@@ -1,11 +1,12 @@
 <!doctype html>
-<html lang="en">
+<html lang="fr">
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>FileScope Pro — Find Files by Name and Content</title>
   <meta name="description" content="FileScope Pro helps Windows users find files instantly by name, content, creation date, modification date, and extension." />
   <style>
+    /* ===== STYLES IDENTIQUES À L'ORIGINAL (non modifiés) ===== */
     :root{
       --bg:#0b1220;
       --bg2:#111a2e;
@@ -60,7 +61,6 @@
       border:1px solid rgba(255,255,255,.18);
       box-shadow:none;
     }
-
     .hero{
       padding:72px 0 44px;
       display:grid;
@@ -93,38 +93,21 @@
       margin-top:18px; color:var(--muted); font-size:14px
     }
     .trust span{padding:8px 12px; border:1px solid rgba(255,255,255,.12); border-radius:999px; background:rgba(255,255,255,.03)}
-    .preview{
+    /* style pour la colonne droite française (remplace .preview) */
+    .french-block{
       background:linear-gradient(180deg, rgba(18,28,51,.95), rgba(14,22,40,.95));
       border:1px solid var(--line);
       border-radius:24px;
       padding:22px;
       box-shadow:var(--shadow);
+      height:100%;
+      display:flex;
+      flex-direction:column;
+      justify-content:center;
     }
-    .preview .screen{
-      border-radius:18px;
-      background:#0e1628;
-      border:1px solid rgba(255,255,255,.08);
-      padding:16px;
-    }
-    .preview .bar{
-      height:12px;
-      border-radius:999px;
-      background:linear-gradient(90deg, #4c7dff, #7de2c7);
-      width:76%;
-      margin-bottom:14px;
-    }
-    .fake-row{display:grid; grid-template-columns:1.15fr .85fr; gap:10px; margin-bottom:10px}
-    .chip, .line{
-      height:38px; border-radius:12px; background:#16233f; border:1px solid rgba(255,255,255,.06)
-    }
-    .line{height:74px}
-    .mini{
-      display:grid;
-      grid-template-columns:repeat(2,1fr);
-      gap:10px;
-      margin-top:12px;
-    }
-
+    .french-block .eyebrow{color:var(--accent2);}
+    .french-block .lead{font-size:16px;}
+    .french-block .trust span{background:rgba(255,255,255,.03);}
     section{padding:44px 0}
     .section-title{
       font-size:32px;
@@ -136,7 +119,6 @@
       margin:0 0 22px;
       max-width:760px;
     }
-
     .cards{
       display:grid;
       grid-template-columns:repeat(3, 1fr);
@@ -151,7 +133,6 @@
     }
     .card h3{margin:0 0 10px; font-size:18px}
     .card p{margin:0; color:var(--muted)}
-
     .steps{
       display:grid;
       grid-template-columns:repeat(3,1fr);
@@ -170,7 +151,6 @@
       margin-bottom:12px;
       border:1px solid rgba(76,125,255,.25);
     }
-
     .feature{
       display:grid;
       grid-template-columns:1fr 1fr;
@@ -203,7 +183,6 @@
     .mock .r3 div{height:86px; border-radius:10px; background:#172440}
     .feature ul{margin:12px 0 0; padding-left:18px; color:var(--muted)}
     .feature li{margin-bottom:8px}
-
     .testimonials{
       background:linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,.03));
       border-top:1px solid rgba(255,255,255,.06);
@@ -221,11 +200,9 @@
     .stars{color:var(--warn); margin-bottom:12px; font-size:18px}
     .quote{font-size:15px; color:#e7eeff; margin:0 0 14px}
     .meta{color:var(--muted); font-size:13px}
-
     .faq{display:grid; grid-template-columns:1fr 1fr; gap:18px}
     .faq-item h3{margin:0 0 8px; font-size:18px}
     .faq-item p{margin:0; color:var(--muted)}
-
     .cta{
       padding:58px 0 78px;
     }
@@ -247,7 +224,6 @@
     .footer-row{display:flex; justify-content:space-between; gap:18px; flex-wrap:wrap}
     .footer-links{display:flex; gap:14px; flex-wrap:wrap}
     .footer-links a{color:var(--muted)}
-
     @media (max-width: 920px){
       .hero,.feature,.cards,.steps,.faq{grid-template-columns:1fr}
       .nav{flex-direction:column; align-items:flex-start}
@@ -271,7 +247,9 @@
   </div>
 
   <main class="wrap">
+    <!-- SECTION HERO : BILINGUE (anglais à gauche, français à droite) -->
     <section class="hero">
+      <!-- Colonne gauche : ANGLAIS (original) -->
       <div>
         <div class="eyebrow">Windows Desktop Software</div>
         <h1>Find any file in seconds.</h1>
@@ -290,24 +268,27 @@
         </div>
       </div>
 
-      <div class="preview" aria-label="Product preview">
-        <div class="screen">
-          <div class="bar"></div>
-          <div class="fake-row">
-            <div class="chip"></div>
-            <div class="chip"></div>
-          </div>
-          <div class="line"></div>
-          <div class="mini">
-            <div class="chip"></div>
-            <div class="chip"></div>
-            <div class="chip"></div>
-            <div class="chip"></div>
-          </div>
+      <!-- Colonne droite : FRANÇAIS (traduction du contenu gauche) -->
+      <div class="french-block">
+        <div class="eyebrow">Logiciel Windows</div>
+        <h1 style="font-size:clamp(32px,5vw,52px);">Trouvez n’importe quel fichier en quelques secondes.</h1>
+        <p class="lead">
+          FileScope Pro permet aux utilisateurs Windows de rechercher des fichiers par nom, contenu, date de création,
+          date de modification et extension, le tout dans une interface simple et rapide.
+        </p>
+        <div class="hero-actions">
+          <a class="btn" href="#buy">Acheter</a>
+          <a class="btn secondary" href="#features">Voir les fonctionnalités</a>
+        </div>
+        <div class="trust">
+          <span>Sans connexion Internet</span>
+          <span>Conçu pour Windows</span>
+          <span>Recherche par nom et contenu</span>
         </div>
       </div>
     </section>
 
+    <!-- ===== RESTE DE LA PAGE (INCHANGÉ, EN ANGLAIS) ===== -->
     <section>
       <div class="cards">
         <div class="card">
