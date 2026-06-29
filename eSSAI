@@ -1,0 +1,496 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>FileScope Pro — Retrouvez vos fichiers en un clin d'œil</title>
+  <meta name="description" content="Recherchez vos fichiers Windows par nom, contenu, date de création/modification. OCR inclus. Téléchargez l'essai gratuit." />
+  <style>
+    /* ===== STYLES FLUENT ===== */
+    :root {
+      --bg: #0b1220;
+      --bg2: #111a2e;
+      --card: #121c33;
+      --text: #eaf0ff;
+      --muted: #b6c2e2;
+      --line: #26324f;
+      --accent: #4c7dff;
+      --accent2: #7de2c7;
+      --warn: #f5b301;
+      --shadow: 0 18px 50px rgba(0,0,0,.28);
+      --radius: 18px;
+      --max: 1120px;
+    }
+    * { box-sizing:border-box; margin:0; padding:0; }
+    body {
+      background: radial-gradient(circle at top left, rgba(76,125,255,.18), transparent 30%),
+                  radial-gradient(circle at top right, rgba(125,226,199,.12), transparent 25%),
+                  var(--bg);
+      color: var(--text);
+      font-family: 'Segoe UI', system-ui, Arial, sans-serif;
+      line-height:1.6;
+    }
+    a { text-decoration: none; color: inherit; }
+    .wrap {
+      max-width: var(--max);
+      margin: 0 auto;
+      padding: 0 22px;
+    }
+    .topbar {
+      padding: 18px 0;
+      border-bottom: 1px solid rgba(255,255,255,.08);
+      background: rgba(8,13,25,.4);
+      backdrop-filter: blur(12px);
+      position: sticky;
+      top:0;
+      z-index:10;
+    }
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap:16px;
+      flex-wrap: wrap;
+    }
+    .brand {
+      font-weight: 800;
+      font-size: 1.25rem;
+      letter-spacing: .02em;
+    }
+    .navlinks {
+      display: flex;
+      gap: 22px;
+      flex-wrap: wrap;
+    }
+    .navlinks a {
+      font-size: 14px;
+      color: var(--muted);
+      transition: color .2s;
+    }
+    .navlinks a:hover { color: #fff; }
+    .btn {
+      display: inline-block;
+      padding: 13px 28px;
+      border-radius: 12px;
+      background: var(--accent);
+      color: #fff;
+      font-weight: 700;
+      box-shadow: 0 10px 26px rgba(76,125,255,.28);
+      transition: transform .15s, box-shadow .15s;
+    }
+    .btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 16px 36px rgba(76,125,255,.35);
+    }
+    .btn.secondary {
+      background: transparent;
+      border: 1px solid rgba(255,255,255,.18);
+      box-shadow: none;
+    }
+    .btn.secondary:hover {
+      background: rgba(255,255,255,.05);
+      transform: none;
+    }
+    .btn.big { font-size: 1.15rem; padding: 18px 40px; }
+
+    .hero {
+      padding: 50px 0 30px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+      align-items: stretch;
+    }
+    .hero-col {
+      background: linear-gradient(180deg, rgba(18,28,51,.95), rgba(14,22,40,.95));
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      padding: 28px 24px;
+      box-shadow: var(--shadow);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+    .eyebrow {
+      color: var(--accent2);
+      text-transform: uppercase;
+      letter-spacing: .12em;
+      font-size: 12px;
+      font-weight: 800;
+      margin-bottom: 14px;
+    }
+    h1 {
+      font-size: clamp(36px, 6vw, 58px);
+      line-height: 1.03;
+      margin: 0 0 16px;
+    }
+    .lead {
+      font-size: 18px;
+      color: var(--muted);
+      margin: 0 0 22px;
+    }
+    .hero-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 20px;
+    }
+    .badge-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+      margin-top: 22px;
+    }
+    .badge-grid span {
+      padding: 8px 12px;
+      border: 1px solid rgba(255,255,255,.12);
+      border-radius: 999px;
+      background: rgba(255,255,255,.03);
+      text-align: center;
+      font-size: 13px;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+    @media (max-width: 920px) {
+      .hero { grid-template-columns:1fr; }
+      .badge-grid span { white-space: normal; }
+    }
+
+    section { padding: 44px 0; }
+    .section-title {
+      font-size: 32px;
+      line-height: 1.15;
+      margin: 0 0 10px;
+    }
+    .section-sub {
+      color: var(--muted);
+      margin: 0 0 22px;
+      max-width: 760px;
+    }
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px,1fr));
+      gap: 18px;
+    }
+    .card {
+      background: linear-gradient(180deg, rgba(18,28,51,.98), rgba(13,20,36,.98));
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 22px;
+      box-shadow: var(--shadow);
+    }
+    .card h3 { margin: 0 0 10px; font-size: 18px; }
+    .card p { margin: 0; color: var(--muted); }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(2,1fr);
+      gap: 18px;
+    }
+    .feature-grid .card { border-left: 4px solid var(--accent); }
+
+    .steps {
+      display: grid;
+      grid-template-columns: repeat(3,1fr);
+      gap: 18px;
+    }
+    .step .num {
+      width: 38px; height:38px; border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      background: rgba(76,125,255,.15);
+      color: #cfe0ff;
+      font-weight: 800;
+      margin-bottom: 12px;
+      border: 1px solid rgba(76,125,255,.25);
+    }
+
+    .testimonials {
+      background: linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,.03));
+      border-top: 1px solid rgba(255,255,255,.06);
+      border-bottom: 1px solid rgba(255,255,255,.06);
+    }
+    .stars { color: var(--warn); margin-bottom: 10px; font-size: 18px; }
+    .quote { font-size: 15px; color: #e7eeff; margin: 0 0 14px; }
+    .meta { color: var(--muted); font-size: 13px; }
+
+    .faq {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 18px;
+    }
+    .faq-item h3 { margin: 0 0 8px; font-size: 18px; }
+    .faq-item p { margin: 0; color: var(--muted); }
+
+    .pricing {
+      background: linear-gradient(180deg, rgba(76,125,255,.08), rgba(125,226,199,.06));
+      border-radius: var(--radius);
+      padding: 30px;
+      text-align: center;
+      border: 1px solid rgba(255,255,255,.08);
+      box-shadow: var(--shadow);
+    }
+    .pricing .price {
+      font-size: 42px;
+      font-weight: 800;
+      color: #fff;
+      margin: 10px 0;
+    }
+    .pricing .price small {
+      font-size: 18px;
+      font-weight: 400;
+      color: var(--muted);
+    }
+    .pricing ul {
+      display: inline-block;
+      text-align: left;
+      margin: 20px auto;
+      padding: 0;
+      list-style: none;
+      color: var(--muted);
+    }
+    .pricing ul li { margin: 6px 0; }
+    .pricing ul li::before { content: "✓ "; color: var(--accent2); }
+
+    .cta-box {
+      background: linear-gradient(135deg, rgba(76,125,255,.16), rgba(125,226,199,.10));
+      border: 1px solid rgba(255,255,255,.10);
+      border-radius: 26px;
+      padding: 40px 30px;
+      text-align: center;
+      margin-top: 30px;
+    }
+
+    footer {
+      padding: 22px 0 38px;
+      color: var(--muted);
+      border-top: 1px solid rgba(255,255,255,.06);
+      font-size: 14px;
+    }
+    .footer-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      flex-wrap: wrap;
+    }
+    .footer-links { display: flex; gap: 14px; flex-wrap: wrap; }
+
+    @media (max-width: 920px) {
+      .feature-grid, .steps, .faq { grid-template-columns: 1fr; }
+      .nav { flex-direction: column; align-items: flex-start; }
+    }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <div class="wrap">
+      <div class="nav">
+        <div class="brand">📁 FileScope Pro</div>
+        <div class="navlinks">
+          <a href="#features">Fonctions</a>
+          <a href="#how">Utilisation</a>
+          <a href="#testimonials">Avis</a>
+          <a href="#faq">FAQ</a>
+          <a href="#pricing">Tarifs</a>
+        </div>
+        <a class="btn" href="#pricing">Acheter</a>
+      </div>
+    </div>
+  </div>
+
+  <main class="wrap">
+    <!-- HERO -->
+    <section class="hero">
+      <div class="hero-col">
+        <div class="eyebrow">Logiciel Windows</div>
+        <h1>Retrouvez n’importe quel fichier en quelques secondes.</h1>
+        <p class="lead">
+          Recherche par nom, contenu, date de création/modification, et extension. 
+          OCR pour les PDF scannés, filtre Excel numérique. Le tout dans une interface moderne.
+        </p>
+        <div class="hero-actions">
+          <a class="btn big" href="#pricing">Acheter – 49,90 €</a>
+          <a class="btn secondary" href="#features">En savoir plus</a>
+        </div>
+        <div class="badge-grid">
+          <span>🔍 Recherche par contenu</span>
+          <span>📅 Date de création/modif.</span>
+          <span>📊 Filtre Excel numérique</span>
+          <span>📄 OCR pour PDF scannés</span>
+          <span>💻 Windows 10/11</span>
+          <span>🔒 30 jours satisfait/remboursé</span>
+        </div>
+      </div>
+      <div class="hero-col">
+        <!-- colonne de droite peut contenir une image ou un résumé -->
+        <div class="eyebrow">Pourquoi choisir FileScope Pro ?</div>
+        <ul style="list-style:none;padding:0;color:var(--muted);font-size:16px;">
+          <li style="padding:8px 0;border-bottom:1px solid var(--line);">✅ Recherche instantanée par nom et contenu</li>
+          <li style="padding:8px 0;border-bottom:1px solid var(--line);">✅ Filtrer par date de création / modification</li>
+          <li style="padding:8px 0;border-bottom:1px solid var(--line);">✅ Recherche de plages numériques dans Excel (.xlsx/.xls)</li>
+          <li style="padding:8px 0;border-bottom:1px solid var(--line);">✅ OCR pour les PDF scannés (Tesseract intégré)</li>
+          <li style="padding:8px 0;">✅ Interface Windows 11 Fluent Design</li>
+        </ul>
+      </div>
+    </section>
+
+    <!-- FEATURES -->
+    <section id="features">
+      <div class="section-title">Fonctionnalités avancées</div>
+      <div class="section-sub">
+        FileScope Pro ne se contente pas de chercher des noms. Il analyse le contenu, les métadonnées et même les images.
+      </div>
+      <div class="feature-grid">
+        <div class="card">
+          <h3>📄 Recherche dans les documents</h3>
+          <p>Par courez le texte des fichiers Word, Excel, PDF, Power BI et fichiers texte.</p>
+        </div>
+        <div class="card">
+          <h3>📊 Filtre Excel numérique</h3>
+          <p>Trouvez les classeurs contenant des valeurs dans une plage donnée (ex: 1000-2000).</p>
+        </div>
+        <div class="card">
+          <h3>🖼️ OCR pour PDF scannés</h3>
+          <p>Extrayez le texte des images avec Tesseract. Recherchez dans des PDF non textuels.</p>
+        </div>
+        <div class="card">
+          <h3>📅 Filtres par date</h3>
+          <p>Affinez par date de création et de modification. Format DD/MM/YYYY.</p>
+        </div>
+        <div class="card">
+          <h3>🔎 Wildcards et recherche avancée</h3>
+          <p>Utilisez * pour des motifs partiels. Exemple : Contrat*Hassene.</p>
+        </div>
+        <div class="card">
+          <h3>⚡ Mode Performance</h3>
+          <p>Optimisation pour les recherches volumineuses. Priorité élevée au thread.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- HOW IT WORKS -->
+    <section id="how">
+      <div class="section-title">Comment ça marche ?</div>
+      <div class="section-sub">Trois étapes simples pour retrouver vos fichiers.</div>
+      <div class="steps">
+        <div class="card step">
+          <div class="num">1</div>
+          <h3>Choisissez un emplacement</h3>
+          <p>Sélectionnez un dossier (Bureau, Disque C:, etc.).</p>
+        </div>
+        <div class="card step">
+          <div class="num">2</div>
+          <h3>Entrez votre mot‑clé</h3>
+          <p>Nom, contenu, plage de nombres, ou une combinaison.</p>
+        </div>
+        <div class="card step">
+          <div class="num">3</div>
+          <h3>Ouvrez le résultat</h3>
+          <p>Double‑cliquez sur un fichier pour l’ouvrir instantanément.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- TESTIMONIALS -->
+    <section id="testimonials" class="testimonials">
+      <div class="label" style="color:var(--accent2);font-weight:800;letter-spacing:.1em;text-transform:uppercase;font-size:12px;">Ils l’ont testé</div>
+      <div class="section-title">Ce qu’en disent les premiers utilisateurs</div>
+      <div class="section-sub">Des retours concrets de personnes qui gagnent du temps chaque jour.</div>
+      <div class="cards">
+        <div class="card">
+          <div class="stars">★★★★★</div>
+          <p class="quote">« Je retrouve mes fichiers en quelques secondes au lieu de chercher dans des dossiers interminables. »</p>
+          <div class="meta">Sarah M. — Assistante de direction</div>
+        </div>
+        <div class="card">
+          <div class="stars">★★★★★</div>
+          <p class="quote">« La recherche par contenu et les filtres Excel me font gagner un temps fou. »</p>
+          <div class="meta">David K. — Freelance</div>
+        </div>
+        <div class="card">
+          <div class="stars">★★★★★</div>
+          <p class="quote">« Un outil simple mais redoutablement efficace. L’interface est super agréable. »</p>
+          <div class="meta">Amine B. — Consultant indépendant</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- PRICING -->
+    <section id="pricing">
+      <div class="section-title">Tarifs</div>
+      <div class="section-sub">Une licence perpétuelle, pas d’abonnement.</div>
+      <div class="pricing">
+        <div class="price">49,90 € <small>HT</small></div>
+        <p style="color:var(--muted);">Licence standard – 1 utilisateur (2 postes)</p>
+        <ul>
+          <li>🔹 Licence perpétuelle</li>
+          <li>🔹 Mises à jour mineures gratuites</li>
+          <li>🔹 Support par e-mail 6 mois</li>
+          <li>🔹 30 jours satisfait ou remboursé</li>
+        </ul>
+        <div style="margin:20px 0;">
+          <a class="btn big" href="#">Acheter maintenant</a>
+        </div>
+        <p style="font-size:13px;color:var(--muted);">🔒 Paiement sécurisé par Paddle / Stripe. TVA appliquée selon votre pays.</p>
+      </div>
+      <!-- Option Team -->
+      <div style="margin-top:20px;text-align:center;border:1px dashed var(--line);border-radius:12px;padding:18px;">
+        <p><strong>Besoin d’une licence équipe ?</strong> 5 postes – 199 € HT. <a href="#" style="color:var(--accent);">Contactez-nous</a></p>
+      </div>
+    </section>
+
+    <!-- FAQ -->
+    <section id="faq">
+      <div class="section-title">Questions fréquentes</div>
+      <div class="section-sub">Tout ce que vous devez savoir avant d’acheter.</div>
+      <div class="faq">
+        <div class="card faq-item">
+          <h3>Quelles versions de Windows ?</h3>
+          <p>Windows 10 et 11 (64 bits).</p>
+        </div>
+        <div class="card faq-item">
+          <h3>Puis-je l’installer sur plusieurs PC ?</h3>
+          <p>Oui, jusqu’à 2 ordinateurs pour la licence standard.</p>
+        </div>
+        <div class="card faq-item">
+          <h3>L’OCR est‑il inclus ?</h3>
+          <p>Oui. Si Tesseract n’est pas trouvé, le programme vous propose de le localiser automatiquement.</p>
+        </div>
+        <div class="card faq-item">
+          <h3>Que se passe‑t‑il si je change de PC ?</h3>
+          <p>Vous pouvez désactiver l’ancienne licence et l’activer sur le nouveau (via le système HMAC).</p>
+        </div>
+        <div class="card faq-item">
+          <h3>Y a‑t‑il des frais cachés ?</h3>
+          <p>Non. Paiement unique, aucune surprise.</p>
+        </div>
+        <div class="card faq-item">
+          <h3>Puis‑je le tester avant d’acheter ?</h3>
+          <p>Oui, nous proposons une version d’essai de 15 jours (contactez‑nous pour y accéder).</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- FINAL CTA -->
+    <section class="cta-box">
+      <div class="section-title">Prêt à gagner un temps précieux ?</div>
+      <p style="color:var(--muted);max-width:600px;margin:10px auto 22px;">
+        Rejoignez les utilisateurs qui retrouvent leurs fichiers en un clin d’œil.
+      </p>
+      <a class="btn big" href="#pricing">Acheter FileScope Pro – 49,90 €</a>
+      <p style="margin-top:18px;font-size:13px;color:var(--muted);">🔒 Paiement sécurisé • 30 jours satisfait/remboursé</p>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">
+      <div class="footer-row">
+        <div>© 2026 FileScope Pro – Tous droits réservés.</div>
+        <div class="footer-links">
+          <a href="#">Conditions d’utilisation</a>
+          <a href="#">Politique de confidentialité</a>
+          <a href="mailto:moussaoui.hassene@yahoo.com">Support</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>
