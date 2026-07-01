@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>FileScope Pro – Recherche instantanée de fichiers sur Windows</title>
-  <meta name="description" content="FileScope Pro aide les utilisateurs Windows à retrouver instantanément leurs fichiers par nom, contenu, date de création et modification. Interface simple et rapide." />
+  <title>Advanced File Search – Recherche de fichiers puissante pour Windows</title>
+  <meta name="description" content="Advanced File Search : outil de recherche de fichiers par nom, contenu, OCR, Power BI, Excel, portable, sans installation." />
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
@@ -71,6 +71,7 @@
       display: flex;
       gap: 24px;
       align-items: center;
+      flex-wrap: wrap;
     }
     .navlinks a {
       color: var(--muted);
@@ -201,7 +202,7 @@
       backdrop-filter: blur(4px);
     }
 
-    /* ===== MOCKUP (remplace les boîtes grises) ===== */
+    /* ===== MOCKUP ===== */
     .mockup-window {
       background: rgba(18, 28, 51, .7);
       border: 1px solid var(--line);
@@ -264,7 +265,7 @@
     .mockup-item .name { font-weight: 500; font-size: 0.85rem; }
     .mockup-item .meta { color: var(--muted); font-size: 0.75rem; }
 
-    /* ===== SECTIONS GÉNÉRALES ===== */
+    /* ===== SECTIONS ===== */
     section { padding: 50px 0; }
     .section-title {
       font-size: clamp(1.8rem, 3vw, 2.5rem);
@@ -319,6 +320,79 @@
       transition: var(--transition);
     }
     .step:hover .num { background: var(--accent); color: #fff; }
+
+    /* ===== COMPARAISON TABLE ===== */
+    .comparison-table-wrap {
+      overflow-x: auto;
+      margin-top: 20px;
+    }
+    .comparison-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.9rem;
+      background: rgba(18, 28, 51, .7);
+      border-radius: var(--radius);
+      overflow: hidden;
+      backdrop-filter: blur(4px);
+    }
+    .comparison-table th,
+    .comparison-table td {
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--line);
+      text-align: left;
+      color: var(--text);
+    }
+    .comparison-table th {
+      background: rgba(76, 125, 255, .12);
+      font-weight: 700;
+      color: #fff;
+      font-size: 0.9rem;
+      white-space: nowrap;
+    }
+    .comparison-table td:first-child {
+      font-weight: 600;
+      color: var(--accent2);
+    }
+    .comparison-table tr:last-child td {
+      border-bottom: none;
+    }
+    .comparison-table .highlight {
+      color: var(--accent2);
+      font-weight: 700;
+    }
+    .comparison-table .icon-ok { color: #4caf50; font-weight: 700; }
+    .comparison-table .icon-partial { color: #ffc107; }
+    .comparison-table .icon-no { color: #f44336; }
+    .comparison-table .unique-badge {
+      background: var(--accent);
+      color: #fff;
+      padding: 2px 10px;
+      border-radius: 20px;
+      font-size: 0.65rem;
+      font-weight: 700;
+      margin-left: 4px;
+      display: inline-block;
+    }
+
+    /* ===== FEATURES LIST (nouvelle section) ===== */
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-top: 10px;
+    }
+    .feature-item {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(255,255,255,.03);
+      padding: 10px 16px;
+      border-radius: 12px;
+      border: 1px solid var(--line);
+      font-size: 0.9rem;
+      color: var(--text);
+    }
+    .feature-item i { color: var(--accent2); font-size: 1rem; width: 20px; }
 
     /* ===== TESTIMONIALS ===== */
     .testimonials {
@@ -437,13 +511,14 @@
       .cards, .steps, .testimonial-grid { grid-template-columns: 1fr 1fr; }
       .faq-grid { grid-template-columns: 1fr; }
       .footer-grid { grid-template-columns: 1fr 1fr; }
+      .feature-grid { grid-template-columns: 1fr 1fr; }
     }
     @media (max-width: 640px) {
       .topbar { padding: 10px 0; }
       .nav { flex-direction: column; align-items: stretch; gap: 12px; }
       .navlinks { justify-content: space-between; flex-wrap: wrap; }
       .lang-switch { align-self: flex-start; }
-      .cards, .steps, .testimonial-grid { grid-template-columns: 1fr; }
+      .cards, .steps, .testimonial-grid, .feature-grid { grid-template-columns: 1fr; }
       .footer-grid { grid-template-columns: 1fr; }
       .mockup-item { grid-template-columns: 24px 1fr; gap: 4px; }
       .mockup-item .meta { display: none; }
@@ -459,9 +534,10 @@
   <header class="topbar" role="banner" aria-label="Navigation principale">
     <div class="wrap">
       <div class="nav">
-        <div class="brand">FileScope Pro</div>
+        <div class="brand">Advanced File Search</div>
         <nav class="navlinks" aria-label="Menu">
           <a href="#features" data-i18n="nav_features">Fonctionnalités</a>
+          <a href="#comparison" data-i18n="nav_comparison">Comparaison</a>
           <a href="#how-it-works" data-i18n="nav_how">Fonctionnement</a>
           <a href="#testimonials" data-i18n="nav_testimonials">Avis</a>
           <a href="#faq" data-i18n="nav_faq">FAQ</a>
@@ -480,9 +556,9 @@
     <section class="wrap hero" id="home">
       <div class="hero-content">
         <div class="eyebrow" data-i18n="hero_eyebrow">Logiciel Windows</div>
-        <h1 data-i18n="hero_title">Trouvez n'importe quel fichier en quelques secondes.</h1>
+        <h1 data-i18n="hero_title">Retrouvez n'importe quel fichier en un éclair.</h1>
         <p class="lead" data-i18n="hero_lead">
-          FileScope Pro permet aux utilisateurs Windows de rechercher des fichiers par nom, contenu, date de création et modification, le tout dans une interface simple et rapide.
+          Advanced File Search : moteur de recherche puissant avec OCR, filtres Excel, Power BI, portable, sans installation et 100% hors-ligne.
         </p>
         <div class="hero-actions">
           <a href="#buy" class="btn" data-i18n="hero_cta1">Acheter maintenant</a>
@@ -490,42 +566,161 @@
         </div>
         <div class="badge-grid">
           <span data-i18n="badge1">🔍 Recherche sans internet</span>
-          <span data-i18n="badge2">🖥️ Conçu pour Windows 10/11</span>
-          <span data-i18n="badge3">📄 Par nom et contenu</span>
-          <span data-i18n="badge4">📅 Par date de création</span>
-          <span data-i18n="badge5">🕒 Par date de modification</span>
-          <span data-i18n="badge6">⚡ Recherche combinée</span>
+          <span data-i18n="badge2">🖥️ Windows 10/11</span>
+          <span data-i18n="badge3">📄 Nom + contenu</span>
+          <span data-i18n="badge4">📅 Dates création/modif</span>
+          <span data-i18n="badge5">📊 OCR + Excel + Power BI</span>
+          <span data-i18n="badge6">💼 Portable – sans install</span>
         </div>
       </div>
 
-      <!-- Maquette visuelle (remplace les mockups gris) -->
-      <div class="mockup-window" role="img" aria-label="Aperçu de l'interface du logiciel FileScope Pro">
+      <!-- Maquette visuelle -->
+      <div class="mockup-window" role="img" aria-label="Aperçu de l'interface d'Advanced File Search">
         <div class="mockup-titlebar">
           <div class="mockup-dots"><span></span><span></span><span></span></div>
-          <p>📁 Recherche - FileScope Pro</p>
+          <p>🔎 Advanced File Search</p>
         </div>
         <div class="mockup-search">
           <i class="fas fa-search"></i>
-          <span data-i18n="mockup_search">Rechercher par nom, contenu, date...</span>
+          <span data-i18n="mockup_search">Rechercher par nom, contenu, OCR...</span>
           <i class="fas fa-sliders-h" style="margin-left:auto; opacity:.4;"></i>
         </div>
         <div class="mockup-list">
-          <div class="mockup-item"><i class="fas fa-file-pdf"></i><span class="name">Rapport_financier_2025.pdf</span><span class="meta">12/06/2025</span><span class="meta">2.4 Mo</span></div>
-          <div class="mockup-item"><i class="fas fa-file-word"></i><span class="name">Contrat_client_Martin.docx</span><span class="meta">05/06/2025</span><span class="meta">180 Ko</span></div>
-          <div class="mockup-item"><i class="fas fa-file-excel"></i><span class="name">Chiffres_affaires_Q4.xlsx</span><span class="meta">28/05/2025</span><span class="meta">890 Ko</span></div>
-          <div class="mockup-item"><i class="fas fa-file-alt"></i><span class="name">Notes_réunion_équipe.txt</span><span class="meta">20/05/2025</span><span class="meta">4 Ko</span></div>
+          <div class="mockup-item"><i class="fas fa-file-pdf"></i><span class="name">Rapport_scanné_2025.pdf</span><span class="meta">12/06/2025</span><span class="meta">2.4 Mo</span></div>
+          <div class="mockup-item"><i class="fas fa-file-excel"></i><span class="name">Chiffres_Q4.xlsx (filtre numérique)</span><span class="meta">05/06/2025</span><span class="meta">890 Ko</span></div>
+          <div class="mockup-item"><i class="fas fa-file-powerpoint"></i><span class="name">Dashboard.pbix (Power BI)</span><span class="meta">28/05/2025</span><span class="meta">1.2 Mo</span></div>
+          <div class="mockup-item"><i class="fas fa-file-alt"></i><span class="name">Notes_réunion.txt</span><span class="meta">20/05/2025</span><span class="meta">4 Ko</span></div>
         </div>
       </div>
     </section>
 
-    <!-- ===== FEATURES ===== -->
+    <!-- ===== NOUVELLE SECTION : FONCTIONNALITÉS CLÉS (12 points) ===== -->
     <section class="wrap" id="features">
-      <h2 class="section-title" data-i18n="features_title">Fonctionnalités puissantes</h2>
-      <p class="section-sub" data-i18n="features_sub">Conçu pour les professionnels qui veulent gagner du temps et ne plus jamais perdre un fichier important.</p>
-      <div class="cards">
-        <div class="card"><h3><i class="fas fa-file-signature"></i> <span data-i18n="f1_title">Recherche par nom</span></h3><p data-i18n="f1_desc">Retrouvez vos dossiers et fichiers en utilisant le nom exact ou des mots-clés partiels.</p></div>
-        <div class="card"><h3><i class="fas fa-file-alt"></i> <span data-i18n="f2_title">Recherche dans le contenu</span></h3><p data-i18n="f2_desc">Fouillez à l'intérieur des documents Word, Excel, PDF et Power BI pour trouver le bon fichier.</p></div>
-        <div class="card"><h3><i class="fas fa-calendar-alt"></i> <span data-i18n="f3_title">Filtres par date</span></h3><p data-i18n="f3_desc">Affinez vos résultats par date de création ou de modification en un seul clic.</p></div>
+      <h2 class="section-title" data-i18n="features_title">Fonctionnalités avancées</h2>
+      <p class="section-sub" data-i18n="features_sub">Tout ce dont vous avez besoin pour retrouver vos fichiers rapidement, même dans les documents scannés ou les rapports Power BI.</p>
+      <div class="feature-grid">
+        <div class="feature-item"><i class="fas fa-file-signature"></i> <span data-i18n="f1">Recherche par nom et contenu</span></div>
+        <div class="feature-item"><i class="fas fa-calendar-alt"></i> <span data-i18n="f2">Filtre date création / modification</span></div>
+        <div class="feature-item"><i class="fas fa-robot"></i> <span data-i18n="f3">OCR pour PDF scannés</span></div>
+        <div class="feature-item"><i class="fas fa-table"></i> <span data-i18n="f4">Filtre Excel numérique</span></div>
+        <div class="feature-item"><i class="fas fa-chart-pie"></i> <span data-i18n="f5">Support Power BI (.pbix)</span></div>
+        <div class="feature-item"><i class="fas fa-usb"></i> <span data-i18n="f6">Portable – sans installation</span></div>
+        <div class="feature-item"><i class="fas fa-eraser"></i> <span data-i18n="f7">Aucune trace registre</span></div>
+        <div class="feature-item"><i class="fas fa-user-shield"></i> <span data-i18n="f8">Sans droits administrateur</span></div>
+        <div class="feature-item"><i class="fas fa-infinity"></i> <span data-i18n="f9">Licence à vie</span></div>
+        <div class="feature-item"><i class="fas fa-wifi-slash"></i> <span data-i18n="f10">100% hors-ligne</span></div>
+        <div class="feature-item"><i class="fas fa-paint-brush"></i> <span data-i18n="f11">Interface moderne</span></div>
+        <div class="feature-item"><i class="fas fa-file-export"></i> <span data-i18n="f12">Export vers Excel</span></div>
+      </div>
+    </section>
+
+    <!-- ===== NOUVELLE SECTION : COMPARAISON AVEC CONCURRENTS ===== -->
+    <section class="wrap" id="comparison">
+      <h2 class="section-title" data-i18n="comparison_title">📊 Comparaison avec les concurrents</h2>
+      <p class="section-sub" data-i18n="comparison_sub">Advanced File Search se distingue par ses fonctionnalités uniques (OCR, filtres Excel, Power BI, portable) à un prix très compétitif.</p>
+      <div class="comparison-table-wrap">
+        <table class="comparison-table">
+          <thead>
+            <tr>
+              <th data-i18n="comp_criteria">Critère</th>
+              <th>Advanced File Search</th>
+              <th>Everything</th>
+              <th>FileLocator Pro</th>
+              <th>Copernic</th>
+              <th>dtSearch</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td data-i18n="comp_name">Recherche par nom</td>
+              <td><span class="icon-ok">✅</span></td>
+              <td><span class="icon-ok">✅✅✅</span></td>
+              <td><span class="icon-ok">✅</span></td>
+              <td><span class="icon-ok">✅</span></td>
+              <td><span class="icon-ok">✅</span></td>
+            </tr>
+            <tr>
+              <td data-i18n="comp_content">Recherche contenu</td>
+              <td><span class="icon-ok">✅✅✅</span></td>
+              <td><span class="icon-no">❌</span></td>
+              <td><span class="icon-ok">✅✅✅</span></td>
+              <td><span class="icon-ok">✅✅✅</span></td>
+              <td><span class="icon-ok">✅✅✅</span></td>
+            </tr>
+            <tr>
+              <td data-i18n="comp_ocr">OCR (PDF scannés)</td>
+              <td><span class="icon-ok">✅</span></td>
+              <td><span class="icon-no">❌</span></td>
+              <td><span class="icon-partial">✅ (option)</span></td>
+              <td><span class="icon-no">❌</span></td>
+              <td><span class="icon-partial">✅ (option)</span></td>
+            </tr>
+            <tr>
+              <td data-i18n="comp_excel">Filtre Excel numérique</td>
+              <td><span class="icon-ok">✅✅✅ <span class="unique-badge">Unique</span></span></td>
+              <td><span class="icon-no">❌</span></td>
+              <td><span class="icon-no">❌</span></td>
+              <td><span class="icon-no">❌</span></td>
+              <td><span class="icon-no">❌</span></td>
+            </tr>
+            <tr>
+              <td data-i18n="comp_powerbi">Recherche Power BI</td>
+              <td><span class="icon-ok">✅✅✅ <span class="unique-badge">Unique</span></span></td>
+              <td><span class="icon-no">❌</span></td>
+              <td><span class="icon-no">❌</span></td>
+              <td><span class="icon-no">❌</span></td>
+              <td><span class="icon-no">❌</span></td>
+            </tr>
+            <tr>
+              <td data-i18n="comp_portable">Portable (sans installation)</td>
+              <td><span class="icon-ok">✅✅✅</span></td>
+              <td><span class="icon-ok">✅</span></td>
+              <td><span class="icon-no">❌</span></td>
+              <td><span class="icon-no">❌</span></td>
+              <td><span class="icon-no">❌</span></td>
+            </tr>
+            <tr>
+              <td data-i18n="comp_registry">Sans trace registre</td>
+              <td><span class="icon-ok">✅✅✅</span></td>
+              <td><span class="icon-ok">✅</span></td>
+              <td><span class="icon-no">❌</span></td>
+              <td><span class="icon-no">❌</span></td>
+              <td><span class="icon-no">❌</span></td>
+            </tr>
+            <tr>
+              <td data-i18n="comp_offline">Sans Internet / Hors-ligne</td>
+              <td><span class="icon-ok">✅✅✅</span></td>
+              <td><span class="icon-ok">✅</span></td>
+              <td><span class="icon-ok">✅</span></td>
+              <td><span class="icon-ok">✅</span></td>
+              <td><span class="icon-ok">✅</span></td>
+            </tr>
+            <tr>
+              <td data-i18n="comp_lifetime">Licence à vie</td>
+              <td><span class="icon-ok">✅✅✅</span></td>
+              <td><span class="icon-ok">✅ (gratuit)</span></td>
+              <td><span class="icon-ok">✅ (149 $)</span></td>
+              <td><span class="icon-no">❌ (abonnement)</span></td>
+              <td><span class="icon-ok">✅ (199 $)</span></td>
+            </tr>
+            <tr>
+              <td data-i18n="comp_ease">Simplicité d'utilisation</td>
+              <td><span class="icon-ok">✅✅✅</span></td>
+              <td><span class="icon-ok">✅✅</span></td>
+              <td><span class="icon-partial">⭐⭐</span></td>
+              <td><span class="icon-partial">⭐⭐</span></td>
+              <td><span class="icon-partial">⭐</span></td>
+            </tr>
+            <tr>
+              <td data-i18n="comp_help">Aide intégrée (ⓘ)</td>
+              <td><span class="icon-ok">✅✅✅</span></td>
+              <td><span class="icon-no">❌</span></td>
+              <td><span class="icon-partial">⭐</span></td>
+              <td><span class="icon-partial">⭐</span></td>
+              <td><span class="icon-partial">⭐</span></td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </section>
 
@@ -535,8 +730,8 @@
       <p class="section-sub" data-i18n="how_sub">Trois étapes simples pour retrouver vos fichiers en un éclair.</p>
       <div class="steps">
         <div class="card step"><div class="num">1</div><h3 data-i18n="s1_title">Sélectionnez un emplacement</h3><p data-i18n="s1_desc">Choisissez votre Bureau ou n'importe quel dossier de votre ordinateur.</p></div>
-        <div class="card step"><div class="num">2</div><h3 data-i18n="s2_title">Entrez un mot-clé</h3><p data-i18n="s2_desc">Recherchez par nom, contenu, ou les deux simultanément.</p></div>
-        <div class="card step"><div class="num">3</div><h3 data-i18n="s3_title">Ouvrez le résultat</h3><p data-i18n="s3_desc">Double-cliquez sur un fichier pour l'ouvrir instantanément depuis la liste.</p></div>
+        <div class="card step"><div class="num">2</div><h3 data-i18n="s2_title">Entrez un mot-clé</h3><p data-i18n="s2_desc">Recherchez par nom, contenu, ou utilisez les filtres avancés (OCR, Excel, Power BI).</p></div>
+        <div class="card step"><div class="num">3</div><h3 data-i18n="s3_title">Ouvrez le résultat</h3><p data-i18n="s3_desc">Double-cliquez sur un fichier ou exportez la liste vers Excel.</p></div>
       </div>
     </section>
 
@@ -547,9 +742,9 @@
         <h2 class="section-title" data-i18n="testimonial_title">Ce que nos premiers utilisateurs disent</h2>
         <p class="section-sub" data-i18n="testimonial_sub">Des retours authentiques de personnes qui ont testé le logiciel et gagné en productivité.</p>
         <div class="testimonial-grid">
-          <div class="card"><div class="stars">★★★★★</div><p class="quote" data-i18n="t1_quote">“Je retrouve mes fichiers en quelques secondes au lieu de perdre du temps à chercher dans des dossiers.”</p><div class="meta" data-i18n="t1_meta">Sarah M. — Assistante de direction</div></div>
-          <div class="card"><div class="stars">★★★★★</div><p class="quote" data-i18n="t2_quote">“La recherche par nom et contenu me fait gagner un temps précieux chaque jour.”</p><div class="meta" data-i18n="t2_meta">David K. — Freelance</div></div>
-          <div class="card"><div class="stars">★★★★★</div><p class="quote" data-i18n="t3_quote">“Un outil simple mais redoutable pour gérer mes documents sur Windows.”</p><div class="meta" data-i18n="t3_meta">Amine B. — Consultant indépendant</div></div>
+          <div class="card"><div class="stars">★★★★★</div><p class="quote" data-i18n="t1_quote">“Je retrouve mes fichiers en quelques secondes, même dans les PDF scannés. L'OCR est impressionnant !”</p><div class="meta" data-i18n="t1_meta">Sarah M. — Assistante de direction</div></div>
+          <div class="card"><div class="stars">★★★★★</div><p class="quote" data-i18n="t2_quote">“Le filtre Excel numérique m'a sauvé des heures de recherche. Un outil vraiment unique.”</p><div class="meta" data-i18n="t2_meta">David K. — Freelance</div></div>
+          <div class="card"><div class="stars">★★★★★</div><p class="quote" data-i18n="t3_quote">“Pouvoir chercher dans mes fichiers Power BI sans ouvrir le logiciel, c'est un gain de temps fou.”</p><div class="meta" data-i18n="t3_meta">Amine B. — Consultant indépendant</div></div>
         </div>
       </div>
     </section>
@@ -561,19 +756,19 @@
       <div class="faq-grid">
         <div class="card faq-item">
           <h3><span data-i18n="q1">A-t-il besoin d'une connexion internet ?</span> <i class="fas fa-chevron-down"></i></h3>
-          <div class="answer"><p data-i18n="a1">Non. FileScope Pro est une application de bureau qui fonctionne entièrement en local sur votre Windows.</p></div>
+          <div class="answer"><p data-i18n="a1">Non. Advanced File Search fonctionne 100% en local, sans internet.</p></div>
         </div>
         <div class="card faq-item">
-          <h3><span data-i18n="q2">Que puis-je rechercher ?</span> <i class="fas fa-chevron-down"></i></h3>
-          <div class="answer"><p data-i18n="a2">Vous pouvez rechercher par nom, contenu, date de création, date de modification et extension de fichier.</p></div>
+          <h3><span data-i18n="q2">Que puis-je rechercher exactement ?</span> <i class="fas fa-chevron-down"></i></h3>
+          <div class="answer"><p data-i18n="a2">Nom, contenu, dates, extension, et en plus : OCR pour PDF scannés, données numériques dans Excel, et métadonnées Power BI.</p></div>
         </div>
         <div class="card faq-item">
-          <h3><span data-i18n="q3">À qui s'adresse ce logiciel ?</span> <i class="fas fa-chevron-down"></i></h3>
-          <div class="answer"><p data-i18n="a3">À toute personne utilisant Windows et souhaitant gagner en efficacité dans la gestion de ses fichiers.</p></div>
+          <h3><span data-i18n="q3">Est-ce vraiment portable ?</span> <i class="fas fa-chevron-down"></i></h3>
+          <div class="answer"><p data-i18n="a3">Oui, vous pouvez le lancer depuis une clé USB sans rien installer, et il ne laisse aucune trace dans le registre.</p></div>
         </div>
         <div class="card faq-item">
-          <h3><span data-i18n="q4">Comment puis-je l'acheter ?</span> <i class="fas fa-chevron-down"></i></h3>
-          <div class="answer"><p data-i18n="a4">Utilisez le bouton ci-dessous. Vous serez redirigé vers notre page de paiement sécurisée (Paddle).</p></div>
+          <h3><span data-i18n="q4">Quel est le prix ?</span> <i class="fas fa-chevron-down"></i></h3>
+          <div class="answer"><p data-i18n="a4">Licence à vie à partir de 19,99 € (version personnelle) ou 49,99 € (version professionnelle). Aucun abonnement.</p></div>
         </div>
       </div>
     </section>
@@ -582,14 +777,14 @@
     <section class="wrap cta" id="buy">
       <div class="cta-box">
         <div class="eyebrow" style="color:var(--accent2); text-transform:uppercase; font-weight:700; font-size:0.75rem; letter-spacing:.1em;" data-i18n="cta_eyebrow">Prêt à passer à l'action</div>
-        <h2 class="section-title" style="margin:0;" data-i18n="cta_title">Obtenez FileScope Pro dès aujourd'hui</h2>
-        <div class="price">29,99 € <small data-i18n="cta_price_label">(licence perpétuelle)</small></div>
-        <p data-i18n="cta_desc">Un outil de recherche de fichiers puissant, avec des bénéfices clairs et une preuve sociale pour vous accompagner.</p>
+        <h2 class="section-title" style="margin:0;" data-i18n="cta_title">Obtenez Advanced File Search dès aujourd'hui</h2>
+        <div class="price">19,99 € <small data-i18n="cta_price_label">(licence personnelle)</small> <span style="font-size:1.2rem; color:var(--accent2);">|</span> 49,99 € <small data-i18n="cta_price_label_pro">(professionnelle)</small></div>
+        <p data-i18n="cta_desc">Un outil de recherche complet avec OCR, filtres Excel, Power BI, portable et licence à vie. Comparez et adoptez la solution la plus puissante.</p>
         <div class="hero-actions">
           <a href="#" class="btn" data-i18n="cta_btn1">Acheter maintenant</a>
-          <a href="#" class="btn secondary" data-i18n="cta_btn2">Voir la démo</a>
+          <a href="#" class="btn secondary" data-i18n="cta_btn2">Télécharger l'essai</a>
         </div>
-        <p style="font-size:0.8rem; margin-top:16px; opacity:.6;" data-i18n="cta_secure">🔒 Paiement sécurisé • Garantie satisfait ou remboursé</p>
+        <p style="font-size:0.8rem; margin-top:16px; opacity:.6;" data-i18n="cta_secure">🔒 Paiement sécurisé • Garantie satisfait ou remboursé • Licence à vie</p>
       </div>
     </section>
   </main>
@@ -598,10 +793,9 @@
   <footer>
     <div class="wrap">
       <div class="footer-grid">
-        <!-- Colonne 1 : Infos -->
         <div>
-          <h4>FileScope Pro</h4>
-          <p style="margin: 6px 0 12px; max-width:300px;" data-i18n="footer_desc">Le moteur de recherche de fichiers intelligent pour Windows 10 et 11.</p>
+          <h4>Advanced File Search</h4>
+          <p style="margin: 6px 0 12px; max-width:300px;" data-i18n="footer_desc">Le moteur de recherche de fichiers intelligent pour Windows 10 et 11, avec OCR, Power BI et filtres Excel.</p>
           <div class="footer-socials">
             <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
             <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
@@ -609,17 +803,15 @@
             <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
           </div>
         </div>
-        <!-- Colonne 2 : Liens légaux -->
         <div>
           <h4 data-i18n="footer_legal">Mentions légales</h4>
           <ul>
             <li><a href="#" data-i18n="footer_tos">Conditions générales</a></li>
             <li><a href="#" data-i18n="footer_privacy">Politique de confidentialité</a></li>
             <li><a href="#" data-i18n="footer_legal_mention">Mentions légales</a></li>
-            <li><a href="mailto:moussaoui.hassene@yahoo.com" data-i18n="footer_support">Support technique</a></li>
+            <li><a href="mailto:support@advancedfilesearch.com" data-i18n="footer_support">Support technique</a></li>
           </ul>
         </div>
-        <!-- Colonne 3 : Prérequis système -->
         <div>
           <h4 data-i18n="footer_requirements">Prérequis système</h4>
           <ul>
@@ -631,7 +823,7 @@
         </div>
       </div>
       <div class="footer-bottom">
-        <span data-i18n="copyright">© 2026 FileScope Pro. Tous droits réservés.</span>
+        <span data-i18n="copyright">© 2026 Advanced File Search. Tous droits réservés.</span>
         <span data-i18n="version">Version 2.0.1</span>
       </div>
     </div>
@@ -646,65 +838,87 @@
       const translations = {
         fr: {
           nav_features: 'Fonctionnalités',
+          nav_comparison: 'Comparaison',
           nav_how: 'Fonctionnement',
           nav_testimonials: 'Avis',
           nav_faq: 'FAQ',
           nav_buy: 'Acheter',
           hero_eyebrow: 'Logiciel Windows',
-          hero_title: 'Trouvez n\'importe quel fichier en quelques secondes.',
-          hero_lead: 'FileScope Pro permet aux utilisateurs Windows de rechercher des fichiers par nom, contenu, date de création et modification, le tout dans une interface simple et rapide.',
+          hero_title: 'Retrouvez n\'importe quel fichier en un éclair.',
+          hero_lead: 'Advanced File Search : moteur de recherche puissant avec OCR, filtres Excel, Power BI, portable, sans installation et 100% hors-ligne.',
           hero_cta1: 'Acheter maintenant',
           hero_cta2: 'Voir les fonctionnalités',
           badge1: '🔍 Recherche sans internet',
-          badge2: '🖥️ Conçu pour Windows 10/11',
-          badge3: '📄 Par nom et contenu',
-          badge4: '📅 Par date de création',
-          badge5: '🕒 Par date de modification',
-          badge6: '⚡ Recherche combinée',
-          mockup_search: 'Rechercher par nom, contenu, date...',
-          features_title: 'Fonctionnalités puissantes',
-          features_sub: 'Conçu pour les professionnels qui veulent gagner du temps et ne plus jamais perdre un fichier important.',
-          f1_title: 'Recherche par nom',
-          f1_desc: 'Retrouvez vos dossiers et fichiers en utilisant le nom exact ou des mots-clés partiels.',
-          f2_title: 'Recherche dans le contenu',
-          f2_desc: 'Fouillez à l\'intérieur des documents Word, Excel, PDF et Power BI pour trouver le bon fichier.',
-          f3_title: 'Filtres par date',
-          f3_desc: 'Affinez vos résultats par date de création ou de modification en un seul clic.',
+          badge2: '🖥️ Windows 10/11',
+          badge3: '📄 Nom + contenu',
+          badge4: '📅 Dates création/modif',
+          badge5: '📊 OCR + Excel + Power BI',
+          badge6: '💼 Portable – sans install',
+          mockup_search: 'Rechercher par nom, contenu, OCR...',
+          features_title: 'Fonctionnalités avancées',
+          features_sub: 'Tout ce dont vous avez besoin pour retrouver vos fichiers rapidement, même dans les documents scannés ou les rapports Power BI.',
+          f1: 'Recherche par nom et contenu',
+          f2: 'Filtre date création / modification',
+          f3: 'OCR pour PDF scannés',
+          f4: 'Filtre Excel numérique',
+          f5: 'Support Power BI (.pbix)',
+          f6: 'Portable – sans installation',
+          f7: 'Aucune trace registre',
+          f8: 'Sans droits administrateur',
+          f9: 'Licence à vie',
+          f10: '100% hors-ligne',
+          f11: 'Interface moderne',
+          f12: 'Export vers Excel',
+          comparison_title: '📊 Comparaison avec les concurrents',
+          comparison_sub: 'Advanced File Search se distingue par ses fonctionnalités uniques (OCR, filtres Excel, Power BI, portable) à un prix très compétitif.',
+          comp_criteria: 'Critère',
+          comp_name: 'Recherche par nom',
+          comp_content: 'Recherche contenu',
+          comp_ocr: 'OCR (PDF scannés)',
+          comp_excel: 'Filtre Excel numérique',
+          comp_powerbi: 'Recherche Power BI',
+          comp_portable: 'Portable (sans installation)',
+          comp_registry: 'Sans trace registre',
+          comp_offline: 'Sans Internet / Hors-ligne',
+          comp_lifetime: 'Licence à vie',
+          comp_ease: 'Simplicité d\'utilisation',
+          comp_help: 'Aide intégrée (ⓘ)',
           how_title: 'Comment ça fonctionne',
           how_sub: 'Trois étapes simples pour retrouver vos fichiers en un éclair.',
           s1_title: 'Sélectionnez un emplacement',
           s1_desc: 'Choisissez votre Bureau ou n\'importe quel dossier de votre ordinateur.',
           s2_title: 'Entrez un mot-clé',
-          s2_desc: 'Recherchez par nom, contenu, ou les deux simultanément.',
+          s2_desc: 'Recherchez par nom, contenu, ou utilisez les filtres avancés (OCR, Excel, Power BI).',
           s3_title: 'Ouvrez le résultat',
-          s3_desc: 'Double-cliquez sur un fichier pour l\'ouvrir instantanément depuis la liste.',
+          s3_desc: 'Double-cliquez sur un fichier ou exportez la liste vers Excel.',
           testimonial_label: 'Retours d\'utilisateurs',
           testimonial_title: 'Ce que nos premiers utilisateurs disent',
           testimonial_sub: 'Des retours authentiques de personnes qui ont testé le logiciel et gagné en productivité.',
-          t1_quote: '“Je retrouve mes fichiers en quelques secondes au lieu de perdre du temps à chercher dans des dossiers.”',
+          t1_quote: '“Je retrouve mes fichiers en quelques secondes, même dans les PDF scannés. L\'OCR est impressionnant !”',
           t1_meta: 'Sarah M. — Assistante de direction',
-          t2_quote: '“La recherche par nom et contenu me fait gagner un temps précieux chaque jour.”',
+          t2_quote: '“Le filtre Excel numérique m\'a sauvé des heures de recherche. Un outil vraiment unique.”',
           t2_meta: 'David K. — Freelance',
-          t3_quote: '“Un outil simple mais redoutable pour gérer mes documents sur Windows.”',
+          t3_quote: '“Pouvoir chercher dans mes fichiers Power BI sans ouvrir le logiciel, c\'est un gain de temps fou.”',
           t3_meta: 'Amine B. — Consultant indépendant',
           faq_title: 'Questions fréquentes',
           faq_sub: 'Des réponses claires pour vous aider à décider en toute confiance.',
           q1: 'A-t-il besoin d\'une connexion internet ?',
-          a1: 'Non. FileScope Pro est une application de bureau qui fonctionne entièrement en local sur votre Windows.',
-          q2: 'Que puis-je rechercher ?',
-          a2: 'Vous pouvez rechercher par nom, contenu, date de création, date de modification et extension de fichier.',
-          q3: 'À qui s\'adresse ce logiciel ?',
-          a3: 'À toute personne utilisant Windows et souhaitant gagner en efficacité dans la gestion de ses fichiers.',
-          q4: 'Comment puis-je l\'acheter ?',
-          a4: 'Utilisez le bouton ci-dessous. Vous serez redirigé vers notre page de paiement sécurisée (Paddle).',
+          a1: 'Non. Advanced File Search fonctionne 100% en local, sans internet.',
+          q2: 'Que puis-je rechercher exactement ?',
+          a2: 'Nom, contenu, dates, extension, et en plus : OCR pour PDF scannés, données numériques dans Excel, et métadonnées Power BI.',
+          q3: 'Est-ce vraiment portable ?',
+          a3: 'Oui, vous pouvez le lancer depuis une clé USB sans rien installer, et il ne laisse aucune trace dans le registre.',
+          q4: 'Quel est le prix ?',
+          a4: 'Licence à vie à partir de 19,99 € (version personnelle) ou 49,99 € (version professionnelle). Aucun abonnement.',
           cta_eyebrow: 'Prêt à passer à l\'action',
-          cta_title: 'Obtenez FileScope Pro dès aujourd\'hui',
-          cta_price_label: '(licence perpétuelle)',
-          cta_desc: 'Un outil de recherche de fichiers puissant, avec des bénéfices clairs et une preuve sociale pour vous accompagner.',
+          cta_title: 'Obtenez Advanced File Search dès aujourd\'hui',
+          cta_price_label: '(licence personnelle)',
+          cta_price_label_pro: '(professionnelle)',
+          cta_desc: 'Un outil de recherche complet avec OCR, filtres Excel, Power BI, portable et licence à vie. Comparez et adoptez la solution la plus puissante.',
           cta_btn1: 'Acheter maintenant',
-          cta_btn2: 'Voir la démo',
-          cta_secure: '🔒 Paiement sécurisé • Garantie satisfait ou remboursé',
-          footer_desc: 'Le moteur de recherche de fichiers intelligent pour Windows 10 et 11.',
+          cta_btn2: 'Télécharger l\'essai',
+          cta_secure: '🔒 Paiement sécurisé • Garantie satisfait ou remboursé • Licence à vie',
+          footer_desc: 'Le moteur de recherche de fichiers intelligent pour Windows 10 et 11, avec OCR, Power BI et filtres Excel.',
           footer_legal: 'Mentions légales',
           footer_tos: 'Conditions générales',
           footer_privacy: 'Politique de confidentialité',
@@ -715,70 +929,92 @@
           req_ram: '💾 4 Go de RAM (8 Go recommandé)',
           req_space: '📦 50 Mo d\'espace disque',
           req_net: '🌐 Aucune connexion internet requise',
-          copyright: '© 2026 FileScope Pro. Tous droits réservés.',
+          copyright: '© 2026 Advanced File Search. Tous droits réservés.',
           version: 'Version 2.0.1'
         },
         en: {
           nav_features: 'Features',
+          nav_comparison: 'Comparison',
           nav_how: 'How it works',
           nav_testimonials: 'Testimonials',
           nav_faq: 'FAQ',
           nav_buy: 'Buy now',
           hero_eyebrow: 'Windows Desktop Software',
-          hero_title: 'Find any file in seconds.',
-          hero_lead: 'FileScope Pro helps Windows users search by name, content, creation date, and modification date from one fast interface.',
+          hero_title: 'Find any file in a flash.',
+          hero_lead: 'Advanced File Search: powerful search engine with OCR, Excel filters, Power BI, portable, no install, 100% offline.',
           hero_cta1: 'Buy now',
           hero_cta2: 'See features',
           badge1: '🔍 Offline search',
-          badge2: '🖥️ Made for Windows 10/11',
-          badge3: '📄 Name & content search',
-          badge4: '📅 Filter by creation date',
-          badge5: '🕒 Filter by modification date',
-          badge6: '⚡ Combined search',
-          mockup_search: 'Search by name, content, date...',
-          features_title: 'Powerful features',
-          features_sub: 'Built for professionals who want to save time and never lose an important file again.',
-          f1_title: 'Search by name',
-          f1_desc: 'Find folders and files using exact names or partial keywords.',
-          f2_title: 'Search inside content',
-          f2_desc: 'Look inside Word, Excel, PDF, and Power BI files to find the right one.',
-          f3_title: 'Filter by date',
-          f3_desc: 'Refine results by creation or modification date with one click.',
+          badge2: '🖥️ Windows 10/11',
+          badge3: '📄 Name + content',
+          badge4: '📅 Creation/modification dates',
+          badge5: '📊 OCR + Excel + Power BI',
+          badge6: '💼 Portable – no install',
+          mockup_search: 'Search by name, content, OCR...',
+          features_title: 'Advanced features',
+          features_sub: 'Everything you need to find files quickly, even in scanned documents or Power BI reports.',
+          f1: 'Search by name and content',
+          f2: 'Filter by creation / modification date',
+          f3: 'OCR for scanned PDFs',
+          f4: 'Excel numeric filter',
+          f5: 'Power BI (.pbix) support',
+          f6: 'Portable – no installation',
+          f7: 'No registry traces',
+          f8: 'No admin rights required',
+          f9: 'Lifetime license',
+          f10: '100% offline',
+          f11: 'Modern interface',
+          f12: 'Export to Excel',
+          comparison_title: '📊 Comparison with competitors',
+          comparison_sub: 'Advanced File Search stands out with its unique features (OCR, Excel filters, Power BI, portable) at a very competitive price.',
+          comp_criteria: 'Criteria',
+          comp_name: 'Search by name',
+          comp_content: 'Content search',
+          comp_ocr: 'OCR (scanned PDFs)',
+          comp_excel: 'Excel numeric filter',
+          comp_powerbi: 'Power BI search',
+          comp_portable: 'Portable (no install)',
+          comp_registry: 'No registry traces',
+          comp_offline: 'Offline / No internet',
+          comp_lifetime: 'Lifetime license',
+          comp_ease: 'Ease of use',
+          comp_help: 'Built-in help (ⓘ)',
           how_title: 'How it works',
           how_sub: 'Three simple steps to find your files in a flash.',
           s1_title: 'Select a location',
           s1_desc: 'Choose your Desktop or any folder on your computer.',
           s2_title: 'Enter a keyword',
-          s2_desc: 'Search by name, content, or both at the same time.',
+          s2_desc: 'Search by name, content, or use advanced filters (OCR, Excel, Power BI).',
           s3_title: 'Open the result',
-          s3_desc: 'Double-click a file to open it instantly from the list.',
+          s3_desc: 'Double-click a file or export the list to Excel.',
           testimonial_label: 'User feedback',
           testimonial_title: 'What early users are saying',
           testimonial_sub: 'Authentic feedback from people who tested the software and boosted their productivity.',
-          t1_quote: '“I find my files in seconds instead of wasting time searching through folders.”',
+          t1_quote: '“I find my files in seconds, even in scanned PDFs. The OCR is impressive!”',
           t1_meta: 'Sarah M. — Office Assistant',
-          t2_quote: '“Searching by name and content saves me so much time every day.”',
+          t2_quote: '“The Excel numeric filter saved me hours of searching. A truly unique tool.”',
           t2_meta: 'David K. — Freelancer',
-          t3_quote: '“A simple yet powerful tool for managing my documents on Windows.”',
+          t3_quote: '“Being able to search inside Power BI files without opening the app is a huge time-saver.”',
           t3_meta: 'Amine B. — Independent Consultant',
           faq_title: 'Frequently asked questions',
           faq_sub: 'Clear answers to help you decide with confidence.',
-          q1: 'Does it require internet?',
-          a1: 'No. FileScope Pro is a desktop app that runs entirely locally on your Windows PC.',
-          q2: 'What can I search?',
-          a2: 'You can search by name, content, creation date, modification date, and file extension.',
-          q3: 'Who is it for?',
-          a3: 'Anyone using Windows who wants to be more efficient managing files.',
-          q4: 'How do I buy it?',
-          a4: 'Use the button below. You\'ll be redirected to our secure checkout page (Paddle).',
+          q1: 'Does it need an internet connection?',
+          a1: 'No. Advanced File Search works 100% locally, offline.',
+          q2: 'What exactly can I search?',
+          a2: 'Name, content, dates, extension, plus OCR for scanned PDFs, numeric data in Excel, and Power BI metadata.',
+          q3: 'Is it really portable?',
+          a3: 'Yes, you can run it from a USB stick with no installation, and it leaves no traces in the registry.',
+          q4: 'What is the price?',
+          a4: 'Lifetime license starting at €19.99 (personal) or €49.99 (professional). No subscription.',
           cta_eyebrow: 'Ready to take action',
-          cta_title: 'Get FileScope Pro today',
-          cta_price_label: '(perpetual license)',
-          cta_desc: 'A powerful file-search tool with clear benefits and social proof to back you up.',
+          cta_title: 'Get Advanced File Search today',
+          cta_price_label: '(personal license)',
+          cta_price_label_pro: '(professional)',
+          cta_desc: 'A comprehensive search tool with OCR, Excel filters, Power BI, portable, and lifetime license. Compare and choose the most powerful solution.',
           cta_btn1: 'Buy now',
-          cta_btn2: 'View demo',
-          cta_secure: '🔒 Secure checkout • Satisfaction guaranteed',
-          footer_desc: 'The intelligent file search engine for Windows 10 & 11.',
+          cta_btn2: 'Download trial',
+          cta_secure: '🔒 Secure checkout • Satisfaction guaranteed • Lifetime license',
+          footer_desc: 'The intelligent file search engine for Windows 10 & 11, with OCR, Power BI, and Excel filters.',
           footer_legal: 'Legal',
           footer_tos: 'Terms of Service',
           footer_privacy: 'Privacy Policy',
@@ -789,7 +1025,7 @@
           req_ram: '💾 4 GB RAM (8 GB recommended)',
           req_space: '📦 50 MB disk space',
           req_net: '🌐 No internet connection needed',
-          copyright: '© 2026 FileScope Pro. All rights reserved.',
+          copyright: '© 2026 Advanced File Search. All rights reserved.',
           version: 'Version 2.0.1'
         }
       };
@@ -798,47 +1034,34 @@
       const i18nElements = document.querySelectorAll('[data-i18n]');
 
       function setLanguage(lang) {
-        // Mettre à jour les boutons
         langButtons.forEach(btn => {
           btn.classList.toggle('active', btn.dataset.lang === lang);
         });
-        // Mettre à jour les textes
         i18nElements.forEach(el => {
           const key = el.dataset.i18n;
           if (translations[lang] && translations[lang][key]) {
-            if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
-              el.placeholder = translations[lang][key];
-            } else {
-              el.innerHTML = translations[lang][key];
-            }
+            el.innerHTML = translations[lang][key];
           }
         });
-        // Mettre à jour la balise html lang
         document.documentElement.lang = lang;
-        localStorage.setItem('filescope_lang', lang);
+        localStorage.setItem('advancedfilesearch_lang', lang);
       }
 
       langButtons.forEach(btn => {
         btn.addEventListener('click', function() {
-          const lang = this.dataset.lang;
-          setLanguage(lang);
+          setLanguage(this.dataset.lang);
         });
       });
 
-      // Charger la langue sauvegardée ou le français par défaut
-      const savedLang = localStorage.getItem('filescope_lang') || 'fr';
+      const savedLang = localStorage.getItem('advancedfilesearch_lang') || 'fr';
       setLanguage(savedLang);
 
       // ----- 2. FAQ ACCORDÉON -----
       const faqItems = document.querySelectorAll('.faq-item');
       faqItems.forEach(item => {
         item.addEventListener('click', function() {
-          // Ferme les autres éléments (pour un comportement d'accordéon pur)
-          // On peut aussi choisir de laisser l'utilisateur ouvrir plusieurs, mais l'accordéon est plus propre.
           faqItems.forEach(other => {
-            if (other !== this) {
-              other.classList.remove('active');
-            }
+            if (other !== this) other.classList.remove('active');
           });
           this.classList.toggle('active');
         });
