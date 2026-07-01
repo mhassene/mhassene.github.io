@@ -43,36 +43,26 @@
       top:0;
       z-index:10;
     }
-    .nav{display:flex; align-items:center; justify-content:space-between; gap:16px; flex-wrap:wrap}
-    .brand{font-weight:800; letter-spacing:.02em; font-size:20px}
+    .nav{display:flex; align-items:center; justify-content:space-between; gap:16px}
+    .brand{font-weight:800; letter-spacing:.02em}
     .navlinks{display:flex; gap:18px; flex-wrap:wrap}
-    .navlinks a{color:var(--muted); font-size:14px; transition:.2s}
-    .navlinks a:hover{color:#fff}
+    .navlinks a{color:var(--muted); font-size:14px}
     .btn{
       display:inline-block;
-      padding:12px 22px;
+      padding:13px 20px;
       border-radius:12px;
       background:var(--accent);
       color:#fff;
       font-weight:700;
       box-shadow:0 10px 26px rgba(76,125,255,.28);
-      transition:.2s;
-      border:none;
-      cursor:pointer;
-      font-size:14px;
     }
-    .btn:hover{transform:translateY(-2px); box-shadow:0 14px 32px rgba(76,125,255,.35)}
     .btn.secondary{
       background:transparent;
       border:1px solid rgba(255,255,255,.18);
       box-shadow:none;
     }
-    .btn.secondary:hover{background:rgba(255,255,255,.05)}
-    .btn.small{padding:6px 14px; font-size:12px; box-shadow:none}
-    .lang-btn.active{background:var(--accent); color:#fff; border-color:var(--accent)}
-    .lang-btn{background:transparent; border:1px solid rgba(255,255,255,.15); color:var(--muted)}
-    .lang-btn:hover{background:rgba(255,255,255,.05)}
 
+    /* Section hero : deux colonnes de même hauteur */
     .hero{
       padding:40px 0 30px;
       display:grid;
@@ -80,11 +70,12 @@
       gap:28px;
       align-items:stretch;
     }
+    /* Style commun pour les deux colonnes (identique) */
     .hero-col{
       background:linear-gradient(180deg, rgba(18,28,51,.95), rgba(14,22,40,.95));
       border:1px solid var(--line);
       border-radius:24px;
-      padding:28px;
+      padding:22px;
       box-shadow:var(--shadow);
       display:flex;
       flex-direction:column;
@@ -99,42 +90,51 @@
       margin-bottom:14px;
     }
     h1{
-      font-size:clamp(36px, 5vw, 54px);
+      font-size:clamp(40px, 6vw, 62px);
       line-height:1.03;
       margin:0 0 16px;
     }
     .lead{
-      font-size:17px;
+      font-size:18px;
       color:var(--muted);
-      margin:0 0 18px;
+      margin:0 0 22px;
     }
-    .hero-actions{display:flex; gap:12px; flex-wrap:wrap; margin-top:14px}
+    .hero-actions{display:flex; gap:12px; flex-wrap:wrap; margin-top:20px}
+
+    /* Grille pour les badges : 2 colonnes, donc 3 lignes pour 6 badges */
     .badge-grid{
       display:grid;
       grid-template-columns:repeat(2, 1fr);
-      gap:10px;
+      gap:12px;
       margin-top:18px;
     }
     .badge-grid span{
       padding:8px 12px;
-      border:1px solid rgba(255,255,255,.10);
+      border:1px solid rgba(255,255,255,.12);
       border-radius:999px;
       background:rgba(255,255,255,.03);
       text-align:center;
-      font-size:13px;
+      font-size:14px;
       color:var(--muted);
       white-space:nowrap;
     }
+    /* Responsive : sur petit écran, les colonnes passent en dessous l'une de l'autre */
     @media (max-width: 920px){
-      .hero{grid-template-columns:1fr; gap:20px}
+      .hero{
+        grid-template-columns:1fr;
+        gap:20px;
+      }
     }
     @media (max-width: 640px){
-      .badge-grid{grid-template-columns:1fr}
-      .badge-grid span{white-space:normal}
-      .nav{flex-direction:column; align-items:stretch}
-      .navlinks{justify-content:center}
+      .badge-grid{
+        grid-template-columns:1fr;
+      }
+      .badge-grid span{
+        white-space:normal;
+      }
     }
 
+    /* ===== RESTE DE LA PAGE (inchangé, en anglais) ===== */
     section{padding:44px 0}
     .section-title{
       font-size:32px;
@@ -157,17 +157,17 @@
       border-radius:var(--radius);
       padding:22px;
       box-shadow:var(--shadow);
-      transition:.2s;
     }
-    .card:hover{transform:translateY(-3px); border-color:rgba(76,125,255,.3)}
     .card h3{margin:0 0 10px; font-size:18px}
     .card p{margin:0; color:var(--muted)}
-    .card ul{margin:10px 0 0; padding-left:18px; color:var(--muted)}
-    .card li{margin-bottom:6px}
     .steps{
       display:grid;
       grid-template-columns:repeat(3,1fr);
       gap:18px;
+    }
+    .step{
+      position:relative;
+      padding-top:10px;
     }
     .step .num{
       width:38px;height:38px;border-radius:12px;
@@ -191,23 +191,25 @@
       border-radius:22px;
       padding:18px;
       box-shadow:var(--shadow);
-      min-height:200px;
+      min-height:240px;
     }
     .shot .mock{
-      height:200px;
+      height:220px;
       border-radius:16px;
       background:
-        linear-gradient(180deg, rgba(76,125,255,.15), rgba(125,226,199,.08)),
+        linear-gradient(180deg, rgba(76,125,255,.18), rgba(125,226,199,.08)),
         #0c1324;
       border:1px solid rgba(255,255,255,.06);
       padding:14px;
     }
     .mock .r1,.mock .r2,.mock .r3{
-      height:30px; border-radius:8px; background:#172440; margin-bottom:10px;
+      height:34px; border-radius:10px; background:#172440; margin-bottom:10px;
     }
-    .mock .r2{height:56px}
+    .mock .r2{height:64px}
     .mock .r3{display:grid; grid-template-columns:1fr 1fr; gap:10px; background:transparent; height:auto}
-    .mock .r3 div{height:70px; border-radius:8px; background:#172440}
+    .mock .r3 div{height:86px; border-radius:10px; background:#172440}
+    .feature ul{margin:12px 0 0; padding-left:18px; color:var(--muted)}
+    .feature li{margin-bottom:8px}
     .testimonials{
       background:linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,.03));
       border-top:1px solid rgba(255,255,255,.06);
@@ -226,13 +228,13 @@
     .quote{font-size:15px; color:#e7eeff; margin:0 0 14px}
     .meta{color:var(--muted); font-size:13px}
     .faq{display:grid; grid-template-columns:1fr 1fr; gap:18px}
-    .faq-item h3{margin:0 0 8px; font-size:17px}
+    .faq-item h3{margin:0 0 8px; font-size:18px}
     .faq-item p{margin:0; color:var(--muted)}
     .cta{
-      padding:50px 0 70px;
+      padding:58px 0 78px;
     }
     .cta-box{
-      background:linear-gradient(135deg, rgba(76,125,255,.14), rgba(125,226,199,.08));
+      background:linear-gradient(135deg, rgba(76,125,255,.16), rgba(125,226,199,.10));
       border:1px solid rgba(255,255,255,.10);
       border-radius:26px;
       padding:30px;
@@ -240,7 +242,6 @@
       text-align:center;
     }
     .cta-box p{color:var(--muted); margin:10px auto 0; max-width:760px}
-    .cta-box .hero-actions{justify-content:center}
     footer{
       padding:22px 0 38px;
       color:var(--muted);
@@ -250,24 +251,11 @@
     .footer-row{display:flex; justify-content:space-between; gap:18px; flex-wrap:wrap}
     .footer-links{display:flex; gap:14px; flex-wrap:wrap}
     .footer-links a{color:var(--muted)}
-    .footer-links a:hover{color:#fff}
 
     @media (max-width: 920px){
       .hero,.feature,.cards,.steps,.faq{grid-template-columns:1fr}
+      .nav{flex-direction:column; align-items:flex-start}
     }
-
-    .lang-en, .lang-fr{transition: opacity .2s}
-    .lang-fr{display:none}
-    .lang-en{display:block}
-    body.lang-fr .lang-en{display:none}
-    body.lang-fr .lang-fr{display:block}
-    body.lang-en .lang-en{display:block}
-    body.lang-en .lang-fr{display:none}
-
-    .badge-grid span{transition:.2s}
-    .badge-grid span:hover{border-color:var(--accent); background:rgba(76,125,255,.08)}
-    .highlight{color:var(--accent2)}
-    .check{color:var(--accent2); margin-right:6px}
   </style>
 </head>
 <body>
@@ -276,96 +264,86 @@
       <div class="nav">
         <div class="brand">FileScope Pro</div>
         <div class="navlinks">
-          <a href="#features" data-i18n="nav-features">Features</a>
-          <a href="#how-it-works" data-i18n="nav-how">How it works</a>
-          <a href="#feedback" data-i18n="nav-feedback">Feedback</a>
-          <a href="#faq" data-i18n="nav-faq">FAQ</a>
+          <a href="#features">Features</a>
+          <a href="#how-it-works">How it works</a>
+          <a href="#feedback">Feedback</a>
+          <a href="#faq">FAQ</a>
         </div>
-        <div style="display:flex; gap:8px; align-items:center; flex-wrap:wrap;">
-          <button id="lang-en" class="btn small active lang-btn">🇬🇧 EN</button>
-          <button id="lang-fr" class="btn small secondary lang-btn">🇫🇷 FR</button>
-          <a class="btn" href="#buy" data-i18n="nav-buy">Buy now</a>
-        </div>
+        <a class="btn" href="#buy">Buy now</a>
       </div>
     </div>
   </div>
 
   <main class="wrap">
-
-    <!-- ============================================================ -->
-    <!-- HERO SECTION – Version anglaise -->
-    <!-- ============================================================ -->
-    <section class="hero lang-en">
+    <!-- SECTION HERO : DEUX COLONNES IDENTIQUES VISUELLEMENT -->
+    <section class="hero">
+      <!-- Colonne gauche : ANGLAIS -->
       <div class="hero-col">
         <div class="eyebrow">Windows Desktop Software</div>
         <h1>Find any file in seconds.</h1>
         <p class="lead">
           FileScope Pro helps Windows users search files by name, content, creation date,
-          modification date, extension, and more — all from one fast, simple interface.
-          <br><strong>100% offline. No admin rights. No registry traces. Lifetime license.</strong>
+          modification date, and extension from one fast, simple interface.
         </p>
         <div class="hero-actions">
           <a class="btn" href="#buy">Buy now</a>
           <a class="btn secondary" href="#features">See features</a>
         </div>
         <div class="badge-grid">
-          <span>🔍 Search by name & content</span>
-          <span>📅 Filter by creation / modification date</span>
-          <span>📄 OCR for scanned PDFs</span>
-          <span>📊 Excel numeric filter</span>
-          <span>📈 Power BI (.pbix) support</span>
-          <span>💼 Portable – no install</span>
-          <span>🔒 No registry traces</span>
-          <span>🛡️ No admin rights required</span>
-          <span>♾️ Lifetime license</span>
-          <span>🌐 100% offline</span>
-          <span>🎨 Modern interface</span>
-          <span>📤 Export to Excel</span>
+          <span>Offline search</span>
+          <span>Made for Windows</span>
+          <span>Search by name & content</span>
+          <span>Filter by creation date</span>
+          <span>Filter by modification date</span>
+          <span>Multi‑criteria search</span>
         </div>
       </div>
-    </section>
 
-    <!-- ============================================================ -->
-    <!-- HERO SECTION – Version française -->
-    <!-- ============================================================ -->
-    <section class="hero lang-fr">
+      <!-- Colonne droite : FRANÇAIS -->
       <div class="hero-col">
         <div class="eyebrow">Logiciel Windows</div>
-        <h1>Trouvez n'importe quel fichier en quelques secondes.</h1>
+        <h1 style="font-size:clamp(32px,5vw,52px);">Trouvez n’importe quel fichier en quelques secondes.</h1>
         <p class="lead">
-          FileScope Pro permet aux utilisateurs Windows de rechercher des fichiers par nom, contenu,
-          date de création, date de modification, extension et bien plus encore — le tout dans une
-          interface simple et rapide.
-          <br><strong>100% hors-ligne. Sans droits admin. Aucune trace registre. Licence à vie.</strong>
+          FileScope Pro permet aux utilisateurs Windows de rechercher des fichiers par nom, contenu, date de création,
+          date de modification et extension, le tout dans une interface simple et rapide.
         </p>
         <div class="hero-actions">
           <a class="btn" href="#buy">Acheter</a>
           <a class="btn secondary" href="#features">Voir les fonctionnalités</a>
         </div>
         <div class="badge-grid">
-          <span>🔍 Recherche par nom et contenu</span>
-          <span>📅 Filtre date création / modification</span>
-          <span>📄 OCR pour PDF scannés</span>
-          <span>📊 Filtre Excel numérique</span>
-          <span>📈 Support Power BI (.pbix)</span>
-          <span>💼 Portable – sans installation</span>
-          <span>🔒 Aucune trace registre</span>
-          <span>🛡️ Sans droits administrateur</span>
-          <span>♾️ Licence à vie</span>
-          <span>🌐 100% hors-ligne</span>
-          <span>🎨 Interface moderne</span>
-          <span>📤 Export vers Excel</span>
+          <span>Recherche sans internet</span>
+          <span>Conçu pour Windows</span>
+          <span>Recherche par nom et contenu</span>
+          <span>Recherche par date création</span>
+          <span>Recherche par date modification</span>
+          <span>Recherche combinée</span>
         </div>
       </div>
     </section>
 
-    <!-- ============================================================ -->
-    <!-- HOW IT WORKS – EN -->
-    <!-- ============================================================ -->
-    <section id="how-it-works" class="lang-en">
+    <!-- ===== RESTE DE LA PAGE (CONSERVÉ EN ANGLAIS) ===== -->
+    <section>
+      <div class="cards">
+        <div class="card">
+          <h3>Search by name</h3>
+          <p>Find files and folders quickly using the exact name or partial keywords.</p>
+        </div>
+        <div class="card">
+          <h3>Search inside content</h3>
+          <p>Look inside supported documents to find the right file faster.</p>
+        </div>
+        <div class="card">
+          <h3>Filter by date</h3>
+          <p>Refine results by creation date and modification date with ease.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="how-it-works">
       <div class="section-title">How it works</div>
       <p class="section-sub">
-        FileScope Pro keeps the process simple: choose a location, enter a keyword, and get results in seconds.
+        FileScope Pro keeps the process simple: choose your location, enter a keyword, and get results in seconds.
       </p>
       <div class="steps">
         <div class="card step">
@@ -386,207 +364,54 @@
       </div>
     </section>
 
-    <!-- ============================================================ -->
-    <!-- HOW IT WORKS – FR -->
-    <!-- ============================================================ -->
-    <section id="how-it-works" class="lang-fr">
-      <div class="section-title">Comment ça marche</div>
-      <p class="section-sub">
-        FileScope Pro fonctionne en trois étapes simples : choisissez un dossier, entrez un mot-clé, obtenez des résultats en quelques secondes.
-      </p>
-      <div class="steps">
-        <div class="card step">
-          <div class="num">1</div>
-          <h3>Sélectionnez un dossier</h3>
-          <p>Recherchez dans le Bureau ou n'importe quel dossier de votre ordinateur.</p>
-        </div>
-        <div class="card step">
-          <div class="num">2</div>
-          <h3>Entrez votre mot-clé</h3>
-          <p>Recherchez par nom, contenu, ou les deux simultanément.</p>
-        </div>
-        <div class="card step">
-          <div class="num">3</div>
-          <h3>Ouvrez le résultat</h3>
-          <p>Double-cliquez sur un fichier pour l'ouvrir instantanément depuis la liste.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============================================================ -->
-    <!-- FEATURES – EN -->
-    <!-- ============================================================ -->
-    <section id="features" class="lang-en">
+    <section id="features">
       <div class="section-title">Powerful features</div>
       <p class="section-sub">
-        Everything you need to find files faster — built for Windows users who value time and simplicity.
+        Built for people who want a practical Windows tool to save time and avoid losing important files.
       </p>
-
-      <div class="cards">
-        <div class="card">
-          <h3>🔍 Search by name & content</h3>
-          <p>Find files by name, partial name, or by searching inside the content of supported documents.</p>
+      <div class="feature">
+        <div class="shot">
+          <div class="mock">
+            <div class="r1"></div>
+            <div class="r2"></div>
+            <div class="r3">
+              <div></div><div></div>
+            </div>
+          </div>
         </div>
         <div class="card">
-          <h3>📅 Filter by date</h3>
-          <p>Refine results by creation date and modification date with an easy date picker.</p>
-        </div>
-        <div class="card">
-          <h3>📄 OCR for scanned PDFs</h3>
-          <p>Search inside scanned PDFs using integrated OCR (Tesseract). Works offline.</p>
-        </div>
-        <div class="card">
-          <h3>📊 Excel numeric filter</h3>
-          <p>Find Excel files containing numbers within a specific range. Unique feature.</p>
-        </div>
-        <div class="card">
-          <h3>📈 Power BI (.pbix) support</h3>
-          <p>Search inside Power BI files metadata. A feature no other tool offers.</p>
-        </div>
-        <div class="card">
-          <h3>💼 Portable – no install</h3>
-          <p>Run from a USB stick or any folder. No installation, no registry changes.</p>
-        </div>
-        <div class="card">
-          <h3>🔒 No registry traces</h3>
-          <p>All settings are stored in <code>%USERPROFILE%\.mh_afs\</code>. Clean and respectful of your system.</p>
-        </div>
-        <div class="card">
-          <h3>🛡️ No admin rights</h3>
-          <p>No UAC prompts, no elevated privileges needed. Runs with your user rights.</p>
-        </div>
-        <div class="card">
-          <h3>♾️ Lifetime license</h3>
-          <p>Pay once, use forever. No subscription, no renewal, no hidden fees.</p>
-        </div>
-        <div class="card">
-          <h3>🌐 100% offline</h3>
-          <p>No internet connection required. Your files stay on your computer. Zero telemetry.</p>
-        </div>
-        <div class="card">
-          <h3>🎨 Modern & intuitive UI</h3>
-          <p>Clean design with Tailwind colors, help buttons (ⓘ), tooltips, and progress bar.</p>
-        </div>
-        <div class="card">
-          <h3>📤 Export to Excel</h3>
-          <p>Export your search results to a .xlsx file with one click.</p>
+          <h3>Smart file discovery</h3>
+          <p>Search by file name, extension, and content, all from the same interface.</p>
+          <ul>
+            <li>Supports folders, Word, Excel, PDF, and Power BI files.</li>
+            <li>Fast filtering by creation and modification dates.</li>
+            <li>Designed for everyday Windows productivity.</li>
+          </ul>
         </div>
       </div>
-
-      <div style="margin-top:30px; display:grid; grid-template-columns:1fr 1fr; gap:18px;">
+      <div class="feature">
         <div class="card">
-          <h3>📁 Supported formats</h3>
+          <h3>Clean and easy interface</h3>
+          <p>Simple layout, readable results, and a search flow anyone can use immediately.</p>
           <ul>
-            <li><strong>Word</strong> : .docx, .doc</li>
-            <li><strong>Excel</strong> : .xlsx, .xls</li>
-            <li><strong>Power BI</strong> : .pbix</li>
-            <li><strong>PDF</strong> : text + OCR</li>
-            <li><strong>Text</strong> : .txt, .csv, .xml, .log</li>
-            <li><strong>Custom</strong> : add your own extensions</li>
+            <li>Progress indicator during search.</li>
+            <li>Sortable results by name, type, and date.</li>
+            <li>Open files directly from the results panel.</li>
           </ul>
         </div>
-        <div class="card">
-          <h3>⚙️ Advanced settings</h3>
-          <ul>
-            <li><strong>Economy mode</strong> : low resource usage</li>
-            <li><strong>Performance mode</strong> : prioritizes speed</li>
-            <li><strong>Customizable timeout</strong> : adjust per file</li>
-            <li><strong>Page limit</strong> : first, last, or all pages</li>
-            <li><strong>Wildcards</strong> : use * for partial matches</li>
-          </ul>
+        <div class="shot">
+          <div class="mock">
+            <div class="r1" style="width:85%"></div>
+            <div class="r2" style="height:82px"></div>
+            <div class="r3">
+              <div></div><div></div>
+            </div>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- ============================================================ -->
-    <!-- FEATURES – FR -->
-    <!-- ============================================================ -->
-    <section id="features" class="lang-fr">
-      <div class="section-title">Fonctionnalités puissantes</div>
-      <p class="section-sub">
-        Tout ce dont vous avez besoin pour retrouver vos fichiers plus vite — conçu pour les utilisateurs Windows qui valorisent leur temps.
-      </p>
-
-      <div class="cards">
-        <div class="card">
-          <h3>🔍 Recherche par nom et contenu</h3>
-          <p>Trouvez des fichiers par nom, nom partiel, ou en cherchant à l'intérieur du contenu des documents pris en charge.</p>
-        </div>
-        <div class="card">
-          <h3>📅 Filtre par date</h3>
-          <p>Affinez les résultats par date de création et date de modification grâce à un sélecteur de dates simple.</p>
-        </div>
-        <div class="card">
-          <h3>📄 OCR pour PDF scannés</h3>
-          <p>Cherchez dans les PDF scannés grâce à l'OCR intégré (Tesseract). Fonctionne hors-ligne.</p>
-        </div>
-        <div class="card">
-          <h3>📊 Filtre numérique Excel</h3>
-          <p>Trouvez les fichiers Excel contenant des nombres dans une plage spécifique. Fonctionnalité unique.</p>
-        </div>
-        <div class="card">
-          <h3>📈 Support Power BI (.pbix)</h3>
-          <p>Cherchez dans les métadonnées des fichiers Power BI. Une fonctionnalité qu'aucun autre outil n'offre.</p>
-        </div>
-        <div class="card">
-          <h3>💼 Portable – sans installation</h3>
-          <p>Exécutez-le depuis une clé USB ou n'importe quel dossier. Sans installation, sans modification du registre.</p>
-        </div>
-        <div class="card">
-          <h3>🔒 Aucune trace registre</h3>
-          <p>Tous les paramètres sont stockés dans <code>%USERPROFILE%\.mh_afs\</code>. Propre et respectueux de votre système.</p>
-        </div>
-        <div class="card">
-          <h3>🛡️ Sans droits administrateur</h3>
-          <p>Pas de demande UAC, pas de privilèges élevés nécessaires. Fonctionne avec vos droits utilisateur.</p>
-        </div>
-        <div class="card">
-          <h3>♾️ Licence à vie</h3>
-          <p>Payez une fois, utilisez pour toujours. Pas d'abonnement, pas de renouvellement, pas de frais cachés.</p>
-        </div>
-        <div class="card">
-          <h3>🌐 100% hors-ligne</h3>
-          <p>Aucune connexion Internet requise. Vos fichiers restent sur votre ordinateur. Zéro télémétrie.</p>
-        </div>
-        <div class="card">
-          <h3>🎨 Interface moderne et intuitive</h3>
-          <p>Design épuré avec couleurs Tailwind, boutons d'aide (ⓘ), infobulles et barre de progression.</p>
-        </div>
-        <div class="card">
-          <h3>📤 Export vers Excel</h3>
-          <p>Exportez vos résultats de recherche vers un fichier .xlsx en un clic.</p>
-        </div>
-      </div>
-
-      <div style="margin-top:30px; display:grid; grid-template-columns:1fr 1fr; gap:18px;">
-        <div class="card">
-          <h3>📁 Formats supportés</h3>
-          <ul>
-            <li><strong>Word</strong> : .docx, .doc</li>
-            <li><strong>Excel</strong> : .xlsx, .xls</li>
-            <li><strong>Power BI</strong> : .pbix</li>
-            <li><strong>PDF</strong> : texte + OCR</li>
-            <li><strong>Texte</strong> : .txt, .csv, .xml, .log</li>
-            <li><strong>Personnalisé</strong> : ajoutez vos propres extensions</li>
-          </ul>
-        </div>
-        <div class="card">
-          <h3>⚙️ Paramètres avancés</h3>
-          <ul>
-            <li><strong>Mode Économique</strong> : faible consommation de ressources</li>
-            <li><strong>Mode Performance</strong> : priorise la vitesse</li>
-            <li><strong>Timeout personnalisable</strong> : ajustez par fichier</li>
-            <li><strong>Limite de pages</strong> : premières, dernières ou toutes</li>
-            <li><strong>Jokers</strong> : utilisez * pour des correspondances partielles</li>
-          </ul>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============================================================ -->
-    <!-- TESTIMONIALS – EN -->
-    <!-- ============================================================ -->
-    <section id="feedback" class="testimonials lang-en">
+    <section id="feedback" class="testimonials">
       <div class="label">Feedback from testers</div>
       <div class="section-title">What early users are saying</div>
       <p class="section-sub">
@@ -600,193 +425,55 @@
         </div>
         <div class="card">
           <div class="stars">★★★★★</div>
-          <p class="quote">“The Excel numeric filter saved me hours of manual work. A must-have!”</p>
-          <div class="meta">Marc D. — Accountant</div>
+          <p class="quote">“Searching by file name and content saves me a lot of time every day.”</p>
+          <div class="meta">David K. — Freelancer</div>
         </div>
         <div class="card">
           <div class="stars">★★★★★</div>
-          <p class="quote">“Portable, no install, no registry — perfect for my locked-down work PC.”</p>
-          <div class="meta">Thomas R. — System Engineer</div>
-        </div>
-        <div class="card">
-          <div class="stars">★★★★★</div>
-          <p class="quote">“I love the help buttons (ⓘ). I understand every feature without searching online.”</p>
-          <div class="meta">Marie L. — Executive Assistant</div>
+          <p class="quote">“A simple and powerful tool for managing documents on my Windows PC.”</p>
+          <div class="meta">Amine B. — Independent Consultant</div>
         </div>
       </div>
     </section>
 
-    <!-- ============================================================ -->
-    <!-- TESTIMONIALS – FR -->
-    <!-- ============================================================ -->
-    <section id="feedback" class="testimonials lang-fr">
-      <div class="label">Retours des testeurs</div>
-      <div class="section-title">Ce que disent les premiers utilisateurs</div>
-      <p class="section-sub">
-        Des retours réels de personnes qui ont testé le logiciel et qui voulaient un moyen plus rapide de trouver leurs fichiers sous Windows.
-      </p>
-      <div class="cards">
-        <div class="card">
-          <div class="stars">★★★★★</div>
-          <p class="quote">“Je retrouve mes fichiers en quelques secondes au lieu de perdre du temps à chercher dans des dossiers.”</p>
-          <div class="meta">Sarah M. — Assistante de bureau</div>
-        </div>
-        <div class="card">
-          <div class="stars">★★★★★</div>
-          <p class="quote">“Le filtre numérique Excel m'a fait gagner des heures de travail manuel. Indispensable !”</p>
-          <div class="meta">Marc D. — Expert‑comptable</div>
-        </div>
-        <div class="card">
-          <div class="stars">★★★★★</div>
-          <p class="quote">“Portable, sans installation, sans registre — parfait pour mon PC professionnel verrouillé.”</p>
-          <div class="meta">Thomas R. — Ingénieur Système</div>
-        </div>
-        <div class="card">
-          <div class="stars">★★★★★</div>
-          <p class="quote">“J'adore les boutons d'aide (ⓘ). Je comprends chaque fonctionnalité sans chercher sur Internet.”</p>
-          <div class="meta">Marie L. — Assistante de Direction</div>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============================================================ -->
-    <!-- FAQ – EN -->
-    <!-- ============================================================ -->
-    <section id="faq" class="lang-en">
+    <section id="faq">
       <div class="section-title">Frequently asked questions</div>
       <p class="section-sub">
-        Clear answers to help you decide faster and reduce hesitation before purchase.
+        Clear answers help visitors decide faster and reduce hesitation before purchase.
       </p>
       <div class="faq">
         <div class="card faq-item">
           <h3>Does it require internet?</h3>
-          <p>No. FileScope Pro is 100% offline. No data ever leaves your computer.</p>
+          <p>No. FileScope Pro is a desktop app designed to run locally on your Windows computer.</p>
         </div>
         <div class="card faq-item">
-          <h3>Do I need admin rights?</h3>
-          <p>No. The software runs with your user rights. No UAC prompts.</p>
+          <h3>What can I search?</h3>
+          <p>You can search by file name, content, creation date, modification date, and extension.</p>
         </div>
         <div class="card faq-item">
-          <h3>Is it really portable?</h3>
-          <p>Yes. Just run the .exe file from any folder or USB stick. No installation, no registry traces.</p>
+          <h3>Who is it for?</h3>
+          <p>It is made for anyone using Windows who wants to find files faster and work more efficiently.</p>
         </div>
         <div class="card faq-item">
-          <h3>What is the license?</h3>
-          <p>Lifetime license. Pay once, use forever. No subscription, no renewal.</p>
-        </div>
-        <div class="card faq-item">
-          <h3>What file formats are supported?</h3>
-          <p>Word (.docx, .doc), Excel (.xlsx, .xls), PDF (text + OCR), Power BI (.pbix), text files (.txt, .csv, .xml, .log), and custom extensions.</p>
-        </div>
-        <div class="card faq-item">
-          <h3>Can I search inside scanned PDFs?</h3>
-          <p>Yes. The integrated OCR (Tesseract) lets you search scanned PDFs offline.</p>
-        </div>
-        <div class="card faq-item">
-          <h3>How do I get support?</h3>
-          <p>Contact us at <a href="mailto:moussaoui.hassene@yahoo.com" style="color:var(--accent)">moussaoui.hassene@yahoo.com</a>. Response within 24 hours.</p>
-        </div>
-        <div class="card faq-item">
-          <h3>Is there a trial version?</h3>
-          <p>Yes. Download the full version and test it. You can activate later with a license key.</p>
+          <h3>How do I buy it?</h3>
+          <p>Use the button below to go to your Paddle checkout page once it is connected.</p>
         </div>
       </div>
     </section>
 
-    <!-- ============================================================ -->
-    <!-- FAQ – FR -->
-    <!-- ============================================================ -->
-    <section id="faq" class="lang-fr">
-      <div class="section-title">Questions fréquentes</div>
-      <p class="section-sub">
-        Des réponses claires pour vous aider à décider plus rapidement et réduire les hésitations avant l'achat.
-      </p>
-      <div class="faq">
-        <div class="card faq-item">
-          <h3>Nécessite‑t‑il Internet ?</h3>
-          <p>Non. FileScope Pro est 100% hors-ligne. Aucune donnée ne quitte jamais votre ordinateur.</p>
-        </div>
-        <div class="card faq-item">
-          <h3>Ai‑je besoin de droits administrateur ?</h3>
-          <p>Non. Le logiciel fonctionne avec vos droits utilisateur. Aucune demande UAC.</p>
-        </div>
-        <div class="card faq-item">
-          <h3>Est‑il vraiment portable ?</h3>
-          <p>Oui. Lancez simplement le fichier .exe depuis n'importe quel dossier ou clé USB. Sans installation, sans trace registre.</p>
-        </div>
-        <div class="card faq-item">
-          <h3>Quelle est la licence ?</h3>
-          <p>Licence à vie. Payez une fois, utilisez pour toujours. Pas d'abonnement, pas de renouvellement.</p>
-        </div>
-        <div class="card faq-item">
-          <h3>Quels formats de fichiers sont pris en charge ?</h3>
-          <p>Word (.docx, .doc), Excel (.xlsx, .xls), PDF (texte + OCR), Power BI (.pbix), fichiers texte (.txt, .csv, .xml, .log), et extensions personnalisées.</p>
-        </div>
-        <div class="card faq-item">
-          <h3>Puis‑je chercher dans des PDF scannés ?</h3>
-          <p>Oui. L'OCR intégré (Tesseract) vous permet de chercher dans les PDF scannés hors-ligne.</p>
-        </div>
-        <div class="card faq-item">
-          <h3>Comment obtenir du support ?</h3>
-          <p>Contactez‑nous à <a href="mailto:moussaoui.hassene@yahoo.com" style="color:var(--accent)">moussaoui.hassene@yahoo.com</a>. Réponse sous 24h.</p>
-        </div>
-        <div class="card faq-item">
-          <h3>Y a‑t‑il une version d'essai ?</h3>
-          <p>Oui. Téléchargez la version complète et testez‑la. Vous pourrez activer plus tard avec une clé de licence.</p>
-        </div>
-      </div>
-    </section>
-
-    <!-- ============================================================ -->
-    <!-- CTA – EN -->
-    <!-- ============================================================ -->
-    <section id="buy" class="cta lang-en">
+    <section id="buy" class="cta">
       <div class="cta-box">
-        <div class="eyebrow">Ready to buy</div>
-        <div class="section-title">Get FileScope Pro today</div>
+        <div class="eyebrow">Ready to sell</div>
+        <div class="section-title">Put FileScope Pro in front of customers today</div>
         <p>
-          <strong>Lifetime license — pay once, use forever.</strong><br>
-          100% offline • Portable • No admin rights • No registry traces • 30-day money-back guarantee.
+          A focused Windows file-search tool with strong messaging, clear benefits, and social proof ready for Paddle.
         </p>
-        <div style="display:flex; gap:12px; justify-content:center; flex-wrap:wrap; margin-top:16px;">
-          <span style="font-size:28px; font-weight:800; color:var(--accent2);">€49.99</span>
-          <span style="color:var(--muted); font-size:14px; align-self:center;">(commercial license)</span>
-        </div>
-        <div class="hero-actions">
+        <div class="hero-actions" style="justify-content:center">
           <a class="btn" href="#">Buy now</a>
-          <a class="btn secondary" href="#">Download free trial</a>
+          <a class="btn secondary" href="#">View demo</a>
         </div>
-        <p style="font-size:13px; margin-top:14px; color:var(--muted);">
-          <span class="check">✅</span> Lifetime updates included &nbsp;·&nbsp; <span class="check">✅</span> 30-day money-back guarantee
-        </p>
       </div>
     </section>
-
-    <!-- ============================================================ -->
-    <!-- CTA – FR -->
-    <!-- ============================================================ -->
-    <section id="buy" class="cta lang-fr">
-      <div class="cta-box">
-        <div class="eyebrow">Prêt à acheter</div>
-        <div class="section-title">Obtenez FileScope Pro dès aujourd'hui</div>
-        <p>
-          <strong>Licence à vie — payez une fois, utilisez pour toujours.</strong><br>
-          100% hors-ligne • Portable • Sans droits admin • Aucune trace registre • Garantie satisfait ou remboursé 30 jours.
-        </p>
-        <div style="display:flex; gap:12px; justify-content:center; flex-wrap:wrap; margin-top:16px;">
-          <span style="font-size:28px; font-weight:800; color:var(--accent2);">49,99 €</span>
-          <span style="color:var(--muted); font-size:14px; align-self:center;">(licence commerciale)</span>
-        </div>
-        <div class="hero-actions">
-          <a class="btn" href="#">Acheter</a>
-          <a class="btn secondary" href="#">Télécharger l'essai gratuit</a>
-        </div>
-        <p style="font-size:13px; margin-top:14px; color:var(--muted);">
-          <span class="check">✅</span> Mises à jour à vie incluses &nbsp;·&nbsp; <span class="check">✅</span> Garantie 30 jours satisfait ou remboursé
-        </p>
-      </div>
-    </section>
-
   </main>
 
   <footer>
@@ -797,75 +484,9 @@
           <a href="#">Terms</a>
           <a href="#">Privacy</a>
           <a href="mailto:moussaoui.hassene@yahoo.com">Support</a>
-          <a href="#">Contact</a>
         </div>
       </div>
     </div>
   </footer>
-
-  <!-- ============================================================ -->
-  <!-- SCRIPT BILINGUE -->
-  <!-- ============================================================ -->
-  <script>
-    document.addEventListener('DOMContentLoaded', function() {
-      const langEn = document.getElementById('lang-en');
-      const langFr = document.getElementById('lang-fr');
-      const body = document.body;
-
-      function setLanguage(lang) {
-        if (lang === 'fr') {
-          body.classList.add('lang-fr');
-          body.classList.remove('lang-en');
-          langFr.classList.add('active');
-          langFr.classList.remove('secondary');
-          langEn.classList.remove('active');
-          langEn.classList.add('secondary');
-          // Mettre à jour les liens "Buy now" / "Acheter" et "See features" / "Voir les fonctionnalités"
-          // et les textes de navigation si besoin
-        } else {
-          body.classList.add('lang-en');
-          body.classList.remove('lang-fr');
-          langEn.classList.add('active');
-          langEn.classList.remove('secondary');
-          langFr.classList.remove('active');
-          langFr.classList.add('secondary');
-        }
-        // Sauvegarder la préférence
-        localStorage.setItem('language', lang);
-      }
-
-      langEn.addEventListener('click', function(e) {
-        e.preventDefault();
-        setLanguage('en');
-      });
-
-      langFr.addEventListener('click', function(e) {
-        e.preventDefault();
-        setLanguage('fr');
-      });
-
-      // Restaurer la langue sauvegardée
-      const savedLang = localStorage.getItem('language');
-      if (savedLang === 'fr') {
-        setLanguage('fr');
-      } else {
-        setLanguage('en');
-      }
-
-      // Gestion des ancres pour le défilement fluide
-      document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-        anchor.addEventListener('click', function(e) {
-          const href = this.getAttribute('href');
-          if (href === '#') return;
-          const target = document.querySelector(href);
-          if (target) {
-            e.preventDefault();
-            target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-          }
-        });
-      });
-    });
-  </script>
-
 </body>
 </html>
