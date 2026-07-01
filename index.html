@@ -360,10 +360,10 @@
       color: var(--accent2);
       font-weight: 700;
     }
-    .comparison-table .icon-ok { color: #4caf50; font-weight: 700; }
-    .comparison-table .icon-partial { color: #ffc107; }
-    .comparison-table .icon-no { color: #f44336; }
-    .comparison-table .unique-badge {
+    .icon-ok { color: #4caf50; font-weight: 700; }
+    .icon-partial { color: #ffc107; font-weight: 700; }
+    .icon-no { color: #f44336; font-weight: 700; }
+    .unique-badge {
       background: var(--accent);
       color: #fff;
       padding: 2px 10px;
@@ -374,7 +374,28 @@
       display: inline-block;
     }
 
-    /* ===== FEATURES LIST (nouvelle section) ===== */
+    /* ===== LEGENDE ===== */
+    .legend-box {
+      margin-top: 24px;
+      padding: 18px 24px;
+      background: rgba(18, 28, 51, .6);
+      border-radius: 16px;
+      border: 1px solid var(--line);
+    }
+    .legend-box .legend-title {
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 10px;
+    }
+    .legend-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 8px 16px;
+      font-size: 0.9rem;
+      color: var(--muted);
+    }
+
+    /* ===== FEATURES LIST ===== */
     .feature-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -525,6 +546,7 @@
       .cta-box .price { font-size: 2rem; }
       .btn { width: 100%; justify-content: center; }
       .hero-actions { flex-direction: column; align-items: stretch; }
+      .legend-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -594,7 +616,7 @@
       </div>
     </section>
 
-    <!-- ===== NOUVELLE SECTION : FONCTIONNALITÉS CLÉS (12 points) ===== -->
+    <!-- ===== FONCTIONNALITÉS AVANCÉES (12 points) ===== -->
     <section class="wrap" id="features">
       <h2 class="section-title" data-i18n="features_title">Fonctionnalités avancées</h2>
       <p class="section-sub" data-i18n="features_sub">Tout ce dont vous avez besoin pour retrouver vos fichiers rapidement, même dans les documents scannés ou les rapports Power BI.</p>
@@ -614,20 +636,21 @@
       </div>
     </section>
 
-    <!-- ===== NOUVELLE SECTION : COMPARAISON AVEC CONCURRENTS ===== -->
+    <!-- ===== COMPARAISON AVEC CONCURRENTS + LÉGENDE + MENTION IA ===== -->
     <section class="wrap" id="comparison">
       <h2 class="section-title" data-i18n="comparison_title">📊 Comparaison avec les concurrents</h2>
       <p class="section-sub" data-i18n="comparison_sub">Advanced File Search se distingue par ses fonctionnalités uniques (OCR, filtres Excel, Power BI, portable) à un prix très compétitif.</p>
+      
       <div class="comparison-table-wrap">
         <table class="comparison-table">
           <thead>
             <tr>
               <th data-i18n="comp_criteria">Critère</th>
               <th>Advanced File Search</th>
-              <th>Everything</th>
-              <th>FileLocator Pro</th>
-              <th>Copernic</th>
-              <th>dtSearch</th>
+              <th data-i18n="comp_leader">Concurrent 1 :<br>Leader du Marché</th>
+              <th data-i18n="comp_second">Concurrent 2 :<br>Deuxième Solution</th>
+              <th data-i18n="comp_third">Concurrent 3 :<br>Troisième Alternative</th>
+              <th data-i18n="comp_fourth">Concurrent 4 :<br>4ème Alternative</th>
             </tr>
           </thead>
           <tbody>
@@ -698,10 +721,10 @@
             <tr>
               <td data-i18n="comp_lifetime">Licence à vie</td>
               <td><span class="icon-ok">✅✅✅</span></td>
-              <td><span class="icon-ok">✅ (gratuit)</span></td>
-              <td><span class="icon-ok">✅ (149 $)</span></td>
-              <td><span class="icon-no">❌ (abonnement)</span></td>
-              <td><span class="icon-ok">✅ (199 $)</span></td>
+              <td><span class="icon-ok">✅ (Gratuit)</span></td>
+              <td><span class="icon-ok">✅ (Payant)</span></td>
+              <td><span class="icon-no">❌ (Abonnement)</span></td>
+              <td><span class="icon-ok">✅ (Payant)</span></td>
             </tr>
             <tr>
               <td data-i18n="comp_ease">Simplicité d'utilisation</td>
@@ -721,6 +744,22 @@
             </tr>
           </tbody>
         </table>
+      </div>
+
+      <!-- ===== LÉGENDE ===== -->
+      <div class="legend-box">
+        <p class="legend-title" data-i18n="legend_title">📌 Légende :</p>
+        <div class="legend-grid">
+          <span><span class="icon-ok" style="font-weight:700;">✅</span> <span data-i18n="legend_ok">= Fonctionnalité présente / performante</span></span>
+          <span><span class="icon-ok" style="font-weight:700;">✅✅✅</span> <span data-i18n="legend_ok3">= Très performant / Excellente maîtrise</span></span>
+          <span><span class="icon-partial" style="font-weight:700;">⭐</span> / <span class="icon-partial" style="font-weight:700;">⭐⭐</span> <span data-i18n="legend_star">= Moyen / Basique (limité)</span></span>
+          <span><span class="icon-no" style="font-weight:700;">❌</span> <span data-i18n="legend_cross">= Absent / Non disponible</span></span>
+          <span><span class="unique-badge" style="display:inline-block; padding:2px 10px; background:var(--accent); color:#fff; border-radius:20px; font-size:0.7rem; font-weight:700;">Unique</span> <span data-i18n="legend_unique">= Fonctionnalité exclusive à Advanced File Search</span></span>
+        </div>
+        <!-- ===== MENTION IA ===== -->
+        <p style="margin-top: 14px; font-size: 0.85rem; color: var(--muted); border-top: 1px solid var(--line); padding-top: 14px; text-align: center; font-style: italic;">
+          <span data-i18n="ai_mention">🤖 Comparaison faite par Intelligence Artificielle</span>
+        </p>
       </div>
     </section>
 
@@ -872,6 +911,10 @@
           comparison_title: '📊 Comparaison avec les concurrents',
           comparison_sub: 'Advanced File Search se distingue par ses fonctionnalités uniques (OCR, filtres Excel, Power BI, portable) à un prix très compétitif.',
           comp_criteria: 'Critère',
+          comp_leader: 'Concurrent 1 :<br>Leader du Marché',
+          comp_second: 'Concurrent 2 :<br>Deuxième Solution',
+          comp_third: 'Concurrent 3 :<br>Troisième Alternative',
+          comp_fourth: 'Concurrent 4 :<br>4ème Alternative',
           comp_name: 'Recherche par nom',
           comp_content: 'Recherche contenu',
           comp_ocr: 'OCR (PDF scannés)',
@@ -883,6 +926,13 @@
           comp_lifetime: 'Licence à vie',
           comp_ease: 'Simplicité d\'utilisation',
           comp_help: 'Aide intégrée (ⓘ)',
+          legend_title: '📌 Légende :',
+          legend_ok: '= Fonctionnalité présente / performante',
+          legend_ok3: '= Très performant / Excellente maîtrise',
+          legend_star: '= Moyen / Basique (limité)',
+          legend_cross: '= Absent / Non disponible',
+          legend_unique: '= Fonctionnalité exclusive à Advanced File Search',
+          ai_mention: '🤖 Comparaison faite par Intelligence Artificielle',
           how_title: 'Comment ça fonctionne',
           how_sub: 'Trois étapes simples pour retrouver vos fichiers en un éclair.',
           s1_title: 'Sélectionnez un emplacement',
@@ -968,6 +1018,10 @@
           comparison_title: '📊 Comparison with competitors',
           comparison_sub: 'Advanced File Search stands out with its unique features (OCR, Excel filters, Power BI, portable) at a very competitive price.',
           comp_criteria: 'Criteria',
+          comp_leader: 'Competitor 1 :<br>Market Leader',
+          comp_second: 'Competitor 2 :<br>Second Solution',
+          comp_third: 'Competitor 3 :<br>Third Alternative',
+          comp_fourth: 'Competitor 4 :<br>4th Alternative',
           comp_name: 'Search by name',
           comp_content: 'Content search',
           comp_ocr: 'OCR (scanned PDFs)',
@@ -979,6 +1033,13 @@
           comp_lifetime: 'Lifetime license',
           comp_ease: 'Ease of use',
           comp_help: 'Built-in help (ⓘ)',
+          legend_title: '📌 Legend:',
+          legend_ok: '= Feature available / efficient',
+          legend_ok3: '= Highly efficient / Excellent',
+          legend_star: '= Average / Basic (limited)',
+          legend_cross: '= Absent / Not available',
+          legend_unique: '= Exclusive feature of Advanced File Search',
+          ai_mention: '🤖 Comparison made by Artificial Intelligence',
           how_title: 'How it works',
           how_sub: 'Three simple steps to find your files in a flash.',
           s1_title: 'Select a location',
