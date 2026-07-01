@@ -321,6 +321,54 @@
     }
     .step:hover .num { background: var(--accent); color: #fff; }
 
+    /* ===== DETAILED FEATURES ===== */
+    .detail-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-top: 10px;
+    }
+    .detail-item {
+      background: rgba(18, 28, 51, .6);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 20px 22px;
+      transition: var(--transition);
+    }
+    .detail-item:hover {
+      border-color: var(--accent);
+      transform: translateY(-3px);
+      box-shadow: 0 12px 30px rgba(0,0,0,.3);
+    }
+    .detail-item h4 {
+      font-size: 1.05rem;
+      margin: 0 0 8px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      color: #fff;
+    }
+    .detail-item h4 i { color: var(--accent2); font-size: 1.2rem; width: 28px; }
+    .detail-item p, .detail-item li {
+      color: var(--muted);
+      font-size: 0.92rem;
+      margin: 0;
+    }
+    .detail-item ul { margin: 6px 0 0 18px; padding: 0; }
+    .detail-item ul li { margin-bottom: 4px; }
+    .exclusive-badge {
+      background: var(--accent);
+      color: #fff;
+      font-size: 0.6rem;
+      font-weight: 700;
+      padding: 2px 10px;
+      border-radius: 20px;
+      text-transform: uppercase;
+      letter-spacing: .05em;
+      margin-left: 6px;
+      display: inline-block;
+    }
+
     /* ===== COMPARAISON TABLE ===== */
     .comparison-table-wrap {
       overflow-x: auto;
@@ -356,14 +404,10 @@
     .comparison-table tr:last-child td {
       border-bottom: none;
     }
-    .comparison-table .highlight {
-      color: var(--accent2);
-      font-weight: 700;
-    }
-    .icon-ok { color: #4caf50; font-weight: 700; }
-    .icon-partial { color: #ffc107; font-weight: 700; }
-    .icon-no { color: #f44336; font-weight: 700; }
-    .unique-badge {
+    .comparison-table .icon-ok { color: #4caf50; font-weight: 700; }
+    .comparison-table .icon-partial { color: #ffc107; font-weight: 700; }
+    .comparison-table .icon-no { color: #f44336; font-weight: 700; }
+    .comparison-table .unique-badge {
       background: var(--accent);
       color: #fff;
       padding: 2px 10px;
@@ -395,26 +439,6 @@
       color: var(--muted);
     }
 
-    /* ===== FEATURES LIST ===== */
-    .feature-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 14px;
-      margin-top: 10px;
-    }
-    .feature-item {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      background: rgba(255,255,255,.03);
-      padding: 10px 16px;
-      border-radius: 12px;
-      border: 1px solid var(--line);
-      font-size: 0.9rem;
-      color: var(--text);
-    }
-    .feature-item i { color: var(--accent2); font-size: 1rem; width: 20px; }
-
     /* ===== TESTIMONIALS ===== */
     .testimonials {
       background: linear-gradient(180deg, rgba(255, 255, 255, .02), rgba(255, 255, 255, .03));
@@ -425,7 +449,7 @@
     .quote { font-size: 0.95rem; color: #e7eeff; margin: 0 0 14px; font-style: italic; }
     .meta { color: var(--muted); font-size: 0.85rem; font-weight: 500; }
 
-    /* ===== FAQ ACCORDÉON ===== */
+    /* ===== FAQ ===== */
     .faq-grid { grid-template-columns: 1fr 1fr; }
     .faq-item {
       cursor: pointer;
@@ -456,10 +480,8 @@
     .faq-item.active h3 i { transform: rotate(180deg); }
     .faq-item .answer p { margin: 0; color: var(--muted); font-size: 0.9rem; }
 
-    /* ===== CTA / PRIX ===== */
-    .cta {
-      padding: 60px 0 80px;
-    }
+    /* ===== CTA ===== */
+    .cta { padding: 60px 0 80px; }
     .cta-box {
       background: linear-gradient(135deg, rgba(76, 125, 255, .12), rgba(125, 226, 199, .08));
       border: 1px solid rgba(255, 255, 255, .08);
@@ -529,17 +551,16 @@
       .hero-content .lead { margin: 0 auto 28px; }
       .hero-actions { justify-content: center; }
       .badge-grid { justify-content: center; }
-      .cards, .steps, .testimonial-grid { grid-template-columns: 1fr 1fr; }
+      .cards, .steps, .testimonial-grid, .detail-grid { grid-template-columns: 1fr; }
       .faq-grid { grid-template-columns: 1fr; }
       .footer-grid { grid-template-columns: 1fr 1fr; }
-      .feature-grid { grid-template-columns: 1fr 1fr; }
     }
     @media (max-width: 640px) {
       .topbar { padding: 10px 0; }
       .nav { flex-direction: column; align-items: stretch; gap: 12px; }
       .navlinks { justify-content: space-between; flex-wrap: wrap; }
       .lang-switch { align-self: flex-start; }
-      .cards, .steps, .testimonial-grid, .feature-grid { grid-template-columns: 1fr; }
+      .cards, .steps, .testimonial-grid, .detail-grid { grid-template-columns: 1fr; }
       .footer-grid { grid-template-columns: 1fr; }
       .mockup-item { grid-template-columns: 24px 1fr; gap: 4px; }
       .mockup-item .meta { display: none; }
@@ -559,8 +580,8 @@
         <div class="brand">Advanced File Search</div>
         <nav class="navlinks" aria-label="Menu">
           <a href="#features" data-i18n="nav_features">Fonctionnalités</a>
+          <a href="#detailed-features" data-i18n="nav_detailed">Tout détail</a>
           <a href="#comparison" data-i18n="nav_comparison">Comparaison</a>
-          <a href="#how-it-works" data-i18n="nav_how">Fonctionnement</a>
           <a href="#testimonials" data-i18n="nav_testimonials">Avis</a>
           <a href="#faq" data-i18n="nav_faq">FAQ</a>
           <a href="#buy" class="btn" style="padding:8px 18px; font-size:0.85rem;" data-i18n="nav_buy">Acheter</a>
@@ -580,23 +601,21 @@
         <div class="eyebrow" data-i18n="hero_eyebrow">Logiciel Windows</div>
         <h1 data-i18n="hero_title">Retrouvez n'importe quel fichier en un éclair.</h1>
         <p class="lead" data-i18n="hero_lead">
-          Advanced File Search : moteur de recherche puissant avec OCR, filtres Excel, Power BI, portable, sans installation et 100% hors-ligne.
+          Advanced File Search : moteur de recherche puissant avec OCR, recherche Excel par valeur, Power BI, portable, sans installation et 100% hors-ligne.
         </p>
         <div class="hero-actions">
           <a href="#buy" class="btn" data-i18n="hero_cta1">Acheter maintenant</a>
-          <a href="#features" class="btn secondary" data-i18n="hero_cta2">Voir les fonctionnalités</a>
+          <a href="#detailed-features" class="btn secondary" data-i18n="hero_cta2">Voir tout en détail</a>
         </div>
         <div class="badge-grid">
           <span data-i18n="badge1">🔍 Recherche sans internet</span>
           <span data-i18n="badge2">🖥️ Windows 10/11</span>
           <span data-i18n="badge3">📄 Nom + contenu</span>
           <span data-i18n="badge4">📅 Dates création/modif</span>
-          <span data-i18n="badge5">📊 OCR + Excel + Power BI</span>
+          <span data-i18n="badge5">📊 OCR + Excel valeur + Power BI</span>
           <span data-i18n="badge6">💼 Portable – sans install</span>
         </div>
       </div>
-
-      <!-- Maquette visuelle -->
       <div class="mockup-window" role="img" aria-label="Aperçu de l'interface d'Advanced File Search">
         <div class="mockup-titlebar">
           <div class="mockup-dots"><span></span><span></span><span></span></div>
@@ -609,37 +628,66 @@
         </div>
         <div class="mockup-list">
           <div class="mockup-item"><i class="fas fa-file-pdf"></i><span class="name">Rapport_scanné_2025.pdf</span><span class="meta">12/06/2025</span><span class="meta">2.4 Mo</span></div>
-          <div class="mockup-item"><i class="fas fa-file-excel"></i><span class="name">Chiffres_Q4.xlsx (filtre numérique)</span><span class="meta">05/06/2025</span><span class="meta">890 Ko</span></div>
+          <div class="mockup-item"><i class="fas fa-file-excel"></i><span class="name">Chiffres_Q4.xlsx (recherche valeur)</span><span class="meta">05/06/2025</span><span class="meta">890 Ko</span></div>
           <div class="mockup-item"><i class="fas fa-file-powerpoint"></i><span class="name">Dashboard.pbix (Power BI)</span><span class="meta">28/05/2025</span><span class="meta">1.2 Mo</span></div>
           <div class="mockup-item"><i class="fas fa-file-alt"></i><span class="name">Notes_réunion.txt</span><span class="meta">20/05/2025</span><span class="meta">4 Ko</span></div>
         </div>
       </div>
     </section>
 
-    <!-- ===== FONCTIONNALITÉS AVANCÉES (12 points) ===== -->
+    <!-- ===== FONCTIONNALITÉS AVANCÉES (aperçu) ===== -->
     <section class="wrap" id="features">
       <h2 class="section-title" data-i18n="features_title">Fonctionnalités avancées</h2>
-      <p class="section-sub" data-i18n="features_sub">Tout ce dont vous avez besoin pour retrouver vos fichiers rapidement, même dans les documents scannés ou les rapports Power BI.</p>
-      <div class="feature-grid">
-        <div class="feature-item"><i class="fas fa-file-signature"></i> <span data-i18n="f1">Recherche par nom et contenu</span></div>
-        <div class="feature-item"><i class="fas fa-calendar-alt"></i> <span data-i18n="f2">Filtre date création / modification</span></div>
-        <div class="feature-item"><i class="fas fa-robot"></i> <span data-i18n="f3">OCR pour PDF scannés</span></div>
-        <div class="feature-item"><i class="fas fa-table"></i> <span data-i18n="f4">Filtre Excel numérique</span></div>
-        <div class="feature-item"><i class="fas fa-chart-pie"></i> <span data-i18n="f5">Support Power BI (.pbix)</span></div>
-        <div class="feature-item"><i class="fas fa-usb"></i> <span data-i18n="f6">Portable – sans installation</span></div>
-        <div class="feature-item"><i class="fas fa-eraser"></i> <span data-i18n="f7">Aucune trace registre</span></div>
-        <div class="feature-item"><i class="fas fa-user-shield"></i> <span data-i18n="f8">Sans droits administrateur</span></div>
-        <div class="feature-item"><i class="fas fa-infinity"></i> <span data-i18n="f9">Licence à vie</span></div>
-        <div class="feature-item"><i class="fas fa-wifi-slash"></i> <span data-i18n="f10">100% hors-ligne</span></div>
-        <div class="feature-item"><i class="fas fa-paint-brush"></i> <span data-i18n="f11">Interface moderne</span></div>
-        <div class="feature-item"><i class="fas fa-file-export"></i> <span data-i18n="f12">Export vers Excel</span></div>
+      <p class="section-sub" data-i18n="features_sub">Un aperçu de ce que Advanced File Search peut faire pour vous.</p>
+      <div class="cards">
+        <div class="card"><h3><i class="fas fa-file-signature"></i> <span data-i18n="f1">Recherche par nom et contenu</span></h3><p data-i18n="f1_desc">Avec jokers (*) et logique booléenne.</p></div>
+        <div class="card"><h3><i class="fas fa-robot"></i> <span data-i18n="f3">OCR pour PDF scannés</span></h3><p data-i18n="f3_desc">Reconnaissance de texte dans les images et PDF.</p></div>
+        <div class="card"><h3><i class="fas fa-table"></i> <span data-i18n="f4">Recherche Excel par valeur</span></h3><p data-i18n="f4_desc">Recherche par plages de valeurs dans les cellules.</p></div>
       </div>
     </section>
 
-    <!-- ===== COMPARAISON AVEC CONCURRENTS + LÉGENDE + MENTION IA ===== -->
+    <!-- ===== NOUVELLE SECTION : FONCTIONNALITÉS DÉTAILLÉES ===== -->
+    <section class="wrap" id="detailed-features" style="background: radial-gradient(circle at center, rgba(76,125,255,.05), transparent 60%); border-radius: 30px; padding: 50px 22px; margin-bottom: 20px;">
+      <h2 class="section-title" data-i18n="detail_title">⚡ Pourquoi choisir Advanced File Search ?</h2>
+      <p class="section-sub" data-i18n="detail_sub">Découvrez toutes les raisons qui font de notre logiciel le meilleur choix pour vos recherches de fichiers.</p>
+      
+      <div class="detail-grid">
+        <div class="detail-item"><h4><i class="fas fa-rocket"></i> <span data-i18n="d1_title">Ultra-simple à utiliser</span></h4><p data-i18n="d1_desc">Interface épurée, barre de recherche principale, résultats en temps réel. Double-clic pour ouvrir, export Excel en 1 clic. Pas de courbe d'apprentissage.</p></div>
+        <div class="detail-item"><h4><i class="fas fa-question-circle"></i> <span data-i18n="d2_title">Aide intégrée (ⓘ)</span></h4><p data-i18n="d2_desc">Boutons d'aide contextuels partout : jokers, modes de recherche, recherche Excel par valeur, types de fichiers, pages PDF, modes Économique/Performance, et journal de débogage.</p></div>
+        <div class="detail-item"><h4><i class="fas fa-usb"></i> <span data-i18n="d3_title">100% Portable</span></h4><p data-i18n="d3_desc">Un seul .exe. Lancez-le depuis une clé USB. Aucune installation, aucune clé de registre, aucun droit admin requis. Données stockées dans <code style="background:rgba(255,255,255,.05); padding:2px 6px; border-radius:4px;">%USERPROFILE%\.mh_afs\</code>.</p></div>
+        <div class="detail-item"><h4><i class="fas fa-infinity"></i> <span data-i18n="d4_title">Licence à vie</span></h4><p data-i18n="d4_desc">Achat unique. Pas d'abonnement, pas de renouvellement. Mises à jour mineures incluses. Utilisable sur plusieurs machines (usage personnel ou commercial).</p></div>
+        <div class="detail-item"><h4><i class="fas fa-sliders-h"></i> <span data-i18n="d5_title">Recherche multi-critères</span></h4><p data-i18n="d5_desc">Par nom (jokers), contenu (Word, Excel, PDF, Power BI), dates (création/modification), types de fichiers et extensions personnalisées.</p></div>
+        <div class="detail-item"><h4><i class="fas fa-eye"></i> <span data-i18n="d6_title">OCR intégré</span> <span class="exclusive-badge">Exclusif</span></h4><p data-i18n="d6_desc">Recherchez un mot dans un PDF scanné ou une image grâce à Tesseract. Paramétrage des pages (premières, dernières, toutes).</p></div>
+        <div class="detail-item"><h4><i class="fas fa-calculator"></i> <span data-i18n="d7_title">Recherche Excel par valeur</span> <span class="exclusive-badge">Exclusif</span></h4><p data-i18n="d7_desc">Trouvez les fichiers Excel contenant des valeurs numériques dans une plage donnée. Accepte les décimaux (. ou ,) et les nombres négatifs.</p></div>
+        <div class="detail-item"><h4><i class="fas fa-cog"></i> <span data-i18n="d8_title">Paramètres avancés</span></h4><p data-i18n="d8_desc">Mode Économique (faible ressource) ou Performance (vitesse). Timeout personnalisable par fichier.</p></div>
+        <div class="detail-item"><h4><i class="fas fa-paint-brush"></i> <span data-i18n="d9_title">Interface moderne</span></h4><p data-i18n="d9_desc">Palette élégante, tableau triable, barre de progression avec estimation, statistiques en direct (fichiers analysés, temps écoulé).</p></div>
+        <div class="detail-item"><h4><i class="fas fa-folder-open"></i> <span data-i18n="d10_title">Gestion des dossiers</span></h4><p data-i18n="d10_desc">Recherche récursive, ajout/suppression de chemins, exclusion automatique des dossiers interdits (accès refusé).</p></div>
+        <div class="detail-item"><h4><i class="fas fa-shield-alt"></i> <span data-i18n="d11_title">Sécurité</span></h4><p data-i18n="d11_desc">Instance unique (pas de doublons), activation par code licence, 100% sans virus/malware.</p></div>
+        <div class="detail-item"><h4><i class="fas fa-file-export"></i> <span data-i18n="d12_title">Exportation</span></h4><p data-i18n="d12_desc">Exportez les résultats en Excel (.xlsx) en un clic. Journal de débogage (debug.log) pour le support technique.</p></div>
+        <div class="detail-item" style="grid-column: span 2; text-align: center; border-color: var(--accent);">
+          <h4 style="justify-content: center;"><i class="fas fa-boxes"></i> <span data-i18n="d13_title">Support de nombreux formats</span></h4>
+          <p data-i18n="d13_desc"><strong>Word</strong> (.docx, .doc) · <strong>Excel</strong> (.xlsx, .xls) · <strong>Power BI</strong> (.pbix) · <strong>PDF</strong> (texte + OCR) · <strong>Texte</strong> (.txt, .csv, .xml, .log) · <strong>Extensions personnalisées</strong> (ajoutez vos propres types).</p>
+        </div>
+      </div>
+
+      <!-- Prérequis système -->
+      <div style="margin-top: 40px; padding: 24px; background: rgba(18,28,51,.5); border-radius: var(--radius); border: 1px solid var(--line); text-align: center;">
+        <h3 style="color: #fff; margin-bottom: 12px;" data-i18n="requirements_title">🖥️ Prérequis système</h3>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 10px; color: var(--muted); font-size: 0.95rem;">
+          <span data-i18n="req_os">🖥️ Windows 10 / 11 (64-bit)</span>
+          <span data-i18n="req_ram">💾 4 Go de RAM (8 Go recommandé)</span>
+          <span data-i18n="req_space">📦 50 Mo d'espace disque</span>
+          <span data-i18n="req_net">🌐 Aucune connexion internet requise</span>
+          <span data-i18n="req_portable">📁 100% Portable (exécutable unique)</span>
+        </div>
+        <p style="margin-top: 14px; color: var(--accent2); font-size: 0.9rem;" data-i18n="req_note">✅ Aucune installation, aucune trace registre, aucun droit administrateur nécessaire.</p>
+      </div>
+    </section>
+
+    <!-- ===== COMPARAISON AVEC CONCURRENTS (ANONYMISÉS) ===== -->
     <section class="wrap" id="comparison">
       <h2 class="section-title" data-i18n="comparison_title">📊 Comparaison avec les concurrents</h2>
-      <p class="section-sub" data-i18n="comparison_sub">Advanced File Search se distingue par ses fonctionnalités uniques (OCR, filtres Excel, Power BI, portable) à un prix très compétitif.</p>
+      <p class="section-sub" data-i18n="comparison_sub">Advanced File Search se distingue par ses fonctionnalités uniques (OCR, recherche Excel par valeur, Power BI, portable) à un prix très compétitif.</p>
       
       <div class="comparison-table-wrap">
         <table class="comparison-table">
@@ -654,123 +702,34 @@
             </tr>
           </thead>
           <tbody>
-            <tr>
-              <td data-i18n="comp_name">Recherche par nom</td>
-              <td><span class="icon-ok">✅</span></td>
-              <td><span class="icon-ok">✅✅✅</span></td>
-              <td><span class="icon-ok">✅</span></td>
-              <td><span class="icon-ok">✅</span></td>
-              <td><span class="icon-ok">✅</span></td>
-            </tr>
-            <tr>
-              <td data-i18n="comp_content">Recherche contenu</td>
-              <td><span class="icon-ok">✅✅✅</span></td>
-              <td><span class="icon-no">❌</span></td>
-              <td><span class="icon-ok">✅✅✅</span></td>
-              <td><span class="icon-ok">✅✅✅</span></td>
-              <td><span class="icon-ok">✅✅✅</span></td>
-            </tr>
-            <tr>
-              <td data-i18n="comp_ocr">OCR (PDF scannés)</td>
-              <td><span class="icon-ok">✅</span></td>
-              <td><span class="icon-no">❌</span></td>
-              <td><span class="icon-partial">✅ (option)</span></td>
-              <td><span class="icon-no">❌</span></td>
-              <td><span class="icon-partial">✅ (option)</span></td>
-            </tr>
-            <tr>
-              <td data-i18n="comp_excel">Filtre Excel numérique</td>
-              <td><span class="icon-ok">✅✅✅ <span class="unique-badge">Unique</span></span></td>
-              <td><span class="icon-no">❌</span></td>
-              <td><span class="icon-no">❌</span></td>
-              <td><span class="icon-no">❌</span></td>
-              <td><span class="icon-no">❌</span></td>
-            </tr>
-            <tr>
-              <td data-i18n="comp_powerbi">Recherche Power BI</td>
-              <td><span class="icon-ok">✅✅✅ <span class="unique-badge">Unique</span></span></td>
-              <td><span class="icon-no">❌</span></td>
-              <td><span class="icon-no">❌</span></td>
-              <td><span class="icon-no">❌</span></td>
-              <td><span class="icon-no">❌</span></td>
-            </tr>
-            <tr>
-              <td data-i18n="comp_portable">Portable (sans installation)</td>
-              <td><span class="icon-ok">✅✅✅</span></td>
-              <td><span class="icon-ok">✅</span></td>
-              <td><span class="icon-no">❌</span></td>
-              <td><span class="icon-no">❌</span></td>
-              <td><span class="icon-no">❌</span></td>
-            </tr>
-            <tr>
-              <td data-i18n="comp_registry">Sans trace registre</td>
-              <td><span class="icon-ok">✅✅✅</span></td>
-              <td><span class="icon-ok">✅</span></td>
-              <td><span class="icon-no">❌</span></td>
-              <td><span class="icon-no">❌</span></td>
-              <td><span class="icon-no">❌</span></td>
-            </tr>
-            <tr>
-              <td data-i18n="comp_offline">Sans Internet / Hors-ligne</td>
-              <td><span class="icon-ok">✅✅✅</span></td>
-              <td><span class="icon-ok">✅</span></td>
-              <td><span class="icon-ok">✅</span></td>
-              <td><span class="icon-ok">✅</span></td>
-              <td><span class="icon-ok">✅</span></td>
-            </tr>
-            <tr>
-              <td data-i18n="comp_lifetime">Licence à vie</td>
-              <td><span class="icon-ok">✅✅✅</span></td>
-              <td><span class="icon-ok">✅ (Gratuit)</span></td>
-              <td><span class="icon-ok">✅ (Payant)</span></td>
-              <td><span class="icon-no">❌ (Abonnement)</span></td>
-              <td><span class="icon-ok">✅ (Payant)</span></td>
-            </tr>
-            <tr>
-              <td data-i18n="comp_ease">Simplicité d'utilisation</td>
-              <td><span class="icon-ok">✅✅✅</span></td>
-              <td><span class="icon-ok">✅✅</span></td>
-              <td><span class="icon-partial">⭐⭐</span></td>
-              <td><span class="icon-partial">⭐⭐</span></td>
-              <td><span class="icon-partial">⭐</span></td>
-            </tr>
-            <tr>
-              <td data-i18n="comp_help">Aide intégrée (ⓘ)</td>
-              <td><span class="icon-ok">✅✅✅</span></td>
-              <td><span class="icon-no">❌</span></td>
-              <td><span class="icon-partial">⭐</span></td>
-              <td><span class="icon-partial">⭐</span></td>
-              <td><span class="icon-partial">⭐</span></td>
-            </tr>
+            <tr><td data-i18n="comp_name">Recherche par nom</td><td><span class="icon-ok">✅</span></td><td><span class="icon-ok">✅✅✅</span></td><td><span class="icon-ok">✅</span></td><td><span class="icon-ok">✅</span></td><td><span class="icon-ok">✅</span></td></tr>
+            <tr><td data-i18n="comp_content">Recherche contenu</td><td><span class="icon-ok">✅✅✅</span></td><td><span class="icon-no">❌</span></td><td><span class="icon-ok">✅✅✅</span></td><td><span class="icon-ok">✅✅✅</span></td><td><span class="icon-ok">✅✅✅</span></td></tr>
+            <tr><td data-i18n="comp_ocr">OCR (PDF scannés)</td><td><span class="icon-ok">✅</span></td><td><span class="icon-no">❌</span></td><td><span class="icon-partial">✅ (option)</span></td><td><span class="icon-no">❌</span></td><td><span class="icon-partial">✅ (option)</span></td></tr>
+            <tr><td data-i18n="comp_excel">Recherche Excel par valeur</td><td><span class="icon-ok">✅✅✅ <span class="unique-badge">Unique</span></span></td><td><span class="icon-no">❌</span></td><td><span class="icon-no">❌</span></td><td><span class="icon-no">❌</span></td><td><span class="icon-no">❌</span></td></tr>
+            <tr><td data-i18n="comp_powerbi">Recherche Power BI</td><td><span class="icon-ok">✅✅✅ <span class="unique-badge">Unique</span></span></td><td><span class="icon-no">❌</span></td><td><span class="icon-no">❌</span></td><td><span class="icon-no">❌</span></td><td><span class="icon-no">❌</span></td></tr>
+            <tr><td data-i18n="comp_portable">Portable (sans installation)</td><td><span class="icon-ok">✅✅✅</span></td><td><span class="icon-ok">✅</span></td><td><span class="icon-no">❌</span></td><td><span class="icon-no">❌</span></td><td><span class="icon-no">❌</span></td></tr>
+            <tr><td data-i18n="comp_registry">Sans trace registre</td><td><span class="icon-ok">✅✅✅</span></td><td><span class="icon-ok">✅</span></td><td><span class="icon-no">❌</span></td><td><span class="icon-no">❌</span></td><td><span class="icon-no">❌</span></td></tr>
+            <tr><td data-i18n="comp_offline">Sans Internet / Hors-ligne</td><td><span class="icon-ok">✅✅✅</span></td><td><span class="icon-ok">✅</span></td><td><span class="icon-ok">✅</span></td><td><span class="icon-ok">✅</span></td><td><span class="icon-ok">✅</span></td></tr>
+            <tr><td data-i18n="comp_lifetime">Licence à vie</td><td><span class="icon-ok">✅✅✅</span></td><td><span class="icon-ok">✅ (Gratuit)</span></td><td><span class="icon-ok">✅ (Payant)</span></td><td><span class="icon-no">❌ (Abonnement)</span></td><td><span class="icon-ok">✅ (Payant)</span></td></tr>
+            <tr><td data-i18n="comp_ease">Simplicité d'utilisation</td><td><span class="icon-ok">✅✅✅</span></td><td><span class="icon-ok">✅✅</span></td><td><span class="icon-partial">⭐⭐</span></td><td><span class="icon-partial">⭐⭐</span></td><td><span class="icon-partial">⭐</span></td></tr>
+            <tr><td data-i18n="comp_help">Aide intégrée (ⓘ)</td><td><span class="icon-ok">✅✅✅</span></td><td><span class="icon-no">❌</span></td><td><span class="icon-partial">⭐</span></td><td><span class="icon-partial">⭐</span></td><td><span class="icon-partial">⭐</span></td></tr>
           </tbody>
         </table>
       </div>
 
-      <!-- ===== LÉGENDE ===== -->
+      <!-- Légende -->
       <div class="legend-box">
         <p class="legend-title" data-i18n="legend_title">📌 Légende :</p>
         <div class="legend-grid">
-          <span><span class="icon-ok" style="font-weight:700;">✅</span> <span data-i18n="legend_ok">= Fonctionnalité présente / performante</span></span>
-          <span><span class="icon-ok" style="font-weight:700;">✅✅✅</span> <span data-i18n="legend_ok3">= Très performant / Excellente maîtrise</span></span>
-          <span><span class="icon-partial" style="font-weight:700;">⭐</span> / <span class="icon-partial" style="font-weight:700;">⭐⭐</span> <span data-i18n="legend_star">= Moyen / Basique (limité)</span></span>
-          <span><span class="icon-no" style="font-weight:700;">❌</span> <span data-i18n="legend_cross">= Absent / Non disponible</span></span>
-          <span><span class="unique-badge" style="display:inline-block; padding:2px 10px; background:var(--accent); color:#fff; border-radius:20px; font-size:0.7rem; font-weight:700;">Unique</span> <span data-i18n="legend_unique">= Fonctionnalité exclusive à Advanced File Search</span></span>
+          <span><span class="icon-ok" style="font-weight:700;">✅</span> <span data-i18n="legend_ok">= Fonctionnalité présente</span></span>
+          <span><span class="icon-ok" style="font-weight:700;">✅✅✅</span> <span data-i18n="legend_ok3">= Très performant</span></span>
+          <span><span class="icon-partial" style="font-weight:700;">⭐</span> <span data-i18n="legend_star">= Moyen / Basique</span></span>
+          <span><span class="icon-no" style="font-weight:700;">❌</span> <span data-i18n="legend_cross">= Absent</span></span>
+          <span><span class="unique-badge" style="display:inline-block; padding:2px 10px; background:var(--accent); color:#fff; border-radius:20px; font-size:0.7rem; font-weight:700;">Unique</span> <span data-i18n="legend_unique">= Exclusif à Advanced File Search</span></span>
         </div>
-        <!-- ===== MENTION IA ===== -->
         <p style="margin-top: 14px; font-size: 0.85rem; color: var(--muted); border-top: 1px solid var(--line); padding-top: 14px; text-align: center; font-style: italic;">
           <span data-i18n="ai_mention">🤖 Comparaison faite par Intelligence Artificielle</span>
         </p>
-      </div>
-    </section>
-
-    <!-- ===== HOW IT WORKS ===== -->
-    <section class="wrap" id="how-it-works">
-      <h2 class="section-title" data-i18n="how_title">Comment ça fonctionne</h2>
-      <p class="section-sub" data-i18n="how_sub">Trois étapes simples pour retrouver vos fichiers en un éclair.</p>
-      <div class="steps">
-        <div class="card step"><div class="num">1</div><h3 data-i18n="s1_title">Sélectionnez un emplacement</h3><p data-i18n="s1_desc">Choisissez votre Bureau ou n'importe quel dossier de votre ordinateur.</p></div>
-        <div class="card step"><div class="num">2</div><h3 data-i18n="s2_title">Entrez un mot-clé</h3><p data-i18n="s2_desc">Recherchez par nom, contenu, ou utilisez les filtres avancés (OCR, Excel, Power BI).</p></div>
-        <div class="card step"><div class="num">3</div><h3 data-i18n="s3_title">Ouvrez le résultat</h3><p data-i18n="s3_desc">Double-cliquez sur un fichier ou exportez la liste vers Excel.</p></div>
       </div>
     </section>
 
@@ -782,46 +741,35 @@
         <p class="section-sub" data-i18n="testimonial_sub">Des retours authentiques de personnes qui ont testé le logiciel et gagné en productivité.</p>
         <div class="testimonial-grid">
           <div class="card"><div class="stars">★★★★★</div><p class="quote" data-i18n="t1_quote">“Je retrouve mes fichiers en quelques secondes, même dans les PDF scannés. L'OCR est impressionnant !”</p><div class="meta" data-i18n="t1_meta">Sarah M. — Assistante de direction</div></div>
-          <div class="card"><div class="stars">★★★★★</div><p class="quote" data-i18n="t2_quote">“Le filtre Excel numérique m'a sauvé des heures de recherche. Un outil vraiment unique.”</p><div class="meta" data-i18n="t2_meta">David K. — Freelance</div></div>
+          <div class="card"><div class="stars">★★★★★</div><p class="quote" data-i18n="t2_quote">“La recherche Excel par valeur m'a sauvé des heures de recherche. Un outil vraiment unique.”</p><div class="meta" data-i18n="t2_meta">David K. — Freelance</div></div>
           <div class="card"><div class="stars">★★★★★</div><p class="quote" data-i18n="t3_quote">“Pouvoir chercher dans mes fichiers Power BI sans ouvrir le logiciel, c'est un gain de temps fou.”</p><div class="meta" data-i18n="t3_meta">Amine B. — Consultant indépendant</div></div>
         </div>
       </div>
     </section>
 
-    <!-- ===== FAQ (Accordéon) ===== -->
+    <!-- ===== FAQ ===== -->
     <section class="wrap" id="faq">
       <h2 class="section-title" data-i18n="faq_title">Questions fréquentes</h2>
       <p class="section-sub" data-i18n="faq_sub">Des réponses claires pour vous aider à décider en toute confiance.</p>
       <div class="faq-grid">
-        <div class="card faq-item">
-          <h3><span data-i18n="q1">A-t-il besoin d'une connexion internet ?</span> <i class="fas fa-chevron-down"></i></h3>
-          <div class="answer"><p data-i18n="a1">Non. Advanced File Search fonctionne 100% en local, sans internet.</p></div>
-        </div>
-        <div class="card faq-item">
-          <h3><span data-i18n="q2">Que puis-je rechercher exactement ?</span> <i class="fas fa-chevron-down"></i></h3>
-          <div class="answer"><p data-i18n="a2">Nom, contenu, dates, extension, et en plus : OCR pour PDF scannés, données numériques dans Excel, et métadonnées Power BI.</p></div>
-        </div>
-        <div class="card faq-item">
-          <h3><span data-i18n="q3">Est-ce vraiment portable ?</span> <i class="fas fa-chevron-down"></i></h3>
-          <div class="answer"><p data-i18n="a3">Oui, vous pouvez le lancer depuis une clé USB sans rien installer, et il ne laisse aucune trace dans le registre.</p></div>
-        </div>
-        <div class="card faq-item">
-          <h3><span data-i18n="q4">Quel est le prix ?</span> <i class="fas fa-chevron-down"></i></h3>
-          <div class="answer"><p data-i18n="a4">Licence à vie à partir de 19,99 € (version personnelle) ou 49,99 € (version professionnelle). Aucun abonnement.</p></div>
-        </div>
+        <div class="card faq-item"><h3><span data-i18n="q1">A-t-il besoin d'une connexion internet ?</span> <i class="fas fa-chevron-down"></i></h3><div class="answer"><p data-i18n="a1">Non. Advanced File Search fonctionne 100% en local.</p></div></div>
+        <div class="card faq-item"><h3><span data-i18n="q2">Que puis-je rechercher exactement ?</span> <i class="fas fa-chevron-down"></i></h3><div class="answer"><p data-i18n="a2">Nom, contenu, dates, OCR, Excel par valeur, Power BI, extensions.</p></div></div>
+        <div class="card faq-item"><h3><span data-i18n="q3">Est-ce vraiment portable ?</span> <i class="fas fa-chevron-down"></i></h3><div class="answer"><p data-i18n="a3">Oui, lancez-le depuis une clé USB, sans installation ni traces.</p></div></div>
+        <div class="card faq-item"><h3><span data-i18n="q4">Quel est le prix ?</span> <i class="fas fa-chevron-down"></i></h3><div class="answer"><p data-i18n="a4">Licence à vie : 19,99 € (personnelle) ou 49,99 € (pro).</p></div></div>
       </div>
     </section>
 
-    <!-- ===== CTA / PRIX ===== -->
+    <!-- ===== CTA ===== -->
     <section class="wrap cta" id="buy">
       <div class="cta-box">
         <div class="eyebrow" style="color:var(--accent2); text-transform:uppercase; font-weight:700; font-size:0.75rem; letter-spacing:.1em;" data-i18n="cta_eyebrow">Prêt à passer à l'action</div>
         <h2 class="section-title" style="margin:0;" data-i18n="cta_title">Obtenez Advanced File Search dès aujourd'hui</h2>
         <div class="price">19,99 € <small data-i18n="cta_price_label">(licence personnelle)</small> <span style="font-size:1.2rem; color:var(--accent2);">|</span> 49,99 € <small data-i18n="cta_price_label_pro">(professionnelle)</small></div>
-        <p data-i18n="cta_desc">Un outil de recherche complet avec OCR, filtres Excel, Power BI, portable et licence à vie. Comparez et adoptez la solution la plus puissante.</p>
+        <p data-i18n="cta_desc">Un outil de recherche complet avec OCR, recherche Excel par valeur, Power BI, portable et licence à vie.</p>
         <div class="hero-actions">
           <a href="#" class="btn" data-i18n="cta_btn1">Acheter maintenant</a>
-          <a href="#" class="btn secondary" data-i18n="cta_btn2">Télécharger l'essai</a>
+          <a href="#detailed-features" class="btn secondary" data-i18n="cta_btn2">📖 Voir toutes les fonctionnalités</a>
+          <a href="#" class="btn secondary" style="background: rgba(125,226,199,.1);" data-i18n="cta_download">⬇️ Télécharger</a>
         </div>
         <p style="font-size:0.8rem; margin-top:16px; opacity:.6;" data-i18n="cta_secure">🔒 Paiement sécurisé • Garantie satisfait ou remboursé • Licence à vie</p>
       </div>
@@ -832,262 +780,105 @@
   <footer>
     <div class="wrap">
       <div class="footer-grid">
-        <div>
-          <h4>Advanced File Search</h4>
-          <p style="margin: 6px 0 12px; max-width:300px;" data-i18n="footer_desc">Le moteur de recherche de fichiers intelligent pour Windows 10 et 11, avec OCR, Power BI et filtres Excel.</p>
-          <div class="footer-socials">
-            <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-            <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
-            <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
-            <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
-          </div>
-        </div>
-        <div>
-          <h4 data-i18n="footer_legal">Mentions légales</h4>
-          <ul>
-            <li><a href="#" data-i18n="footer_tos">Conditions générales</a></li>
-            <li><a href="#" data-i18n="footer_privacy">Politique de confidentialité</a></li>
-            <li><a href="#" data-i18n="footer_legal_mention">Mentions légales</a></li>
-            <li><a href="mailto:support@advancedfilesearch.com" data-i18n="footer_support">Support technique</a></li>
-          </ul>
-        </div>
-        <div>
-          <h4 data-i18n="footer_requirements">Prérequis système</h4>
-          <ul>
-            <li data-i18n="req_os">🖥️ Windows 10 / 11 (64-bit)</li>
-            <li data-i18n="req_ram">💾 4 Go de RAM (8 Go recommandé)</li>
-            <li data-i18n="req_space">📦 50 Mo d'espace disque</li>
-            <li data-i18n="req_net">🌐 Aucune connexion internet requise</li>
-          </ul>
-        </div>
+        <div><h4>Advanced File Search</h4><p style="margin:6px 0 12px; max-width:300px;" data-i18n="footer_desc">Le moteur de recherche intelligent pour Windows, avec OCR, Power BI et recherche Excel par valeur.</p><div class="footer-socials"><a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a><a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a><a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a><a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a></div></div>
+        <div><h4 data-i18n="footer_legal">Mentions légales</h4><ul><li><a href="#" data-i18n="footer_tos">Conditions générales</a></li><li><a href="#" data-i18n="footer_privacy">Politique de confidentialité</a></li><li><a href="#" data-i18n="footer_legal_mention">Mentions légales</a></li><li><a href="mailto:support@advancedfilesearch.com" data-i18n="footer_support">Support</a></li></ul></div>
+        <div><h4 data-i18n="footer_requirements">Prérequis</h4><ul><li data-i18n="req_os">🖥️ Windows 10/11 (64-bit)</li><li data-i18n="req_ram">💾 4 Go RAM</li><li data-i18n="req_space">📦 50 Mo disque</li><li data-i18n="req_net">🌐 Hors-ligne</li></ul></div>
       </div>
-      <div class="footer-bottom">
-        <span data-i18n="copyright">© 2026 Advanced File Search. Tous droits réservés.</span>
-        <span data-i18n="version">Version 2.0.1</span>
-      </div>
+      <div class="footer-bottom"><span data-i18n="copyright">© 2026 Advanced File Search. Tous droits réservés.</span><span data-i18n="version">Version 2.0.1</span></div>
     </div>
   </footer>
 
-  <!-- ===== JAVASCRIPT (Langue + FAQ Accordéon) ===== -->
   <script>
     (function() {
       'use strict';
-
-      // ----- 1. GESTION DE LA LANGUE (FR/EN) -----
       const translations = {
         fr: {
-          nav_features: 'Fonctionnalités',
-          nav_comparison: 'Comparaison',
-          nav_how: 'Fonctionnement',
-          nav_testimonials: 'Avis',
-          nav_faq: 'FAQ',
-          nav_buy: 'Acheter',
-          hero_eyebrow: 'Logiciel Windows',
-          hero_title: 'Retrouvez n\'importe quel fichier en un éclair.',
-          hero_lead: 'Advanced File Search : moteur de recherche puissant avec OCR, filtres Excel, Power BI, portable, sans installation et 100% hors-ligne.',
-          hero_cta1: 'Acheter maintenant',
-          hero_cta2: 'Voir les fonctionnalités',
-          badge1: '🔍 Recherche sans internet',
-          badge2: '🖥️ Windows 10/11',
-          badge3: '📄 Nom + contenu',
-          badge4: '📅 Dates création/modif',
-          badge5: '📊 OCR + Excel + Power BI',
-          badge6: '💼 Portable – sans install',
+          nav_features: 'Fonctionnalités', nav_detailed: 'Tout détail', nav_comparison: 'Comparaison', nav_testimonials: 'Avis', nav_faq: 'FAQ', nav_buy: 'Acheter',
+          hero_eyebrow: 'Logiciel Windows', hero_title: 'Retrouvez n\'importe quel fichier en un éclair.', hero_lead: 'Advanced File Search : moteur de recherche puissant avec OCR, recherche Excel par valeur, Power BI, portable, sans installation et 100% hors-ligne.', hero_cta1: 'Acheter maintenant', hero_cta2: 'Voir tout en détail',
+          badge1: '🔍 Recherche sans internet', badge2: '🖥️ Windows 10/11', badge3: '📄 Nom + contenu', badge4: '📅 Dates création/modif', badge5: '📊 OCR + Excel valeur + Power BI', badge6: '💼 Portable – sans install',
           mockup_search: 'Rechercher par nom, contenu, OCR...',
-          features_title: 'Fonctionnalités avancées',
-          features_sub: 'Tout ce dont vous avez besoin pour retrouver vos fichiers rapidement, même dans les documents scannés ou les rapports Power BI.',
-          f1: 'Recherche par nom et contenu',
-          f2: 'Filtre date création / modification',
-          f3: 'OCR pour PDF scannés',
-          f4: 'Filtre Excel numérique',
-          f5: 'Support Power BI (.pbix)',
-          f6: 'Portable – sans installation',
-          f7: 'Aucune trace registre',
-          f8: 'Sans droits administrateur',
-          f9: 'Licence à vie',
-          f10: '100% hors-ligne',
-          f11: 'Interface moderne',
-          f12: 'Export vers Excel',
-          comparison_title: '📊 Comparaison avec les concurrents',
-          comparison_sub: 'Advanced File Search se distingue par ses fonctionnalités uniques (OCR, filtres Excel, Power BI, portable) à un prix très compétitif.',
-          comp_criteria: 'Critère',
-          comp_leader: 'Concurrent 1 :<br>Leader du Marché',
-          comp_second: 'Concurrent 2 :<br>Deuxième Solution',
-          comp_third: 'Concurrent 3 :<br>Troisième Alternative',
-          comp_fourth: 'Concurrent 4 :<br>4ème Alternative',
-          comp_name: 'Recherche par nom',
-          comp_content: 'Recherche contenu',
-          comp_ocr: 'OCR (PDF scannés)',
-          comp_excel: 'Filtre Excel numérique',
-          comp_powerbi: 'Recherche Power BI',
-          comp_portable: 'Portable (sans installation)',
-          comp_registry: 'Sans trace registre',
-          comp_offline: 'Sans Internet / Hors-ligne',
-          comp_lifetime: 'Licence à vie',
-          comp_ease: 'Simplicité d\'utilisation',
-          comp_help: 'Aide intégrée (ⓘ)',
-          legend_title: '📌 Légende :',
-          legend_ok: '= Fonctionnalité présente / performante',
-          legend_ok3: '= Très performant / Excellente maîtrise',
-          legend_star: '= Moyen / Basique (limité)',
-          legend_cross: '= Absent / Non disponible',
-          legend_unique: '= Fonctionnalité exclusive à Advanced File Search',
-          ai_mention: '🤖 Comparaison faite par Intelligence Artificielle',
-          how_title: 'Comment ça fonctionne',
-          how_sub: 'Trois étapes simples pour retrouver vos fichiers en un éclair.',
-          s1_title: 'Sélectionnez un emplacement',
-          s1_desc: 'Choisissez votre Bureau ou n\'importe quel dossier de votre ordinateur.',
-          s2_title: 'Entrez un mot-clé',
-          s2_desc: 'Recherchez par nom, contenu, ou utilisez les filtres avancés (OCR, Excel, Power BI).',
-          s3_title: 'Ouvrez le résultat',
-          s3_desc: 'Double-cliquez sur un fichier ou exportez la liste vers Excel.',
-          testimonial_label: 'Retours d\'utilisateurs',
-          testimonial_title: 'Ce que nos premiers utilisateurs disent',
-          testimonial_sub: 'Des retours authentiques de personnes qui ont testé le logiciel et gagné en productivité.',
-          t1_quote: '“Je retrouve mes fichiers en quelques secondes, même dans les PDF scannés. L\'OCR est impressionnant !”',
-          t1_meta: 'Sarah M. — Assistante de direction',
-          t2_quote: '“Le filtre Excel numérique m\'a sauvé des heures de recherche. Un outil vraiment unique.”',
-          t2_meta: 'David K. — Freelance',
-          t3_quote: '“Pouvoir chercher dans mes fichiers Power BI sans ouvrir le logiciel, c\'est un gain de temps fou.”',
-          t3_meta: 'Amine B. — Consultant indépendant',
-          faq_title: 'Questions fréquentes',
-          faq_sub: 'Des réponses claires pour vous aider à décider en toute confiance.',
-          q1: 'A-t-il besoin d\'une connexion internet ?',
-          a1: 'Non. Advanced File Search fonctionne 100% en local, sans internet.',
-          q2: 'Que puis-je rechercher exactement ?',
-          a2: 'Nom, contenu, dates, extension, et en plus : OCR pour PDF scannés, données numériques dans Excel, et métadonnées Power BI.',
-          q3: 'Est-ce vraiment portable ?',
-          a3: 'Oui, vous pouvez le lancer depuis une clé USB sans rien installer, et il ne laisse aucune trace dans le registre.',
-          q4: 'Quel est le prix ?',
-          a4: 'Licence à vie à partir de 19,99 € (version personnelle) ou 49,99 € (version professionnelle). Aucun abonnement.',
-          cta_eyebrow: 'Prêt à passer à l\'action',
-          cta_title: 'Obtenez Advanced File Search dès aujourd\'hui',
-          cta_price_label: '(licence personnelle)',
-          cta_price_label_pro: '(professionnelle)',
-          cta_desc: 'Un outil de recherche complet avec OCR, filtres Excel, Power BI, portable et licence à vie. Comparez et adoptez la solution la plus puissante.',
-          cta_btn1: 'Acheter maintenant',
-          cta_btn2: 'Télécharger l\'essai',
-          cta_secure: '🔒 Paiement sécurisé • Garantie satisfait ou remboursé • Licence à vie',
-          footer_desc: 'Le moteur de recherche de fichiers intelligent pour Windows 10 et 11, avec OCR, Power BI et filtres Excel.',
-          footer_legal: 'Mentions légales',
-          footer_tos: 'Conditions générales',
-          footer_privacy: 'Politique de confidentialité',
-          footer_legal_mention: 'Mentions légales',
-          footer_support: 'Support technique',
-          footer_requirements: 'Prérequis système',
-          req_os: '🖥️ Windows 10 / 11 (64-bit)',
-          req_ram: '💾 4 Go de RAM (8 Go recommandé)',
-          req_space: '📦 50 Mo d\'espace disque',
-          req_net: '🌐 Aucune connexion internet requise',
-          copyright: '© 2026 Advanced File Search. Tous droits réservés.',
-          version: 'Version 2.0.1'
+          features_title: 'Fonctionnalités avancées', features_sub: 'Un aperçu de ce que Advanced File Search peut faire pour vous.',
+          f1: 'Recherche par nom et contenu', f1_desc: 'Avec jokers (*) et logique booléenne.',
+          f3: 'OCR pour PDF scannés', f3_desc: 'Reconnaissance de texte dans les images et PDF.',
+          f4: 'Recherche Excel par valeur', f4_desc: 'Recherche par plages de valeurs dans les cellules.',
+          detail_title: '⚡ Pourquoi choisir Advanced File Search ?', detail_sub: 'Découvrez toutes les raisons qui font de notre logiciel le meilleur choix pour vos recherches de fichiers.',
+          d1_title: 'Ultra-simple à utiliser', d1_desc: 'Interface épurée, barre de recherche principale, résultats en temps réel. Double-clic pour ouvrir, export Excel en 1 clic. Pas de courbe d\'apprentissage.',
+          d2_title: 'Aide intégrée (ⓘ)', d2_desc: 'Boutons d\'aide contextuels partout : jokers, modes de recherche, recherche Excel par valeur, types de fichiers, pages PDF, modes Économique/Performance, et journal de débogage.',
+          d3_title: '100% Portable', d3_desc: 'Un seul .exe. Lancez-le depuis une clé USB. Aucune installation, aucune clé de registre, aucun droit admin requis.',
+          d4_title: 'Licence à vie', d4_desc: 'Achat unique. Pas d\'abonnement, pas de renouvellement. Mises à jour mineures incluses.',
+          d5_title: 'Recherche multi-critères', d5_desc: 'Par nom (jokers), contenu (Word, Excel, PDF, Power BI), dates, types et extensions personnalisées.',
+          d6_title: 'OCR intégré', d6_desc: 'Recherchez un mot dans un PDF scanné ou une image grâce à Tesseract.',
+          d7_title: 'Recherche Excel par valeur', d7_desc: 'Trouvez les fichiers Excel contenant des valeurs numériques dans une plage donnée. Accepte les décimaux et négatifs.',
+          d8_title: 'Paramètres avancés', d8_desc: 'Mode Économique (faible ressource) ou Performance (vitesse). Timeout personnalisable.',
+          d9_title: 'Interface moderne', d9_desc: 'Palette élégante, tableau triable, barre de progression avec estimation, statistiques en direct.',
+          d10_title: 'Gestion des dossiers', d10_desc: 'Recherche récursive, ajout/suppression de chemins, exclusion automatique des accès refusés.',
+          d11_title: 'Sécurité', d11_desc: 'Instance unique, activation par code licence, 100% sans virus/malware.',
+          d12_title: 'Exportation', d12_desc: 'Exportez les résultats en Excel (.xlsx) en un clic. Journal de débogage (debug.log).',
+          d13_title: 'Support de nombreux formats', d13_desc: 'Word (.docx, .doc) · Excel (.xlsx, .xls) · Power BI (.pbix) · PDF (texte + OCR) · Texte (.txt, .csv, .xml, .log) · Extensions personnalisées.',
+          requirements_title: '🖥️ Prérequis système', req_os: '🖥️ Windows 10 / 11 (64-bit)', req_ram: '💾 4 Go de RAM (8 Go recommandé)', req_space: '📦 50 Mo d\'espace disque', req_net: '🌐 Aucune connexion internet requise', req_portable: '📁 100% Portable (exécutable unique)', req_note: '✅ Aucune installation, aucune trace registre, aucun droit administrateur nécessaire.',
+          comparison_title: '📊 Comparaison avec les concurrents', comparison_sub: 'Advanced File Search se distingue par ses fonctionnalités uniques (OCR, recherche Excel par valeur, Power BI, portable) à un prix très compétitif.',
+          comp_criteria: 'Critère', comp_leader: 'Concurrent 1 :<br>Leader du Marché', comp_second: 'Concurrent 2 :<br>Deuxième Solution', comp_third: 'Concurrent 3 :<br>Troisième Alternative', comp_fourth: 'Concurrent 4 :<br>4ème Alternative',
+          comp_name: 'Recherche par nom', comp_content: 'Recherche contenu', comp_ocr: 'OCR (PDF scannés)', comp_excel: 'Recherche Excel par valeur', comp_powerbi: 'Recherche Power BI', comp_portable: 'Portable (sans installation)', comp_registry: 'Sans trace registre', comp_offline: 'Sans Internet / Hors-ligne', comp_lifetime: 'Licence à vie', comp_ease: 'Simplicité d\'utilisation', comp_help: 'Aide intégrée (ⓘ)',
+          legend_title: '📌 Légende :', legend_ok: '= Fonctionnalité présente', legend_ok3: '= Très performant', legend_star: '= Moyen / Basique', legend_cross: '= Absent', legend_unique: '= Exclusif à Advanced File Search', ai_mention: '🤖 Comparaison faite par Intelligence Artificielle',
+          testimonial_label: 'Retours d\'utilisateurs', testimonial_title: 'Ce que nos premiers utilisateurs disent', testimonial_sub: 'Des retours authentiques de personnes qui ont testé le logiciel et gagné en productivité.',
+          t1_quote: '“Je retrouve mes fichiers en quelques secondes, même dans les PDF scannés. L\'OCR est impressionnant !”', t1_meta: 'Sarah M. — Assistante de direction',
+          t2_quote: '“La recherche Excel par valeur m\'a sauvé des heures de recherche. Un outil vraiment unique.”', t2_meta: 'David K. — Freelance',
+          t3_quote: '“Pouvoir chercher dans mes fichiers Power BI sans ouvrir le logiciel, c\'est un gain de temps fou.”', t3_meta: 'Amine B. — Consultant indépendant',
+          faq_title: 'Questions fréquentes', faq_sub: 'Des réponses claires pour vous aider à décider en toute confiance.',
+          q1: 'A-t-il besoin d\'une connexion internet ?', a1: 'Non. Advanced File Search fonctionne 100% en local.',
+          q2: 'Que puis-je rechercher exactement ?', a2: 'Nom, contenu, dates, OCR, Excel par valeur, Power BI, extensions.',
+          q3: 'Est-ce vraiment portable ?', a3: 'Oui, lancez-le depuis une clé USB, sans installation ni traces.',
+          q4: 'Quel est le prix ?', a4: 'Licence à vie : 19,99 € (personnelle) ou 49,99 € (pro).',
+          cta_eyebrow: 'Prêt à passer à l\'action', cta_title: 'Obtenez Advanced File Search dès aujourd\'hui', cta_price_label: '(licence personnelle)', cta_price_label_pro: '(professionnelle)',
+          cta_desc: 'Un outil de recherche complet avec OCR, recherche Excel par valeur, Power BI, portable et licence à vie.',
+          cta_btn1: 'Acheter maintenant', cta_btn2: '📖 Voir toutes les fonctionnalités', cta_download: '⬇️ Télécharger', cta_secure: '🔒 Paiement sécurisé • Garantie satisfait ou remboursé • Licence à vie',
+          footer_desc: 'Le moteur de recherche intelligent pour Windows, avec OCR, Power BI et recherche Excel par valeur.',
+          footer_legal: 'Mentions légales', footer_tos: 'Conditions générales', footer_privacy: 'Politique de confidentialité', footer_legal_mention: 'Mentions légales', footer_support: 'Support',
+          footer_requirements: 'Prérequis', copyright: '© 2026 Advanced File Search. Tous droits réservés.', version: 'Version 2.0.1'
         },
         en: {
-          nav_features: 'Features',
-          nav_comparison: 'Comparison',
-          nav_how: 'How it works',
-          nav_testimonials: 'Testimonials',
-          nav_faq: 'FAQ',
-          nav_buy: 'Buy now',
-          hero_eyebrow: 'Windows Desktop Software',
-          hero_title: 'Find any file in a flash.',
-          hero_lead: 'Advanced File Search: powerful search engine with OCR, Excel filters, Power BI, portable, no install, 100% offline.',
-          hero_cta1: 'Buy now',
-          hero_cta2: 'See features',
-          badge1: '🔍 Offline search',
-          badge2: '🖥️ Windows 10/11',
-          badge3: '📄 Name + content',
-          badge4: '📅 Creation/modification dates',
-          badge5: '📊 OCR + Excel + Power BI',
-          badge6: '💼 Portable – no install',
+          nav_features: 'Features', nav_detailed: 'All details', nav_comparison: 'Comparison', nav_testimonials: 'Testimonials', nav_faq: 'FAQ', nav_buy: 'Buy now',
+          hero_eyebrow: 'Windows Desktop Software', hero_title: 'Find any file in a flash.', hero_lead: 'Advanced File Search: powerful search engine with OCR, Excel value search, Power BI, portable, no install, 100% offline.', hero_cta1: 'Buy now', hero_cta2: 'See all details',
+          badge1: '🔍 Offline search', badge2: '🖥️ Windows 10/11', badge3: '📄 Name + content', badge4: '📅 Creation/modification dates', badge5: '📊 OCR + Excel value + Power BI', badge6: '💼 Portable – no install',
           mockup_search: 'Search by name, content, OCR...',
-          features_title: 'Advanced features',
-          features_sub: 'Everything you need to find files quickly, even in scanned documents or Power BI reports.',
-          f1: 'Search by name and content',
-          f2: 'Filter by creation / modification date',
-          f3: 'OCR for scanned PDFs',
-          f4: 'Excel numeric filter',
-          f5: 'Power BI (.pbix) support',
-          f6: 'Portable – no installation',
-          f7: 'No registry traces',
-          f8: 'No admin rights required',
-          f9: 'Lifetime license',
-          f10: '100% offline',
-          f11: 'Modern interface',
-          f12: 'Export to Excel',
-          comparison_title: '📊 Comparison with competitors',
-          comparison_sub: 'Advanced File Search stands out with its unique features (OCR, Excel filters, Power BI, portable) at a very competitive price.',
-          comp_criteria: 'Criteria',
-          comp_leader: 'Competitor 1 :<br>Market Leader',
-          comp_second: 'Competitor 2 :<br>Second Solution',
-          comp_third: 'Competitor 3 :<br>Third Alternative',
-          comp_fourth: 'Competitor 4 :<br>4th Alternative',
-          comp_name: 'Search by name',
-          comp_content: 'Content search',
-          comp_ocr: 'OCR (scanned PDFs)',
-          comp_excel: 'Excel numeric filter',
-          comp_powerbi: 'Power BI search',
-          comp_portable: 'Portable (no install)',
-          comp_registry: 'No registry traces',
-          comp_offline: 'Offline / No internet',
-          comp_lifetime: 'Lifetime license',
-          comp_ease: 'Ease of use',
-          comp_help: 'Built-in help (ⓘ)',
-          legend_title: '📌 Legend:',
-          legend_ok: '= Feature available / efficient',
-          legend_ok3: '= Highly efficient / Excellent',
-          legend_star: '= Average / Basic (limited)',
-          legend_cross: '= Absent / Not available',
-          legend_unique: '= Exclusive feature of Advanced File Search',
-          ai_mention: '🤖 Comparison made by Artificial Intelligence',
-          how_title: 'How it works',
-          how_sub: 'Three simple steps to find your files in a flash.',
-          s1_title: 'Select a location',
-          s1_desc: 'Choose your Desktop or any folder on your computer.',
-          s2_title: 'Enter a keyword',
-          s2_desc: 'Search by name, content, or use advanced filters (OCR, Excel, Power BI).',
-          s3_title: 'Open the result',
-          s3_desc: 'Double-click a file or export the list to Excel.',
-          testimonial_label: 'User feedback',
-          testimonial_title: 'What early users are saying',
-          testimonial_sub: 'Authentic feedback from people who tested the software and boosted their productivity.',
-          t1_quote: '“I find my files in seconds, even in scanned PDFs. The OCR is impressive!”',
-          t1_meta: 'Sarah M. — Office Assistant',
-          t2_quote: '“The Excel numeric filter saved me hours of searching. A truly unique tool.”',
-          t2_meta: 'David K. — Freelancer',
-          t3_quote: '“Being able to search inside Power BI files without opening the app is a huge time-saver.”',
-          t3_meta: 'Amine B. — Independent Consultant',
-          faq_title: 'Frequently asked questions',
-          faq_sub: 'Clear answers to help you decide with confidence.',
-          q1: 'Does it need an internet connection?',
-          a1: 'No. Advanced File Search works 100% locally, offline.',
-          q2: 'What exactly can I search?',
-          a2: 'Name, content, dates, extension, plus OCR for scanned PDFs, numeric data in Excel, and Power BI metadata.',
-          q3: 'Is it really portable?',
-          a3: 'Yes, you can run it from a USB stick with no installation, and it leaves no traces in the registry.',
-          q4: 'What is the price?',
-          a4: 'Lifetime license starting at €19.99 (personal) or €49.99 (professional). No subscription.',
-          cta_eyebrow: 'Ready to take action',
-          cta_title: 'Get Advanced File Search today',
-          cta_price_label: '(personal license)',
-          cta_price_label_pro: '(professional)',
-          cta_desc: 'A comprehensive search tool with OCR, Excel filters, Power BI, portable, and lifetime license. Compare and choose the most powerful solution.',
-          cta_btn1: 'Buy now',
-          cta_btn2: 'Download trial',
-          cta_secure: '🔒 Secure checkout • Satisfaction guaranteed • Lifetime license',
-          footer_desc: 'The intelligent file search engine for Windows 10 & 11, with OCR, Power BI, and Excel filters.',
-          footer_legal: 'Legal',
-          footer_tos: 'Terms of Service',
-          footer_privacy: 'Privacy Policy',
-          footer_legal_mention: 'Legal Notice',
-          footer_support: 'Support',
-          footer_requirements: 'System Requirements',
-          req_os: '🖥️ Windows 10 / 11 (64-bit)',
-          req_ram: '💾 4 GB RAM (8 GB recommended)',
-          req_space: '📦 50 MB disk space',
-          req_net: '🌐 No internet connection needed',
-          copyright: '© 2026 Advanced File Search. All rights reserved.',
-          version: 'Version 2.0.1'
+          features_title: 'Advanced features', features_sub: 'An overview of what Advanced File Search can do for you.',
+          f1: 'Search by name and content', f1_desc: 'With wildcards (*) and boolean logic.',
+          f3: 'OCR for scanned PDFs', f3_desc: 'Text recognition in images and PDFs.',
+          f4: 'Excel value search', f4_desc: 'Search by value ranges in cells.',
+          detail_title: '⚡ Why choose Advanced File Search?', detail_sub: 'Discover all the reasons that make our software the best choice for your file searches.',
+          d1_title: 'Ultra-simple to use', d1_desc: 'Clean interface, main search bar, real-time results. Double-click to open, 1-click Excel export. No learning curve.',
+          d2_title: 'Built-in help (ⓘ)', d2_desc: 'Contextual help buttons everywhere: wildcards, search modes, Excel value search, file types, PDF pages, Eco/Performance modes, and debug log.',
+          d3_title: '100% Portable', d3_desc: 'Single .exe. Run it from a USB stick. No installation, no registry keys, no admin rights required.',
+          d4_title: 'Lifetime license', d4_desc: 'One-time purchase. No subscription, no renewal. Minor updates included.',
+          d5_title: 'Multi-criteria search', d5_desc: 'By name (wildcards), content (Word, Excel, PDF, Power BI), dates, file types and custom extensions.',
+          d6_title: 'Integrated OCR', d6_desc: 'Search for a word in a scanned PDF or image using Tesseract.',
+          d7_title: 'Excel value search', d7_desc: 'Find Excel files containing numeric values in a given range. Accepts decimals and negatives.',
+          d8_title: 'Advanced settings', d8_desc: 'Eco mode (low resources) or Performance (speed). Customizable timeout per file.',
+          d9_title: 'Modern interface', d9_desc: 'Elegant palette, sortable table, progress bar with estimation, live statistics.',
+          d10_title: 'Folder management', d10_desc: 'Recursive search, add/remove paths, automatic exclusion of forbidden folders.',
+          d11_title: 'Security', d11_desc: 'Single instance, license code activation, 100% virus/malware free.',
+          d12_title: 'Export', d12_desc: 'Export results to Excel (.xlsx) in one click. Debug log (debug.log) for support.',
+          d13_title: 'Wide format support', d13_desc: 'Word (.docx, .doc) · Excel (.xlsx, .xls) · Power BI (.pbix) · PDF (text + OCR) · Text (.txt, .csv, .xml, .log) · Custom extensions.',
+          requirements_title: '🖥️ System requirements', req_os: '🖥️ Windows 10 / 11 (64-bit)', req_ram: '💾 4 GB RAM (8 GB recommended)', req_space: '📦 50 MB disk space', req_net: '🌐 No internet connection needed', req_portable: '📁 100% Portable (single executable)', req_note: '✅ No installation, no registry traces, no admin rights needed.',
+          comparison_title: '📊 Comparison with competitors', comparison_sub: 'Advanced File Search stands out with its unique features (OCR, Excel value search, Power BI, portable) at a very competitive price.',
+          comp_criteria: 'Criteria', comp_leader: 'Competitor 1 :<br>Market Leader', comp_second: 'Competitor 2 :<br>Second Solution', comp_third: 'Competitor 3 :<br>Third Alternative', comp_fourth: 'Competitor 4 :<br>4th Alternative',
+          comp_name: 'Search by name', comp_content: 'Content search', comp_ocr: 'OCR (scanned PDFs)', comp_excel: 'Excel value search', comp_powerbi: 'Power BI search', comp_portable: 'Portable (no install)', comp_registry: 'No registry traces', comp_offline: 'Offline / No internet', comp_lifetime: 'Lifetime license', comp_ease: 'Ease of use', comp_help: 'Built-in help (ⓘ)',
+          legend_title: '📌 Legend:', legend_ok: '= Feature available', legend_ok3: '= Highly efficient', legend_star: '= Average / Basic', legend_cross: '= Absent', legend_unique: '= Exclusive to Advanced File Search', ai_mention: '🤖 Comparison made by Artificial Intelligence',
+          testimonial_label: 'User feedback', testimonial_title: 'What early users are saying', testimonial_sub: 'Authentic feedback from people who tested the software and boosted their productivity.',
+          t1_quote: '“I find my files in seconds, even in scanned PDFs. The OCR is impressive!”', t1_meta: 'Sarah M. — Office Assistant',
+          t2_quote: '“The Excel value search saved me hours of searching. A truly unique tool.”', t2_meta: 'David K. — Freelancer',
+          t3_quote: '“Being able to search inside Power BI files without opening the app is a huge time-saver.”', t3_meta: 'Amine B. — Independent Consultant',
+          faq_title: 'Frequently asked questions', faq_sub: 'Clear answers to help you decide with confidence.',
+          q1: 'Does it need an internet connection?', a1: 'No. Advanced File Search works 100% locally.',
+          q2: 'What exactly can I search?', a2: 'Name, content, dates, OCR, Excel value, Power BI, extensions.',
+          q3: 'Is it really portable?', a3: 'Yes, run it from a USB stick, no installation, no traces.',
+          q4: 'What is the price?', a4: 'Lifetime license: €19.99 (personal) or €49.99 (pro).',
+          cta_eyebrow: 'Ready to take action', cta_title: 'Get Advanced File Search today', cta_price_label: '(personal license)', cta_price_label_pro: '(professional)',
+          cta_desc: 'A comprehensive search tool with OCR, Excel value search, Power BI, portable, and lifetime license.',
+          cta_btn1: 'Buy now', cta_btn2: '📖 See all features', cta_download: '⬇️ Download', cta_secure: '🔒 Secure checkout • Satisfaction guaranteed • Lifetime license',
+          footer_desc: 'The intelligent file search engine for Windows, with OCR, Power BI, and Excel value search.',
+          footer_legal: 'Legal', footer_tos: 'Terms of Service', footer_privacy: 'Privacy Policy', footer_legal_mention: 'Legal Notice', footer_support: 'Support',
+          footer_requirements: 'Requirements', copyright: '© 2026 Advanced File Search. All rights reserved.', version: 'Version 2.0.1'
         }
       };
 
@@ -1095,9 +886,7 @@
       const i18nElements = document.querySelectorAll('[data-i18n]');
 
       function setLanguage(lang) {
-        langButtons.forEach(btn => {
-          btn.classList.toggle('active', btn.dataset.lang === lang);
-        });
+        langButtons.forEach(btn => btn.classList.toggle('active', btn.dataset.lang === lang));
         i18nElements.forEach(el => {
           const key = el.dataset.i18n;
           if (translations[lang] && translations[lang][key]) {
@@ -1105,7 +894,7 @@
           }
         });
         document.documentElement.lang = lang;
-        localStorage.setItem('advancedfilesearch_lang', lang);
+        localStorage.setItem('afs_lang', lang);
       }
 
       langButtons.forEach(btn => {
@@ -1114,16 +903,14 @@
         });
       });
 
-      const savedLang = localStorage.getItem('advancedfilesearch_lang') || 'fr';
+      const savedLang = localStorage.getItem('afs_lang') || 'fr';
       setLanguage(savedLang);
 
-      // ----- 2. FAQ ACCORDÉON -----
+      // FAQ Accordéon
       const faqItems = document.querySelectorAll('.faq-item');
       faqItems.forEach(item => {
         item.addEventListener('click', function() {
-          faqItems.forEach(other => {
-            if (other !== this) other.classList.remove('active');
-          });
+          faqItems.forEach(other => { if (other !== this) other.classList.remove('active'); });
           this.classList.toggle('active');
         });
       });
