@@ -3,490 +3,848 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>FileScope Pro — Find Files by Name and Content</title>
-  <meta name="description" content="FileScope Pro helps Windows users find files instantly by name, content, creation date, modification date, and extension." />
+  <title>FileScope Pro – Recherche instantanée de fichiers sur Windows</title>
+  <meta name="description" content="FileScope Pro aide les utilisateurs Windows à retrouver instantanément leurs fichiers par nom, contenu, date de création et modification. Interface simple et rapide." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
   <style>
     /* ===== STYLES GLOBAUX ===== */
-    :root{
-      --bg:#0b1220;
-      --bg2:#111a2e;
-      --card:#121c33;
-      --text:#eaf0ff;
-      --muted:#b6c2e2;
-      --line:#26324f;
-      --accent:#4c7dff;
-      --accent2:#7de2c7;
-      --warn:#f5b301;
-      --shadow:0 18px 50px rgba(0,0,0,.28);
-      --radius:18px;
-      --max:1120px;
+    :root {
+      --bg: #0b1220;
+      --bg2: #111a2e;
+      --card: #121c33;
+      --text: #eaf0ff;
+      --muted: #b6c2e2;
+      --line: #26324f;
+      --accent: #4c7dff;
+      --accent2: #7de2c7;
+      --warn: #f5b301;
+      --shadow: 0 18px 50px rgba(0, 0, 0, .28);
+      --radius: 18px;
+      --max: 1200px;
+      --transition: all 0.25s cubic-bezier(0.25, 0.46, 0.45, 0.94);
     }
-    *{box-sizing:border-box}
-    body{
-      margin:0;
-      font-family:Arial, sans-serif;
-      background:
-        radial-gradient(circle at top left, rgba(76,125,255,.18), transparent 30%),
-        radial-gradient(circle at top right, rgba(125,226,199,.12), transparent 25%),
-        var(--bg);
-      color:var(--text);
-      line-height:1.6;
+    * { box-sizing: border-box; margin: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      background: radial-gradient(circle at top left, rgba(76, 125, 255, .18), transparent 30%),
+                  radial-gradient(circle at top right, rgba(125, 226, 199, .12), transparent 25%),
+                  var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
     }
-    a{text-decoration:none}
-    .wrap{max-width:var(--max); margin:0 auto; padding:0 22px}
-    .topbar{
-      padding:18px 0;
-      border-bottom:1px solid rgba(255,255,255,.08);
-      background:rgba(8,13,25,.4);
-      backdrop-filter: blur(10px);
-      position:sticky;
-      top:0;
-      z-index:10;
+    a { text-decoration: none; color: inherit; }
+    .wrap { max-width: var(--max); margin: 0 auto; padding: 0 22px; }
+
+    /* ===== TOPBAR ===== */
+    .topbar {
+      padding: 14px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, .06);
+      background: rgba(8, 13, 25, .6);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      position: sticky;
+      top: 0;
+      z-index: 50;
     }
-    .nav{display:flex; align-items:center; justify-content:space-between; gap:16px}
-    .brand{font-weight:800; letter-spacing:.02em}
-    .navlinks{display:flex; gap:18px; flex-wrap:wrap}
-    .navlinks a{color:var(--muted); font-size:14px}
-    .btn{
-      display:inline-block;
-      padding:13px 20px;
-      border-radius:12px;
-      background:var(--accent);
-      color:#fff;
-      font-weight:700;
-      box-shadow:0 10px 26px rgba(76,125,255,.28);
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
     }
-    .btn.secondary{
-      background:transparent;
-      border:1px solid rgba(255,255,255,.18);
-      box-shadow:none;
+    .brand {
+      font-weight: 800;
+      font-size: 1.25rem;
+      letter-spacing: -0.02em;
+      background: linear-gradient(135deg, #fff, var(--accent2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .navlinks {
+      display: flex;
+      gap: 24px;
+      align-items: center;
+    }
+    .navlinks a {
+      color: var(--muted);
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: var(--transition);
+      position: relative;
+    }
+    .navlinks a:hover { color: #fff; }
+    .navlinks a::after {
+      content: '';
+      position: absolute;
+      bottom: -4px;
+      left: 0;
+      width: 0%;
+      height: 2px;
+      background: var(--accent);
+      transition: var(--transition);
+    }
+    .navlinks a:hover::after { width: 100%; }
+
+    .lang-switch {
+      display: flex;
+      gap: 6px;
+      background: rgba(255, 255, 255, .06);
+      padding: 4px 6px;
+      border-radius: 30px;
+      border: 1px solid var(--line);
+    }
+    .lang-switch button {
+      background: transparent;
+      border: none;
+      color: var(--muted);
+      font-weight: 600;
+      font-size: 0.75rem;
+      padding: 4px 12px;
+      border-radius: 20px;
+      cursor: pointer;
+      transition: var(--transition);
+      font-family: 'Inter', sans-serif;
+    }
+    .lang-switch button.active {
+      background: var(--accent);
+      color: #fff;
+      box-shadow: 0 4px 12px rgba(76, 125, 255, .3);
+    }
+    .lang-switch button:hover:not(.active) { color: #fff; }
+
+    .btn {
+      display: inline-block;
+      padding: 12px 24px;
+      border-radius: 12px;
+      background: var(--accent);
+      color: #fff;
+      font-weight: 700;
+      font-size: 0.95rem;
+      transition: var(--transition);
+      border: none;
+      cursor: pointer;
+      text-align: center;
+      box-shadow: 0 10px 26px rgba(76, 125, 255, .25);
+      min-height: 48px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 16px 34px rgba(76, 125, 255, .35);
+    }
+    .btn.secondary {
+      background: transparent;
+      border: 1px solid rgba(255, 255, 255, .18);
+      box-shadow: none;
+    }
+    .btn.secondary:hover {
+      background: rgba(255, 255, 255, .06);
+      transform: translateY(-3px);
     }
 
-    /* Section hero : deux colonnes de même hauteur */
-    .hero{
-      padding:40px 0 30px;
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:28px;
-      align-items:stretch;
+    /* ===== HERO ===== */
+    .hero {
+      padding: 50px 0 40px;
+      display: grid;
+      grid-template-columns: 1fr 1.1fr;
+      gap: 40px;
+      align-items: center;
     }
-    /* Style commun pour les deux colonnes (identique) */
-    .hero-col{
-      background:linear-gradient(180deg, rgba(18,28,51,.95), rgba(14,22,40,.95));
-      border:1px solid var(--line);
-      border-radius:24px;
-      padding:22px;
-      box-shadow:var(--shadow);
-      display:flex;
-      flex-direction:column;
-      justify-content:center;
+    .hero-content .eyebrow {
+      color: var(--accent2);
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      font-size: 0.8rem;
+      font-weight: 700;
+      margin-bottom: 12px;
     }
-    .eyebrow{
-      color:var(--accent2);
-      text-transform:uppercase;
-      letter-spacing:.12em;
-      font-size:12px;
-      font-weight:800;
-      margin-bottom:14px;
+    .hero-content h1 {
+      font-size: clamp(2.6rem, 5.5vw, 3.8rem);
+      line-height: 1.05;
+      margin: 0 0 16px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
     }
-    h1{
-      font-size:clamp(40px, 6vw, 62px);
-      line-height:1.03;
-      margin:0 0 16px;
+    .hero-content .lead {
+      font-size: 1.1rem;
+      color: var(--muted);
+      margin: 0 0 28px;
+      max-width: 540px;
     }
-    .lead{
-      font-size:18px;
-      color:var(--muted);
-      margin:0 0 22px;
+    .hero-actions {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      margin-bottom: 28px;
     }
-    .hero-actions{display:flex; gap:12px; flex-wrap:wrap; margin-top:20px}
-
-    /* Grille pour les badges : 2 colonnes, donc 3 lignes pour 6 badges */
-    .badge-grid{
-      display:grid;
-      grid-template-columns:repeat(2, 1fr);
-      gap:12px;
-      margin-top:18px;
+    .badge-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
     }
-    .badge-grid span{
-      padding:8px 12px;
-      border:1px solid rgba(255,255,255,.12);
-      border-radius:999px;
-      background:rgba(255,255,255,.03);
-      text-align:center;
-      font-size:14px;
-      color:var(--muted);
-      white-space:nowrap;
-    }
-    /* Responsive : sur petit écran, les colonnes passent en dessous l'une de l'autre */
-    @media (max-width: 920px){
-      .hero{
-        grid-template-columns:1fr;
-        gap:20px;
-      }
-    }
-    @media (max-width: 640px){
-      .badge-grid{
-        grid-template-columns:1fr;
-      }
-      .badge-grid span{
-        white-space:normal;
-      }
+    .badge-grid span {
+      padding: 6px 16px;
+      border: 1px solid rgba(255, 255, 255, .08);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, .03);
+      font-size: 0.8rem;
+      color: var(--muted);
+      backdrop-filter: blur(4px);
     }
 
-    /* ===== RESTE DE LA PAGE (inchangé, en anglais) ===== */
-    section{padding:44px 0}
-    .section-title{
-      font-size:32px;
-      line-height:1.15;
-      margin:0 0 10px;
+    /* ===== MOCKUP (remplace les boîtes grises) ===== */
+    .mockup-window {
+      background: rgba(18, 28, 51, .7);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 16px 16px 20px;
+      box-shadow: 0 24px 70px rgba(0, 0, 0, .4);
+      backdrop-filter: blur(4px);
+      transition: var(--transition);
     }
-    .section-sub{
-      color:var(--muted);
-      margin:0 0 22px;
-      max-width:760px;
+    .mockup-window:hover { transform: scale(1.01); border-color: rgba(76, 125, 255, .4); }
+    .mockup-titlebar {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--line);
+      margin-bottom: 16px;
     }
-    .cards{
-      display:grid;
-      grid-template-columns:repeat(3, 1fr);
-      gap:18px;
+    .mockup-dots { display: flex; gap: 6px; }
+    .mockup-dots span {
+      display: block;
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
     }
-    .card{
-      background:linear-gradient(180deg, rgba(18,28,51,.98), rgba(13,20,36,.98));
-      border:1px solid var(--line);
-      border-radius:var(--radius);
-      padding:22px;
-      box-shadow:var(--shadow);
+    .mockup-dots span:nth-child(1) { background: #ff5f57; }
+    .mockup-dots span:nth-child(2) { background: #ffbd2e; }
+    .mockup-dots span:nth-child(3) { background: #28c840; }
+    .mockup-titlebar p {
+      font-size: 0.8rem;
+      color: var(--muted);
+      margin-left: 8px;
+      font-weight: 500;
     }
-    .card h3{margin:0 0 10px; font-size:18px}
-    .card p{margin:0; color:var(--muted)}
-    .steps{
-      display:grid;
-      grid-template-columns:repeat(3,1fr);
-      gap:18px;
+    .mockup-search {
+      background: rgba(255, 255, 255, .05);
+      border: 1px solid var(--line);
+      border-radius: 10px;
+      padding: 10px 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 18px;
     }
-    .step{
-      position:relative;
-      padding-top:10px;
+    .mockup-search i { color: var(--muted); font-size: 0.9rem; }
+    .mockup-search span { color: var(--muted); font-size: 0.85rem; }
+    .mockup-list { display: flex; flex-direction: column; gap: 8px; }
+    .mockup-item {
+      display: grid;
+      grid-template-columns: 24px 2fr 1fr 1fr;
+      gap: 12px;
+      padding: 8px 10px;
+      border-radius: 8px;
+      background: rgba(255, 255, 255, .02);
+      border-left: 3px solid transparent;
+      transition: var(--transition);
     }
-    .step .num{
-      width:38px;height:38px;border-radius:12px;
-      display:flex;align-items:center;justify-content:center;
-      background:rgba(76,125,255,.15);
-      color:#cfe0ff;
-      font-weight:800;
-      margin-bottom:12px;
-      border:1px solid rgba(76,125,255,.25);
-    }
-    .feature{
-      display:grid;
-      grid-template-columns:1fr 1fr;
-      gap:18px;
-      align-items:center;
-      margin-bottom:18px;
-    }
-    .shot{
-      background:#0f172a;
-      border:1px solid var(--line);
-      border-radius:22px;
-      padding:18px;
-      box-shadow:var(--shadow);
-      min-height:240px;
-    }
-    .shot .mock{
-      height:220px;
-      border-radius:16px;
-      background:
-        linear-gradient(180deg, rgba(76,125,255,.18), rgba(125,226,199,.08)),
-        #0c1324;
-      border:1px solid rgba(255,255,255,.06);
-      padding:14px;
-    }
-    .mock .r1,.mock .r2,.mock .r3{
-      height:34px; border-radius:10px; background:#172440; margin-bottom:10px;
-    }
-    .mock .r2{height:64px}
-    .mock .r3{display:grid; grid-template-columns:1fr 1fr; gap:10px; background:transparent; height:auto}
-    .mock .r3 div{height:86px; border-radius:10px; background:#172440}
-    .feature ul{margin:12px 0 0; padding-left:18px; color:var(--muted)}
-    .feature li{margin-bottom:8px}
-    .testimonials{
-      background:linear-gradient(180deg, rgba(255,255,255,.02), rgba(255,255,255,.03));
-      border-top:1px solid rgba(255,255,255,.06);
-      border-bottom:1px solid rgba(255,255,255,.06);
-    }
-    .label{
-      display:inline-block;
-      font-size:12px;
-      font-weight:800;
-      letter-spacing:.12em;
-      color:var(--accent2);
-      margin-bottom:12px;
-      text-transform:uppercase;
-    }
-    .stars{color:var(--warn); margin-bottom:12px; font-size:18px}
-    .quote{font-size:15px; color:#e7eeff; margin:0 0 14px}
-    .meta{color:var(--muted); font-size:13px}
-    .faq{display:grid; grid-template-columns:1fr 1fr; gap:18px}
-    .faq-item h3{margin:0 0 8px; font-size:18px}
-    .faq-item p{margin:0; color:var(--muted)}
-    .cta{
-      padding:58px 0 78px;
-    }
-    .cta-box{
-      background:linear-gradient(135deg, rgba(76,125,255,.16), rgba(125,226,199,.10));
-      border:1px solid rgba(255,255,255,.10);
-      border-radius:26px;
-      padding:30px;
-      box-shadow:var(--shadow);
-      text-align:center;
-    }
-    .cta-box p{color:var(--muted); margin:10px auto 0; max-width:760px}
-    footer{
-      padding:22px 0 38px;
-      color:var(--muted);
-      border-top:1px solid rgba(255,255,255,.06);
-      font-size:14px;
-    }
-    .footer-row{display:flex; justify-content:space-between; gap:18px; flex-wrap:wrap}
-    .footer-links{display:flex; gap:14px; flex-wrap:wrap}
-    .footer-links a{color:var(--muted)}
+    .mockup-item:hover { background: rgba(76, 125, 255, .08); border-left-color: var(--accent); }
+    .mockup-item i { color: var(--accent2); font-size: 1rem; }
+    .mockup-item .name { font-weight: 500; font-size: 0.85rem; }
+    .mockup-item .meta { color: var(--muted); font-size: 0.75rem; }
 
-    @media (max-width: 920px){
-      .hero,.feature,.cards,.steps,.faq{grid-template-columns:1fr}
-      .nav{flex-direction:column; align-items:flex-start}
+    /* ===== SECTIONS GÉNÉRALES ===== */
+    section { padding: 50px 0; }
+    .section-title {
+      font-size: clamp(1.8rem, 3vw, 2.5rem);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin: 0 0 8px;
+    }
+    .section-sub {
+      color: var(--muted);
+      margin: 0 0 32px;
+      max-width: 700px;
+      font-size: 1.05rem;
+    }
+    .cards, .steps, .testimonial-grid, .faq-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 22px;
+    }
+    .card {
+      background: linear-gradient(180deg, rgba(18, 28, 51, .98), rgba(13, 20, 36, .98));
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 24px 22px;
+      transition: var(--transition);
+      box-shadow: 0 4px 20px rgba(0, 0, 0, .1);
+    }
+    .card:hover {
+      transform: translateY(-6px);
+      border-color: rgba(76, 125, 255, .3);
+      box-shadow: 0 20px 40px rgba(0, 0, 0, .3);
+    }
+    .card h3 {
+      font-size: 1.2rem;
+      margin: 0 0 8px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .card h3 i { color: var(--accent); font-size: 1.3rem; }
+    .card p { color: var(--muted); margin: 0; font-size: 0.95rem; }
+
+    .step .num {
+      width: 44px; height: 44px;
+      border-radius: 14px;
+      display: flex; align-items: center; justify-content: center;
+      background: rgba(76, 125, 255, .12);
+      color: #cfe0ff;
+      font-weight: 800;
+      font-size: 1.1rem;
+      margin-bottom: 14px;
+      border: 1px solid rgba(76, 125, 255, .2);
+      transition: var(--transition);
+    }
+    .step:hover .num { background: var(--accent); color: #fff; }
+
+    /* ===== TESTIMONIALS ===== */
+    .testimonials {
+      background: linear-gradient(180deg, rgba(255, 255, 255, .02), rgba(255, 255, 255, .03));
+      border-top: 1px solid rgba(255, 255, 255, .04);
+      border-bottom: 1px solid rgba(255, 255, 255, .04);
+    }
+    .stars { color: var(--warn); margin-bottom: 12px; font-size: 1.1rem; letter-spacing: 2px; }
+    .quote { font-size: 0.95rem; color: #e7eeff; margin: 0 0 14px; font-style: italic; }
+    .meta { color: var(--muted); font-size: 0.85rem; font-weight: 500; }
+
+    /* ===== FAQ ACCORDÉON ===== */
+    .faq-grid { grid-template-columns: 1fr 1fr; }
+    .faq-item {
+      cursor: pointer;
+      transition: var(--transition);
+      padding: 18px 22px;
+    }
+    .faq-item h3 {
+      font-size: 1rem;
+      margin: 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-weight: 600;
+    }
+    .faq-item h3 i { color: var(--accent); font-size: 1.1rem; transition: var(--transition); }
+    .faq-item .answer {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.4s ease, opacity 0.3s ease, margin 0.3s ease;
+      opacity: 0;
+      margin-top: 0;
+    }
+    .faq-item.active .answer {
+      max-height: 200px;
+      opacity: 1;
+      margin-top: 12px;
+    }
+    .faq-item.active h3 i { transform: rotate(180deg); }
+    .faq-item .answer p { margin: 0; color: var(--muted); font-size: 0.9rem; }
+
+    /* ===== CTA / PRIX ===== */
+    .cta {
+      padding: 60px 0 80px;
+    }
+    .cta-box {
+      background: linear-gradient(135deg, rgba(76, 125, 255, .12), rgba(125, 226, 199, .08));
+      border: 1px solid rgba(255, 255, 255, .08);
+      border-radius: 28px;
+      padding: 40px 30px;
+      text-align: center;
+      box-shadow: 0 20px 60px rgba(0, 0, 0, .2);
+    }
+    .cta-box .price {
+      font-size: 2.8rem;
+      font-weight: 800;
+      color: #fff;
+      margin: 12px 0;
+    }
+    .cta-box .price small {
+      font-size: 1rem;
+      font-weight: 400;
+      color: var(--muted);
+      margin-left: 8px;
+    }
+    .cta-box p { color: var(--muted); margin: 10px auto 24px; max-width: 600px; }
+    .cta-box .hero-actions { justify-content: center; }
+
+    /* ===== FOOTER ===== */
+    footer {
+      padding: 30px 0 40px;
+      color: var(--muted);
+      border-top: 1px solid rgba(255, 255, 255, .06);
+      font-size: 0.9rem;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 30px;
+      margin-bottom: 24px;
+    }
+    .footer-grid h4 { color: #fff; font-size: 0.9rem; margin-bottom: 10px; }
+    .footer-grid ul { list-style: none; padding: 0; margin: 0; }
+    .footer-grid ul li { margin-bottom: 6px; }
+    .footer-grid ul a { transition: var(--transition); }
+    .footer-grid ul a:hover { color: #fff; }
+    .footer-socials { display: flex; gap: 14px; margin-top: 12px; }
+    .footer-socials a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px; height: 40px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, .05);
+      border: 1px solid var(--line);
+      transition: var(--transition);
+    }
+    .footer-socials a:hover { background: var(--accent); border-color: var(--accent); transform: translateY(-3px); }
+    .footer-bottom {
+      border-top: 1px solid rgba(255, 255, 255, .05);
+      padding-top: 20px;
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      font-size: 0.8rem;
+    }
+
+    /* ===== RESPONSIVE ===== */
+    @media (max-width: 992px) {
+      .hero { grid-template-columns: 1fr; text-align: center; }
+      .hero-content .lead { margin: 0 auto 28px; }
+      .hero-actions { justify-content: center; }
+      .badge-grid { justify-content: center; }
+      .cards, .steps, .testimonial-grid { grid-template-columns: 1fr 1fr; }
+      .faq-grid { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 640px) {
+      .topbar { padding: 10px 0; }
+      .nav { flex-direction: column; align-items: stretch; gap: 12px; }
+      .navlinks { justify-content: space-between; flex-wrap: wrap; }
+      .lang-switch { align-self: flex-start; }
+      .cards, .steps, .testimonial-grid { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .mockup-item { grid-template-columns: 24px 1fr; gap: 4px; }
+      .mockup-item .meta { display: none; }
+      .cta-box .price { font-size: 2rem; }
+      .btn { width: 100%; justify-content: center; }
+      .hero-actions { flex-direction: column; align-items: stretch; }
     }
   </style>
 </head>
 <body>
-  <div class="topbar">
+
+  <!-- ===== TOPBAR ===== -->
+  <header class="topbar" role="banner" aria-label="Navigation principale">
     <div class="wrap">
       <div class="nav">
         <div class="brand">FileScope Pro</div>
-        <div class="navlinks">
-          <a href="#features">Features</a>
-          <a href="#how-it-works">How it works</a>
-          <a href="#feedback">Feedback</a>
-          <a href="#faq">FAQ</a>
-        </div>
-        <a class="btn" href="#buy">Buy now</a>
+        <nav class="navlinks" aria-label="Menu">
+          <a href="#features" data-i18n="nav_features">Fonctionnalités</a>
+          <a href="#how-it-works" data-i18n="nav_how">Fonctionnement</a>
+          <a href="#testimonials" data-i18n="nav_testimonials">Avis</a>
+          <a href="#faq" data-i18n="nav_faq">FAQ</a>
+          <a href="#buy" class="btn" style="padding:8px 18px; font-size:0.85rem;" data-i18n="nav_buy">Acheter</a>
+          <div class="lang-switch" role="group" aria-label="Sélecteur de langue">
+            <button class="active" data-lang="fr" aria-label="Français">FR</button>
+            <button data-lang="en" aria-label="English">EN</button>
+          </div>
+        </nav>
       </div>
     </div>
-  </div>
+  </header>
 
-  <main class="wrap">
-    <!-- SECTION HERO : DEUX COLONNES IDENTIQUES VISUELLEMENT -->
-    <section class="hero">
-      <!-- Colonne gauche : ANGLAIS -->
-      <div class="hero-col">
-        <div class="eyebrow">Windows Desktop Software</div>
-        <h1>Find any file in seconds.</h1>
-        <p class="lead">
-          FileScope Pro helps Windows users search files by name, content, creation date,
-          modification date, and extension from one fast, simple interface.
+  <main>
+    <!-- ===== HERO ===== -->
+    <section class="wrap hero" id="home">
+      <div class="hero-content">
+        <div class="eyebrow" data-i18n="hero_eyebrow">Logiciel Windows</div>
+        <h1 data-i18n="hero_title">Trouvez n'importe quel fichier en quelques secondes.</h1>
+        <p class="lead" data-i18n="hero_lead">
+          FileScope Pro permet aux utilisateurs Windows de rechercher des fichiers par nom, contenu, date de création et modification, le tout dans une interface simple et rapide.
         </p>
         <div class="hero-actions">
-          <a class="btn" href="#buy">Buy now</a>
-          <a class="btn secondary" href="#features">See features</a>
+          <a href="#buy" class="btn" data-i18n="hero_cta1">Acheter maintenant</a>
+          <a href="#features" class="btn secondary" data-i18n="hero_cta2">Voir les fonctionnalités</a>
         </div>
         <div class="badge-grid">
-          <span>Offline search</span>
-          <span>Made for Windows</span>
-          <span>Search by name & content</span>
-          <span>Filter by creation date</span>
-          <span>Filter by modification date</span>
-          <span>Multi‑criteria search</span>
+          <span data-i18n="badge1">🔍 Recherche sans internet</span>
+          <span data-i18n="badge2">🖥️ Conçu pour Windows 10/11</span>
+          <span data-i18n="badge3">📄 Par nom et contenu</span>
+          <span data-i18n="badge4">📅 Par date de création</span>
+          <span data-i18n="badge5">🕒 Par date de modification</span>
+          <span data-i18n="badge6">⚡ Recherche combinée</span>
         </div>
       </div>
 
-      <!-- Colonne droite : FRANÇAIS -->
-      <div class="hero-col">
-        <div class="eyebrow">Logiciel Windows</div>
-        <h1 style="font-size:clamp(32px,5vw,52px);">Trouvez n’importe quel fichier en quelques secondes.</h1>
-        <p class="lead">
-          FileScope Pro permet aux utilisateurs Windows de rechercher des fichiers par nom, contenu, date de création,
-          date de modification et extension, le tout dans une interface simple et rapide.
-        </p>
-        <div class="hero-actions">
-          <a class="btn" href="#buy">Acheter</a>
-          <a class="btn secondary" href="#features">Voir les fonctionnalités</a>
+      <!-- Maquette visuelle (remplace les mockups gris) -->
+      <div class="mockup-window" role="img" aria-label="Aperçu de l'interface du logiciel FileScope Pro">
+        <div class="mockup-titlebar">
+          <div class="mockup-dots"><span></span><span></span><span></span></div>
+          <p>📁 Recherche - FileScope Pro</p>
         </div>
-        <div class="badge-grid">
-          <span>Recherche sans internet</span>
-          <span>Conçu pour Windows</span>
-          <span>Recherche par nom et contenu</span>
-          <span>Recherche par date création</span>
-          <span>Recherche par date modification</span>
-          <span>Recherche combinée</span>
+        <div class="mockup-search">
+          <i class="fas fa-search"></i>
+          <span data-i18n="mockup_search">Rechercher par nom, contenu, date...</span>
+          <i class="fas fa-sliders-h" style="margin-left:auto; opacity:.4;"></i>
+        </div>
+        <div class="mockup-list">
+          <div class="mockup-item"><i class="fas fa-file-pdf"></i><span class="name">Rapport_financier_2025.pdf</span><span class="meta">12/06/2025</span><span class="meta">2.4 Mo</span></div>
+          <div class="mockup-item"><i class="fas fa-file-word"></i><span class="name">Contrat_client_Martin.docx</span><span class="meta">05/06/2025</span><span class="meta">180 Ko</span></div>
+          <div class="mockup-item"><i class="fas fa-file-excel"></i><span class="name">Chiffres_affaires_Q4.xlsx</span><span class="meta">28/05/2025</span><span class="meta">890 Ko</span></div>
+          <div class="mockup-item"><i class="fas fa-file-alt"></i><span class="name">Notes_réunion_équipe.txt</span><span class="meta">20/05/2025</span><span class="meta">4 Ko</span></div>
         </div>
       </div>
     </section>
 
-    <!-- ===== RESTE DE LA PAGE (CONSERVÉ EN ANGLAIS) ===== -->
-    <section>
+    <!-- ===== FEATURES ===== -->
+    <section class="wrap" id="features">
+      <h2 class="section-title" data-i18n="features_title">Fonctionnalités puissantes</h2>
+      <p class="section-sub" data-i18n="features_sub">Conçu pour les professionnels qui veulent gagner du temps et ne plus jamais perdre un fichier important.</p>
       <div class="cards">
-        <div class="card">
-          <h3>Search by name</h3>
-          <p>Find files and folders quickly using the exact name or partial keywords.</p>
-        </div>
-        <div class="card">
-          <h3>Search inside content</h3>
-          <p>Look inside supported documents to find the right file faster.</p>
-        </div>
-        <div class="card">
-          <h3>Filter by date</h3>
-          <p>Refine results by creation date and modification date with ease.</p>
-        </div>
+        <div class="card"><h3><i class="fas fa-file-signature"></i> <span data-i18n="f1_title">Recherche par nom</span></h3><p data-i18n="f1_desc">Retrouvez vos dossiers et fichiers en utilisant le nom exact ou des mots-clés partiels.</p></div>
+        <div class="card"><h3><i class="fas fa-file-alt"></i> <span data-i18n="f2_title">Recherche dans le contenu</span></h3><p data-i18n="f2_desc">Fouillez à l'intérieur des documents Word, Excel, PDF et Power BI pour trouver le bon fichier.</p></div>
+        <div class="card"><h3><i class="fas fa-calendar-alt"></i> <span data-i18n="f3_title">Filtres par date</span></h3><p data-i18n="f3_desc">Affinez vos résultats par date de création ou de modification en un seul clic.</p></div>
       </div>
     </section>
 
-    <section id="how-it-works">
-      <div class="section-title">How it works</div>
-      <p class="section-sub">
-        FileScope Pro keeps the process simple: choose your location, enter a keyword, and get results in seconds.
-      </p>
+    <!-- ===== HOW IT WORKS ===== -->
+    <section class="wrap" id="how-it-works">
+      <h2 class="section-title" data-i18n="how_title">Comment ça fonctionne</h2>
+      <p class="section-sub" data-i18n="how_sub">Trois étapes simples pour retrouver vos fichiers en un éclair.</p>
       <div class="steps">
-        <div class="card step">
-          <div class="num">1</div>
-          <h3>Select a location</h3>
-          <p>Search your Desktop or any folder on your computer.</p>
-        </div>
-        <div class="card step">
-          <div class="num">2</div>
-          <h3>Enter your keyword</h3>
-          <p>Search by file name, content, or both at the same time.</p>
-        </div>
-        <div class="card step">
-          <div class="num">3</div>
-          <h3>Open the result</h3>
-          <p>Double-click a file and open it instantly from the results list.</p>
+        <div class="card step"><div class="num">1</div><h3 data-i18n="s1_title">Sélectionnez un emplacement</h3><p data-i18n="s1_desc">Choisissez votre Bureau ou n'importe quel dossier de votre ordinateur.</p></div>
+        <div class="card step"><div class="num">2</div><h3 data-i18n="s2_title">Entrez un mot-clé</h3><p data-i18n="s2_desc">Recherchez par nom, contenu, ou les deux simultanément.</p></div>
+        <div class="card step"><div class="num">3</div><h3 data-i18n="s3_title">Ouvrez le résultat</h3><p data-i18n="s3_desc">Double-cliquez sur un fichier pour l'ouvrir instantanément depuis la liste.</p></div>
+      </div>
+    </section>
+
+    <!-- ===== TESTIMONIALS ===== -->
+    <section class="testimonials" id="testimonials">
+      <div class="wrap">
+        <div class="label" style="color:var(--accent2); text-transform:uppercase; font-weight:700; font-size:0.75rem; letter-spacing:.1em;" data-i18n="testimonial_label">Retours d'utilisateurs</div>
+        <h2 class="section-title" data-i18n="testimonial_title">Ce que nos premiers utilisateurs disent</h2>
+        <p class="section-sub" data-i18n="testimonial_sub">Des retours authentiques de personnes qui ont testé le logiciel et gagné en productivité.</p>
+        <div class="testimonial-grid">
+          <div class="card"><div class="stars">★★★★★</div><p class="quote" data-i18n="t1_quote">“Je retrouve mes fichiers en quelques secondes au lieu de perdre du temps à chercher dans des dossiers.”</p><div class="meta" data-i18n="t1_meta">Sarah M. — Assistante de direction</div></div>
+          <div class="card"><div class="stars">★★★★★</div><p class="quote" data-i18n="t2_quote">“La recherche par nom et contenu me fait gagner un temps précieux chaque jour.”</p><div class="meta" data-i18n="t2_meta">David K. — Freelance</div></div>
+          <div class="card"><div class="stars">★★★★★</div><p class="quote" data-i18n="t3_quote">“Un outil simple mais redoutable pour gérer mes documents sur Windows.”</p><div class="meta" data-i18n="t3_meta">Amine B. — Consultant indépendant</div></div>
         </div>
       </div>
     </section>
 
-    <section id="features">
-      <div class="section-title">Powerful features</div>
-      <p class="section-sub">
-        Built for people who want a practical Windows tool to save time and avoid losing important files.
-      </p>
-      <div class="feature">
-        <div class="shot">
-          <div class="mock">
-            <div class="r1"></div>
-            <div class="r2"></div>
-            <div class="r3">
-              <div></div><div></div>
-            </div>
-          </div>
+    <!-- ===== FAQ (Accordéon) ===== -->
+    <section class="wrap" id="faq">
+      <h2 class="section-title" data-i18n="faq_title">Questions fréquentes</h2>
+      <p class="section-sub" data-i18n="faq_sub">Des réponses claires pour vous aider à décider en toute confiance.</p>
+      <div class="faq-grid">
+        <div class="card faq-item">
+          <h3><span data-i18n="q1">A-t-il besoin d'une connexion internet ?</span> <i class="fas fa-chevron-down"></i></h3>
+          <div class="answer"><p data-i18n="a1">Non. FileScope Pro est une application de bureau qui fonctionne entièrement en local sur votre Windows.</p></div>
         </div>
-        <div class="card">
-          <h3>Smart file discovery</h3>
-          <p>Search by file name, extension, and content, all from the same interface.</p>
-          <ul>
-            <li>Supports folders, Word, Excel, PDF, and Power BI files.</li>
-            <li>Fast filtering by creation and modification dates.</li>
-            <li>Designed for everyday Windows productivity.</li>
-          </ul>
+        <div class="card faq-item">
+          <h3><span data-i18n="q2">Que puis-je rechercher ?</span> <i class="fas fa-chevron-down"></i></h3>
+          <div class="answer"><p data-i18n="a2">Vous pouvez rechercher par nom, contenu, date de création, date de modification et extension de fichier.</p></div>
         </div>
-      </div>
-      <div class="feature">
-        <div class="card">
-          <h3>Clean and easy interface</h3>
-          <p>Simple layout, readable results, and a search flow anyone can use immediately.</p>
-          <ul>
-            <li>Progress indicator during search.</li>
-            <li>Sortable results by name, type, and date.</li>
-            <li>Open files directly from the results panel.</li>
-          </ul>
+        <div class="card faq-item">
+          <h3><span data-i18n="q3">À qui s'adresse ce logiciel ?</span> <i class="fas fa-chevron-down"></i></h3>
+          <div class="answer"><p data-i18n="a3">À toute personne utilisant Windows et souhaitant gagner en efficacité dans la gestion de ses fichiers.</p></div>
         </div>
-        <div class="shot">
-          <div class="mock">
-            <div class="r1" style="width:85%"></div>
-            <div class="r2" style="height:82px"></div>
-            <div class="r3">
-              <div></div><div></div>
-            </div>
-          </div>
+        <div class="card faq-item">
+          <h3><span data-i18n="q4">Comment puis-je l'acheter ?</span> <i class="fas fa-chevron-down"></i></h3>
+          <div class="answer"><p data-i18n="a4">Utilisez le bouton ci-dessous. Vous serez redirigé vers notre page de paiement sécurisée (Paddle).</p></div>
         </div>
       </div>
     </section>
 
-    <section id="feedback" class="testimonials">
-      <div class="label">Feedback from testers</div>
-      <div class="section-title">What early users are saying</div>
-      <p class="section-sub">
-        Real feedback from people who tested the software and wanted a faster way to find files on Windows.
-      </p>
-      <div class="cards">
-        <div class="card">
-          <div class="stars">★★★★★</div>
-          <p class="quote">“I find my files in seconds instead of wasting time searching through folders.”</p>
-          <div class="meta">Sarah M. — Office Assistant</div>
-        </div>
-        <div class="card">
-          <div class="stars">★★★★★</div>
-          <p class="quote">“Searching by file name and content saves me a lot of time every day.”</p>
-          <div class="meta">David K. — Freelancer</div>
-        </div>
-        <div class="card">
-          <div class="stars">★★★★★</div>
-          <p class="quote">“A simple and powerful tool for managing documents on my Windows PC.”</p>
-          <div class="meta">Amine B. — Independent Consultant</div>
-        </div>
-      </div>
-    </section>
-
-    <section id="faq">
-      <div class="section-title">Frequently asked questions</div>
-      <p class="section-sub">
-        Clear answers help visitors decide faster and reduce hesitation before purchase.
-      </p>
-      <div class="faq">
-        <div class="card faq-item">
-          <h3>Does it require internet?</h3>
-          <p>No. FileScope Pro is a desktop app designed to run locally on your Windows computer.</p>
-        </div>
-        <div class="card faq-item">
-          <h3>What can I search?</h3>
-          <p>You can search by file name, content, creation date, modification date, and extension.</p>
-        </div>
-        <div class="card faq-item">
-          <h3>Who is it for?</h3>
-          <p>It is made for anyone using Windows who wants to find files faster and work more efficiently.</p>
-        </div>
-        <div class="card faq-item">
-          <h3>How do I buy it?</h3>
-          <p>Use the button below to go to your Paddle checkout page once it is connected.</p>
-        </div>
-      </div>
-    </section>
-
-    <section id="buy" class="cta">
+    <!-- ===== CTA / PRIX ===== -->
+    <section class="wrap cta" id="buy">
       <div class="cta-box">
-        <div class="eyebrow">Ready to sell</div>
-        <div class="section-title">Put FileScope Pro in front of customers today</div>
-        <p>
-          A focused Windows file-search tool with strong messaging, clear benefits, and social proof ready for Paddle.
-        </p>
-        <div class="hero-actions" style="justify-content:center">
-          <a class="btn" href="#">Buy now</a>
-          <a class="btn secondary" href="#">View demo</a>
+        <div class="eyebrow" style="color:var(--accent2); text-transform:uppercase; font-weight:700; font-size:0.75rem; letter-spacing:.1em;" data-i18n="cta_eyebrow">Prêt à passer à l'action</div>
+        <h2 class="section-title" style="margin:0;" data-i18n="cta_title">Obtenez FileScope Pro dès aujourd'hui</h2>
+        <div class="price">29,99 € <small data-i18n="cta_price_label">(licence perpétuelle)</small></div>
+        <p data-i18n="cta_desc">Un outil de recherche de fichiers puissant, avec des bénéfices clairs et une preuve sociale pour vous accompagner.</p>
+        <div class="hero-actions">
+          <a href="#" class="btn" data-i18n="cta_btn1">Acheter maintenant</a>
+          <a href="#" class="btn secondary" data-i18n="cta_btn2">Voir la démo</a>
         </div>
+        <p style="font-size:0.8rem; margin-top:16px; opacity:.6;" data-i18n="cta_secure">🔒 Paiement sécurisé • Garantie satisfait ou remboursé</p>
       </div>
     </section>
   </main>
 
+  <!-- ===== FOOTER ===== -->
   <footer>
     <div class="wrap">
-      <div class="footer-row">
-        <div>© 2026 FileScope Pro. All rights reserved.</div>
-        <div class="footer-links">
-          <a href="#">Terms</a>
-          <a href="#">Privacy</a>
-          <a href="mailto:moussaoui.hassene@yahoo.com">Support</a>
+      <div class="footer-grid">
+        <!-- Colonne 1 : Infos -->
+        <div>
+          <h4>FileScope Pro</h4>
+          <p style="margin: 6px 0 12px; max-width:300px;" data-i18n="footer_desc">Le moteur de recherche de fichiers intelligent pour Windows 10 et 11.</p>
+          <div class="footer-socials">
+            <a href="#" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#" aria-label="Twitter"><i class="fab fa-twitter"></i></a>
+            <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+            <a href="#" aria-label="GitHub"><i class="fab fa-github"></i></a>
+          </div>
         </div>
+        <!-- Colonne 2 : Liens légaux -->
+        <div>
+          <h4 data-i18n="footer_legal">Mentions légales</h4>
+          <ul>
+            <li><a href="#" data-i18n="footer_tos">Conditions générales</a></li>
+            <li><a href="#" data-i18n="footer_privacy">Politique de confidentialité</a></li>
+            <li><a href="#" data-i18n="footer_legal_mention">Mentions légales</a></li>
+            <li><a href="mailto:moussaoui.hassene@yahoo.com" data-i18n="footer_support">Support technique</a></li>
+          </ul>
+        </div>
+        <!-- Colonne 3 : Prérequis système -->
+        <div>
+          <h4 data-i18n="footer_requirements">Prérequis système</h4>
+          <ul>
+            <li data-i18n="req_os">🖥️ Windows 10 / 11 (64-bit)</li>
+            <li data-i18n="req_ram">💾 4 Go de RAM (8 Go recommandé)</li>
+            <li data-i18n="req_space">📦 50 Mo d'espace disque</li>
+            <li data-i18n="req_net">🌐 Aucune connexion internet requise</li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span data-i18n="copyright">© 2026 FileScope Pro. Tous droits réservés.</span>
+        <span data-i18n="version">Version 2.0.1</span>
       </div>
     </div>
   </footer>
+
+  <!-- ===== JAVASCRIPT (Langue + FAQ Accordéon) ===== -->
+  <script>
+    (function() {
+      'use strict';
+
+      // ----- 1. GESTION DE LA LANGUE (FR/EN) -----
+      const translations = {
+        fr: {
+          nav_features: 'Fonctionnalités',
+          nav_how: 'Fonctionnement',
+          nav_testimonials: 'Avis',
+          nav_faq: 'FAQ',
+          nav_buy: 'Acheter',
+          hero_eyebrow: 'Logiciel Windows',
+          hero_title: 'Trouvez n\'importe quel fichier en quelques secondes.',
+          hero_lead: 'FileScope Pro permet aux utilisateurs Windows de rechercher des fichiers par nom, contenu, date de création et modification, le tout dans une interface simple et rapide.',
+          hero_cta1: 'Acheter maintenant',
+          hero_cta2: 'Voir les fonctionnalités',
+          badge1: '🔍 Recherche sans internet',
+          badge2: '🖥️ Conçu pour Windows 10/11',
+          badge3: '📄 Par nom et contenu',
+          badge4: '📅 Par date de création',
+          badge5: '🕒 Par date de modification',
+          badge6: '⚡ Recherche combinée',
+          mockup_search: 'Rechercher par nom, contenu, date...',
+          features_title: 'Fonctionnalités puissantes',
+          features_sub: 'Conçu pour les professionnels qui veulent gagner du temps et ne plus jamais perdre un fichier important.',
+          f1_title: 'Recherche par nom',
+          f1_desc: 'Retrouvez vos dossiers et fichiers en utilisant le nom exact ou des mots-clés partiels.',
+          f2_title: 'Recherche dans le contenu',
+          f2_desc: 'Fouillez à l\'intérieur des documents Word, Excel, PDF et Power BI pour trouver le bon fichier.',
+          f3_title: 'Filtres par date',
+          f3_desc: 'Affinez vos résultats par date de création ou de modification en un seul clic.',
+          how_title: 'Comment ça fonctionne',
+          how_sub: 'Trois étapes simples pour retrouver vos fichiers en un éclair.',
+          s1_title: 'Sélectionnez un emplacement',
+          s1_desc: 'Choisissez votre Bureau ou n\'importe quel dossier de votre ordinateur.',
+          s2_title: 'Entrez un mot-clé',
+          s2_desc: 'Recherchez par nom, contenu, ou les deux simultanément.',
+          s3_title: 'Ouvrez le résultat',
+          s3_desc: 'Double-cliquez sur un fichier pour l\'ouvrir instantanément depuis la liste.',
+          testimonial_label: 'Retours d\'utilisateurs',
+          testimonial_title: 'Ce que nos premiers utilisateurs disent',
+          testimonial_sub: 'Des retours authentiques de personnes qui ont testé le logiciel et gagné en productivité.',
+          t1_quote: '“Je retrouve mes fichiers en quelques secondes au lieu de perdre du temps à chercher dans des dossiers.”',
+          t1_meta: 'Sarah M. — Assistante de direction',
+          t2_quote: '“La recherche par nom et contenu me fait gagner un temps précieux chaque jour.”',
+          t2_meta: 'David K. — Freelance',
+          t3_quote: '“Un outil simple mais redoutable pour gérer mes documents sur Windows.”',
+          t3_meta: 'Amine B. — Consultant indépendant',
+          faq_title: 'Questions fréquentes',
+          faq_sub: 'Des réponses claires pour vous aider à décider en toute confiance.',
+          q1: 'A-t-il besoin d\'une connexion internet ?',
+          a1: 'Non. FileScope Pro est une application de bureau qui fonctionne entièrement en local sur votre Windows.',
+          q2: 'Que puis-je rechercher ?',
+          a2: 'Vous pouvez rechercher par nom, contenu, date de création, date de modification et extension de fichier.',
+          q3: 'À qui s\'adresse ce logiciel ?',
+          a3: 'À toute personne utilisant Windows et souhaitant gagner en efficacité dans la gestion de ses fichiers.',
+          q4: 'Comment puis-je l\'acheter ?',
+          a4: 'Utilisez le bouton ci-dessous. Vous serez redirigé vers notre page de paiement sécurisée (Paddle).',
+          cta_eyebrow: 'Prêt à passer à l\'action',
+          cta_title: 'Obtenez FileScope Pro dès aujourd\'hui',
+          cta_price_label: '(licence perpétuelle)',
+          cta_desc: 'Un outil de recherche de fichiers puissant, avec des bénéfices clairs et une preuve sociale pour vous accompagner.',
+          cta_btn1: 'Acheter maintenant',
+          cta_btn2: 'Voir la démo',
+          cta_secure: '🔒 Paiement sécurisé • Garantie satisfait ou remboursé',
+          footer_desc: 'Le moteur de recherche de fichiers intelligent pour Windows 10 et 11.',
+          footer_legal: 'Mentions légales',
+          footer_tos: 'Conditions générales',
+          footer_privacy: 'Politique de confidentialité',
+          footer_legal_mention: 'Mentions légales',
+          footer_support: 'Support technique',
+          footer_requirements: 'Prérequis système',
+          req_os: '🖥️ Windows 10 / 11 (64-bit)',
+          req_ram: '💾 4 Go de RAM (8 Go recommandé)',
+          req_space: '📦 50 Mo d\'espace disque',
+          req_net: '🌐 Aucune connexion internet requise',
+          copyright: '© 2026 FileScope Pro. Tous droits réservés.',
+          version: 'Version 2.0.1'
+        },
+        en: {
+          nav_features: 'Features',
+          nav_how: 'How it works',
+          nav_testimonials: 'Testimonials',
+          nav_faq: 'FAQ',
+          nav_buy: 'Buy now',
+          hero_eyebrow: 'Windows Desktop Software',
+          hero_title: 'Find any file in seconds.',
+          hero_lead: 'FileScope Pro helps Windows users search by name, content, creation date, and modification date from one fast interface.',
+          hero_cta1: 'Buy now',
+          hero_cta2: 'See features',
+          badge1: '🔍 Offline search',
+          badge2: '🖥️ Made for Windows 10/11',
+          badge3: '📄 Name & content search',
+          badge4: '📅 Filter by creation date',
+          badge5: '🕒 Filter by modification date',
+          badge6: '⚡ Combined search',
+          mockup_search: 'Search by name, content, date...',
+          features_title: 'Powerful features',
+          features_sub: 'Built for professionals who want to save time and never lose an important file again.',
+          f1_title: 'Search by name',
+          f1_desc: 'Find folders and files using exact names or partial keywords.',
+          f2_title: 'Search inside content',
+          f2_desc: 'Look inside Word, Excel, PDF, and Power BI files to find the right one.',
+          f3_title: 'Filter by date',
+          f3_desc: 'Refine results by creation or modification date with one click.',
+          how_title: 'How it works',
+          how_sub: 'Three simple steps to find your files in a flash.',
+          s1_title: 'Select a location',
+          s1_desc: 'Choose your Desktop or any folder on your computer.',
+          s2_title: 'Enter a keyword',
+          s2_desc: 'Search by name, content, or both at the same time.',
+          s3_title: 'Open the result',
+          s3_desc: 'Double-click a file to open it instantly from the list.',
+          testimonial_label: 'User feedback',
+          testimonial_title: 'What early users are saying',
+          testimonial_sub: 'Authentic feedback from people who tested the software and boosted their productivity.',
+          t1_quote: '“I find my files in seconds instead of wasting time searching through folders.”',
+          t1_meta: 'Sarah M. — Office Assistant',
+          t2_quote: '“Searching by name and content saves me so much time every day.”',
+          t2_meta: 'David K. — Freelancer',
+          t3_quote: '“A simple yet powerful tool for managing my documents on Windows.”',
+          t3_meta: 'Amine B. — Independent Consultant',
+          faq_title: 'Frequently asked questions',
+          faq_sub: 'Clear answers to help you decide with confidence.',
+          q1: 'Does it require internet?',
+          a1: 'No. FileScope Pro is a desktop app that runs entirely locally on your Windows PC.',
+          q2: 'What can I search?',
+          a2: 'You can search by name, content, creation date, modification date, and file extension.',
+          q3: 'Who is it for?',
+          a3: 'Anyone using Windows who wants to be more efficient managing files.',
+          q4: 'How do I buy it?',
+          a4: 'Use the button below. You\'ll be redirected to our secure checkout page (Paddle).',
+          cta_eyebrow: 'Ready to take action',
+          cta_title: 'Get FileScope Pro today',
+          cta_price_label: '(perpetual license)',
+          cta_desc: 'A powerful file-search tool with clear benefits and social proof to back you up.',
+          cta_btn1: 'Buy now',
+          cta_btn2: 'View demo',
+          cta_secure: '🔒 Secure checkout • Satisfaction guaranteed',
+          footer_desc: 'The intelligent file search engine for Windows 10 & 11.',
+          footer_legal: 'Legal',
+          footer_tos: 'Terms of Service',
+          footer_privacy: 'Privacy Policy',
+          footer_legal_mention: 'Legal Notice',
+          footer_support: 'Support',
+          footer_requirements: 'System Requirements',
+          req_os: '🖥️ Windows 10 / 11 (64-bit)',
+          req_ram: '💾 4 GB RAM (8 GB recommended)',
+          req_space: '📦 50 MB disk space',
+          req_net: '🌐 No internet connection needed',
+          copyright: '© 2026 FileScope Pro. All rights reserved.',
+          version: 'Version 2.0.1'
+        }
+      };
+
+      const langButtons = document.querySelectorAll('.lang-switch button');
+      const i18nElements = document.querySelectorAll('[data-i18n]');
+
+      function setLanguage(lang) {
+        // Mettre à jour les boutons
+        langButtons.forEach(btn => {
+          btn.classList.toggle('active', btn.dataset.lang === lang);
+        });
+        // Mettre à jour les textes
+        i18nElements.forEach(el => {
+          const key = el.dataset.i18n;
+          if (translations[lang] && translations[lang][key]) {
+            if (el.tagName === 'INPUT' || el.tagName === 'TEXTAREA') {
+              el.placeholder = translations[lang][key];
+            } else {
+              el.innerHTML = translations[lang][key];
+            }
+          }
+        });
+        // Mettre à jour la balise html lang
+        document.documentElement.lang = lang;
+        localStorage.setItem('filescope_lang', lang);
+      }
+
+      langButtons.forEach(btn => {
+        btn.addEventListener('click', function() {
+          const lang = this.dataset.lang;
+          setLanguage(lang);
+        });
+      });
+
+      // Charger la langue sauvegardée ou le français par défaut
+      const savedLang = localStorage.getItem('filescope_lang') || 'fr';
+      setLanguage(savedLang);
+
+      // ----- 2. FAQ ACCORDÉON -----
+      const faqItems = document.querySelectorAll('.faq-item');
+      faqItems.forEach(item => {
+        item.addEventListener('click', function() {
+          // Ferme les autres éléments (pour un comportement d'accordéon pur)
+          // On peut aussi choisir de laisser l'utilisateur ouvrir plusieurs, mais l'accordéon est plus propre.
+          faqItems.forEach(other => {
+            if (other !== this) {
+              other.classList.remove('active');
+            }
+          });
+          this.classList.toggle('active');
+        });
+      });
+
+    })();
+  </script>
 </body>
 </html>
